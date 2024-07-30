@@ -11,7 +11,7 @@ function Header() {
             <Navbar className='custom-navbar' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
-                        src="/public/Logo.png"
+                        src="/img/ImagenMiniLogoRedondo.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"

@@ -11,7 +11,7 @@ function Footer(){
                 <Container>
                     <Row style={{"margin" : "10p"}}>
                         <Col style={{"display": "flex", "justifyContent": "left"}}>
-                            <img style={{width: 40, height:40}} src="./ImagenMiniLogoRedondo.png" />
+                            <img style={{width: 40, height:40}} src="/img/ImagenMiniLogoRedondo.png" />
                         </Col>
                         <Col xs={6}>
                             <p className='text-white'>&copy; 2024 Nombre de la app. Todos los derechos reservados.</p>
