@@ -1,5 +1,6 @@
 
 // importar el css a la pagina donde van los botones import './Boton.css';
+import './Boton.css';
 
 function Boton(props) {
     return (
