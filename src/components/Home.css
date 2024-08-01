@@ -1,0 +1,33 @@
+body{
+    width: auto;
+} 
+
+/* styles.css */
+
+
+.gridBotons{
+  /*  background-color: #B2AAA0 !important;
+    box-shadow: 0 0 6px 3px rgba(0, 0, 0, 0.5); /* Sombra equilibrada en todos los lados */
+    margin-top: 4em;
+    border-radius: 5px;
+    width: auto;
+    display: inline-block;
+}
+.round-button {
+    border-radius: 50% !important;
+    width: 100px; /* Ajusta según el tamaño deseado */
+    height: 100px; /* Ajusta según el tamaño deseado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-right: 3em;
+}
+.botoform button{
+    margin-top: 2em;
+    margin-bottom: 2em;
+    margin-left: 2em;
+}
+  
