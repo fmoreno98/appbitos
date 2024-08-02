@@ -75,14 +75,22 @@ return (
                 {opcionSeleccionada === 'gradual' && (
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Gradual</Form.Label>
-                            <Form.Control type="text" placeholder="Ej: Cada 2 días" />
+                            <Form.Control 
+                                type="number" 
+                                placeholder="Ej: 50" 
+                            />
                         </Form.Group>
                     )
                 }
                 {opcionSeleccionada === 'acciones' && (
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Acciones</Form.Label>
-                            <Form.Control type="text" placeholder="Ej: Cada 2 días" />
+                            <Form.Control 
+                                type="number"
+                                placeholder="Ej: 3"
+                                max={100}
+                                min={0}
+                            />
                         </Form.Group>
                     )
                 }
@@ -90,8 +98,8 @@ return (
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Cumplimiento</Form.Label>
                             <br />
-                            Cumplimiento estará siempre activo. Se desactivará en el momento que <br />
-                            incumplas el hábito.
+                            <p className='cumpl p-2'>Cumplimiento estará siempre activo. Se desactivará en el momento que incumplas el hábito.</p>
+                     
                         </Form.Group>
                     )
                 }

@@ -48,3 +48,15 @@
     transform: translate(-50%, -50%);
   }
   
+  .cumpl{
+    border: rgb(222, 221, 221) solid 1px;
+    border-radius: 5px;
+  }
+
+  input[type=number]::-webkit-inner-spin-button, 
+  input[type=number]::-webkit-outer-spin-button { 
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      margin: 0; 
+  }
