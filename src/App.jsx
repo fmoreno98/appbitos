@@ -9,9 +9,8 @@ function App() {
     <>
       <Header />
       <Login />
-      <Register />
+      {/* <Register /> */}
       <Footer />
-     
     </>
   )
 }
