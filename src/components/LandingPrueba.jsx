@@ -169,8 +169,8 @@ function LandingPrueba() {
                                                 </div>
                                                 <div
                                                     className="text-center flex flex-row justify-between flex-wrap justify-between items-center text-xs font-bold">
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-yellow-200 text-yellow-600">GitHub</span>
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-green-200 text-green-600">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#081EAC] text-white">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#938A7F] text-white">Github</span>
                                                 </div>
                                                 <div className="mt-12 flex items-center">
                                                     <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
@@ -207,8 +207,8 @@ function LandingPrueba() {
                                                 </div>
                                                 <div
                                                     className="text-center flex flex-row justify-between flex-wrap justify-between items-center text-xs font-bold">
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-yellow-200 text-yellow-600">GitHub</span>
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-green-200 text-green-600">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#081EAC] text-white">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#938A7F] text-white">Github</span>
                                                 </div>
                                                 <div className="mt-12 flex items-center">
                                                     <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
@@ -245,8 +245,8 @@ function LandingPrueba() {
                                                 </div>
                                                 <div
                                                     className="text-center flex flex-row justify-between flex-wrap justify-between items-center text-xs font-bold">
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-yellow-200 text-yellow-600">GitHub</span>
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-green-200 text-green-600">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#081EAC] text-white">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#938A7F] text-white">Github</span>
                                                 </div>
                                                 <div className="mt-12 flex items-center">
                                                     <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
@@ -283,15 +283,15 @@ function LandingPrueba() {
                                                 </div>
                                                 <div
                                                     className="text-center flex flex-row justify-between flex-wrap justify-between items-center text-xs font-bold">
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-yellow-200 text-yellow-600">GitHub</span>
-                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-green-200 text-green-600">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#081EAC] text-white">Linkedin</span>
+                                                    <span className="w-5/12 mt-6 mx-1 p-1 rounded bg-[#938A7F] text-white">Github</span>
                                                 </div>
                                                 <div className="mt-12 flex items-center">
                                                     <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
                                                         style_change='background-image:url("../assets/jon.png");'></div>
                                                     <div className="ml-4 flex flex-col items-start">
                                                         <div className="font-bold text-gray-800">
-                                                            Jon
+                                                            Franc
                                                         </div>
                                                     </div>
                                                 </div>
