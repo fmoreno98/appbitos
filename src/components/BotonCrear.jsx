@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState } from 'react'
-import { Form, Modal, Button } from 'react-bootstrap';
+import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './fontawesome'
 
@@ -9,6 +9,12 @@ import './BotonCrear.css'
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
     const [progress, setProgress] = useState(props.progress);
+    const [opcionSeleccionada, setOpcionSeleccioanda] = useState('')
+    const [frecuencia, setFrecuencia] = useState(false)
+
+    const manejarCambio = (evento) => {
+        setOpcionSeleccioanda(evento.target.value);
+    };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -34,12 +40,10 @@ return (
                 />
             </svg>
             <div className="circular-progress__text">
-                {/* <FontAwesomeIcon icon="fa-solid fa-plus" /> */}
                 <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{color: '#0E28C0'}} />
             </div>
             </div>
         </div>
-        {/* <button className='botonCrear' onClick={handleShow}>Crear</button> */}
 
         <Modal  className='modal-lg' show={show} centered onHide={handleClose}> 
         <Modal.Header closeButton>
@@ -59,10 +63,38 @@ return (
                     <Form.Label>Descripción</Form.Label>
                     <Form.Control type="text" placeholder="Ej: Caminar 30 minutos" />
                 </Form.Group>
-                <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                    <Form.Label>Frecuencia</Form.Label>
-                    <Form.Control type="text" placeholder="Ej: Cada 2 días" />
-                </Form.Group>
+                <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
+                    <FormLabel>Tipo de hábito</FormLabel>
+                    <FormSelect onChange={manejarCambio}>
+                        <option value=''>Seleccionar opción</option>
+                        <option value='gradual'>Avance gradual</option>
+                        <option value='acciones'>Acciones</option>
+                        <option value='cumplimiento'>Cumplimiento</option>
+                    </FormSelect>
+                </FormGroup>
+                {opcionSeleccionada === 'gradual' && (
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Gradual</Form.Label>
+                            <Form.Control type="text" placeholder="Ej: Cada 2 días" />
+                        </Form.Group>
+                    )
+                }
+                {opcionSeleccionada === 'acciones' && (
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Acciones</Form.Label>
+                            <Form.Control type="text" placeholder="Ej: Cada 2 días" />
+                        </Form.Group>
+                    )
+                }
+                {opcionSeleccionada === 'cumplimiento' && (
+                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                            <Form.Label>Cumplimiento</Form.Label>
+                            <br />
+                            Cumplimiento estará siempre activo. Se desactivará en el momento que <br />
+                            incumplas el hábito.
+                        </Form.Group>
+                    )
+                }
             </Form>
         </Modal.Body>
         </Modal>
