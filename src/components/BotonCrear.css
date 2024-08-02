@@ -1,0 +1,50 @@
+/* CircularProgressBar.css */
+.circular-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    position: relative;
+  }
+  
+  .circular-progress__circle {
+    position: relative;
+  }
+  
+  .circular-chart {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    background-color: #E8E1D9;
+  
+  }
+  
+  .circle-bg {
+    fill: none;
+    stroke: #516BE7;
+    stroke-width: 4.3;
+  }
+  
+  .circle {
+    fill: none;
+    stroke-width: 3;
+    stroke: #081EAC;
+    stroke-linecap: round;
+    transition: stroke-dasharray 0.35s;
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+  }
+  
+  .circular-progress__text {
+    font-size: 0.8em;
+    font-weight: bold;
+    text-anchor: middle;
+    fill: #516BE7;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  

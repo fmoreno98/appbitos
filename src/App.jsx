@@ -3,14 +3,13 @@ import Register from './components/register'
 import Login from './components/login'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import BotonCrear from './components/BotonCrear'
 function App() {
 
   return (
     <>
-      <Header />
-      <Login />
-      <Register />
-      <Footer />
+      <BotonCrear progress={100}/>
+
      
     </>
   )
