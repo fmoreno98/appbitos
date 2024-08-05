@@ -3,7 +3,6 @@ import { useState } from 'react'
 import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './fontawesome'
-
 import './BotonCrear.css'
 
 function BotonCrear(props) {
@@ -17,8 +16,7 @@ function BotonCrear(props) {
     const [fechaCreacion, setFechaCreacion] = useState('')
     const [activo, setActivo] = useState('')
     const [idUsuario, setIdUsuario] = useState(0)
-    const [acciones, setAcciones] = useState(1)
-
+    
     const manejarCambio = (evento) => {
         setOpcionSeleccionada(evento.target.value);
     };
@@ -32,7 +30,7 @@ function BotonCrear(props) {
 
         // Generar fecha y hora actuales
         let now = new Date();
-        now = codigo_pass = now.getTime(); // Puedes modificar esta lógica para generar un código más específico
+        now = now.getTime(); // Puedes modificar esta lógica para generar un código más específico
 
         const ob = {
             "nombre_habito": nombreHabito,
@@ -55,13 +53,24 @@ function BotonCrear(props) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                borrarCampos()
+                setOpcionSeleccionada('')
             })
             .catch(error => {
                 console.error('Error:', error);
             });
 
-        // console.log('Formulario enviado:', formData);
         setShow(false);
+    }
+
+    //borrar los campos una vez enviado el formulario
+    function borrarCampos() {
+        setNombreHabito('');
+        setDescripcion('');
+        setFrecuencia(1);
+        setFechaCreacion('');
+        setActivo('');
+        setIdUsuario(0);
     }
 
     return (
@@ -144,7 +153,8 @@ function BotonCrear(props) {
                                     placeholder="Ej: 3"
                                     max={100}
                                     min={0}
-                                    value={acciones}
+                                    value={frecuencia}
+                                    onChange={(event) => setFrecuencia(event.target.value)}
                                 />
                             </Form.Group>
                         )
