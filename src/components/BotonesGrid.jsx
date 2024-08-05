@@ -34,7 +34,7 @@ const BotonesGrid = () => {
 
     return (
         <Container className="gridBotons">
-            <div className="button-grid">
+            <div className="button-grid" id='button-grid'>
                 {buttonRows.map((row, rowIndex) => (
                     <Row key={rowIndex} className="mb-4">
                         {row.map((button, buttonIndex) => (
