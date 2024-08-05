@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import Register from './components/register'
 import Login from './components/login'
-import './App.css'
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Home from './components/Home'
@@ -14,12 +13,10 @@ function App() {
   return (
     <>
 
-    <Home />
-      {/* <Header />
+      <Header />
       <Login />
-      <Register />
-      <Footer /> */}
-     
+      {/* <Register /> */}
+      <Footer />
     </>
   )
 }
