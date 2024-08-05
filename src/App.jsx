@@ -3,6 +3,9 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Home from './components/Home'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faBell } from '@fortawesome/free-solid-svg-icons';
 import LoginContext from './components/LoginContext';
 
 function App() {
@@ -27,6 +30,7 @@ function App() {
     localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
   }
 
+function App() {
   return (
     <LoginContext.Provider value={{ user, setUser, token, setToken }}>
       <Header />

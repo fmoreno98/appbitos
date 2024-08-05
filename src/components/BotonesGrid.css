@@ -1,0 +1,41 @@
+body {
+    width: auto;
+    margin: 0; /* Elimina los márgenes para que el contenido ocupe toda la pantalla */
+    padding: 0;
+    overflow-x: hidden; /* Previene el desplazamiento horizontal */
+}
+
+.gridBotons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los elementos a la izquierda */
+    margin-top: 4em;
+    width: auto;
+    padding: 0 2em; /* Agrega padding a la izquierda y derecha */
+}
+
+.button-grid {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Alinea los botones a la izquierda */
+    width: 100%; /* Asegura que el contenedor use todo el ancho disponible */
+}
+
+.round-button {
+    border-radius: 50% !important;
+    width: 100px; /* Ajusta según el tamaño deseado */
+    height: 100px; /* Ajusta según el tamaño deseado */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-right: 0; /* Ajusta o elimina el margen derecho si es necesario */
+}
+
+.botoform button {
+    margin-top: 2em;
+    margin-bottom: 4em; /* Ajusta según el margen inferior deseado */
+    margin-left: 0; /* Alinea el botón "Add Button" a la izquierda */
+}
