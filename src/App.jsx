@@ -1,3 +1,4 @@
+
 import { useState, useContext, useEffect } from 'react'
 import Register from './components/Register'
 import Login from './components/Login'
@@ -6,6 +7,7 @@ import Header from './components/Header'
 import Home from './components/Home'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
+import  './App.css'
 import LoginContext from './components/LoginContext';
 import BotonCrear from './components/BotonCrear';
 
@@ -22,25 +24,24 @@ function App() {
     const loginfront = localStorage.getItem('loginfront');
     if (loginfront) {
       setUser(loginfront);
+      setToken(loginfront);
     }
   }, []);
 
   // Función para manejar el logout del usuario
   function handleLogout() {
     setUser(null); // Limpiar el estado del usuario
+    setToken(null); // Limpiar el estado del token
     localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
   }
-
   return (
-
-      <LoginContext.Provider value={{ user, setUser, token, setToken }}>
-        <Header />
-        <Login />
-        <BotonCrear progress={100} />
-        {/* <Register /> */}
-        <Footer />
-      </LoginContext.Provider>
+    <LoginContext.Provider value={{ user, setUser, token, setToken }}>
+      <Header />
+      {/*//<BotonCrear progress={100}/>} */}
+      <Login />
+      {/* <Register /> */}
+      <Footer />
+    </LoginContext.Provider>
   )
 }
-
 export default App
