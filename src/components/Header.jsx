@@ -11,18 +11,18 @@ function Header() {
             <Navbar className='custom-navbar' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
-                        src="/img/ImagenMiniLogoRedondo.png"
+                        src="/img/MiniLogo.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
-                        alt="Appbit Logo"
+                        alt="Appbito Logo"
                     /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link className="prova" href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Sobre Nosotros</Nav.Link>
-                            <Nav.Link href="#link">Contacto</Nav.Link>
+                            <Nav.Link class="prova" href="#home">Home</Nav.Link>
+                            <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
+                            <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
                         <NavDropdown className="usuario" title="Usuario" href="#link">
                             <NavDropdown.Item href="#action/3.1">Perfil</NavDropdown.Item>

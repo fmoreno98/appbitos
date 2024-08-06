@@ -4,6 +4,8 @@ import Register from './components/Register'
 import Login from './components/Login'
 import Footer from './components/Footer'
 import Header from './components/Header'
+import Home from './assets/Home'
+import LandingPage from './components/LandingPage'
 import Home from './components/Home'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
@@ -12,7 +14,6 @@ import LoginContext from './components/LoginContext';
 import BotonCrear from './components/BotonCrear';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Outlet, NavLink } from "react-router-dom";
-
 function App() {
 
   const [user, setUser] = useState(null);
