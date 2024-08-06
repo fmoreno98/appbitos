@@ -9,7 +9,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import  './App.css'
 import LoginContext from './components/LoginContext';
-import BotonCrear from './components/BotonCrear';
+// import BotonCrear from './components/BotonCrear';
 
 function App() {
 
@@ -39,7 +39,7 @@ function App() {
       <Header />
       {/*//<BotonCrear progress={100}/>} */}
       <Login />
-      {/* <Register /> */}
+      <Home />
       <Footer />
     </LoginContext.Provider>
   )
