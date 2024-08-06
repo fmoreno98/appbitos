@@ -20,28 +20,24 @@ function App() {
     // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
     const loginfront = localStorage.getItem('loginfront');
     if (loginfront) {
-      setUser(JSON.parse(loginfront));
+      setToken(loginfront);
     }
   }, []);
 
   // Función para manejar el logout del usuario
   function handleLogout() {
     setUser(null); // Limpiar el estado del usuario
+    setToken(null); // Limpiar el estado del token
     localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
   }
-
-function App() {
   return (
-
-    <>
-    {//<BotonCrear progress={100}/>}
     <LoginContext.Provider value={{ user, setUser, token, setToken }}>
       <Header />
+      {/*//<BotonCrear progress={100}/>} */}
       <Login />
       {/* <Register /> */}
       <Footer />
     </LoginContext.Provider>
   )
 }
-
 export default App
