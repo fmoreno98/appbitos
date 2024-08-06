@@ -32,13 +32,15 @@ function App() {
 
 function App() {
   return (
+
+    <>
+    {//<BotonCrear progress={100}/>}
     <LoginContext.Provider value={{ user, setUser, token, setToken }}>
       <Header />
       <Login />
       {/* <Register /> */}
       <Footer />
     </LoginContext.Provider>
-
   )
 }
 
