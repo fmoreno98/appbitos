@@ -4,15 +4,19 @@ import BotonesGrid from './BotonesGrid';
 import Estadisticas from './Estadisticas';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
+import Footer from './Footer';
+
 
 const Home = () => {
-    
-
     return (
+        <>
         <Container>
             <BotonesGrid />
             <Estadisticas />
         </Container>
+        <Footer />
+        </>
+        
     );
 };
 
