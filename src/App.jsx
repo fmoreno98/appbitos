@@ -7,9 +7,11 @@ import Header from './components/Header'
 import Home from './components/Home'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import  './App.css'
+import './App.css'
 import LoginContext from './components/LoginContext';
 import BotonCrear from './components/BotonCrear';
+import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Outlet, NavLink } from "react-router-dom";
 
 function App() {
 
@@ -25,6 +27,7 @@ function App() {
     if (loginfront) {
       setUser(loginfront);
       setToken(loginfront);
+      console.log(user);
     }
   }, []);
 
@@ -36,10 +39,42 @@ function App() {
   }
   return (
     <LoginContext.Provider value={{ user, setUser, token, setToken }}>
-      <Header />
-      {/*//<BotonCrear progress={100}/>} */}
-      <Login />
-      {/* <Register /> */}
+      <Navbar expand="lg">
+        <Container>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="me-auto">
+              {token === null ? (
+                // Mostrar enlaces de Login y Register si no hay usuario logueado
+                <>
+                  <NavLink
+                    to="/login"
+                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  >
+                    Login
+                  </NavLink>
+                  <NavLink
+                    to="/register"
+                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                  >
+                    Register
+                  </NavLink>
+                </>
+              ) : (
+                // Mostrar enlace de Logout si hay un usuario logueado
+                <NavLink
+                  to="/"
+                  className="nav-link"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </NavLink>
+              )}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+      <Outlet />
       <Footer />
     </LoginContext.Provider>
   )

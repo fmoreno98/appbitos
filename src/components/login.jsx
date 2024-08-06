@@ -1,14 +1,16 @@
 import React, { useState, useEffect,useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {jwtDecode} from "jwt-decode";
 import { login } from './tools/api';
 import LoginContext from './LoginContext';
+
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     contrasena: '',
   });
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [show, setShow] = useState(true);
@@ -51,13 +53,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', formData);
+    console.log('Formulario enviado:');
     login(formData.email, formData.contrasena)
       .then(data => {
         if (data.ok === true) {
           setToken(data.token);
           setShow(false);
           setError('');
+          navigate('/home');
         } else {
           setError(data.msg);
         }
