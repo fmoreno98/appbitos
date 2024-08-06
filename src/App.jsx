@@ -7,6 +7,7 @@ import Home from './components/Home'
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import LoginContext from './components/LoginContext';
+import BotonCrear from './components/BotonCrear';
 
 function App() {
 
@@ -20,7 +21,7 @@ function App() {
     // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
     const loginfront = localStorage.getItem('loginfront');
     if (loginfront) {
-      setUser(JSON.parse(loginfront));
+      setUser(loginfront);
     }
   }, []);
 
@@ -30,17 +31,15 @@ function App() {
     localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
   }
 
-function App() {
   return (
 
-    <>
-    {//<BotonCrear progress={100}/>}
-    <LoginContext.Provider value={{ user, setUser, token, setToken }}>
-      <Header />
-      <Login />
-      {/* <Register /> */}
-      <Footer />
-    </LoginContext.Provider>
+      <LoginContext.Provider value={{ user, setUser, token, setToken }}>
+        <Header />
+        <Login />
+        <BotonCrear progress={100} />
+        {/* <Register /> */}
+        <Footer />
+      </LoginContext.Provider>
   )
 }
 
