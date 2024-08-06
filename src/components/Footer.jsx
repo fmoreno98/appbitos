@@ -7,7 +7,7 @@ function Footer(){
     return(
         <>
             
-            <footer>
+            <footer id='footer'>
                 <Container>
                     <Row style={{"margin" : "10p"}}>
                         <Col style={{"display": "flex", "justifyContent": "left"}}>
