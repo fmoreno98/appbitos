@@ -6,7 +6,6 @@ function Footer() {
 
     return (
         <>
-
             <footer>
                 <Container>
                     <Row style={{ "margin": "10p" }}>
