@@ -5,7 +5,7 @@ import Footer from './components/Footer'
 import Header from './components/Header'
 import Home from './assets/Home'
 import LandingPage from './components/LandingPage'
-import LandingPrueba from './components/LandingPrueba'
+import "./App.css"
 function App() {
 
   return (
@@ -14,8 +14,7 @@ function App() {
       {/* <Login /> */}
       {/* <Register /> */}
        {/* <Home /> */}
-      {/* <LandingPage /> */}
-      <LandingPrueba /> 
+      <LandingPage />
       <Footer />
 
     </>
