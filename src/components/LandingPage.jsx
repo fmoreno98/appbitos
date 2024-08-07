@@ -1,13 +1,13 @@
 import React from 'react';
-
+import Header from './Header';
 function LandingPage() {
     return (
         <>
-
+        <Header />
             {/* <-- Seccion 1 --> */}
-            <div className="object-bottom" style={{ backgroundImage: `url('/img/FondoLanding.png')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center', height: '450px' }}>
+            <div id='home' className="object-bottom" style={{ backgroundImage: `url('/img/FondoLanding.png')`, backgroundRepeat: 'no-repeat', backgroundSize: 'cover', backgroundPosition: 'center center', height: '450px' }}>
                 <section>
-                    <div className="flex flex-col items-center justify-center mt-10 px-4 py-8 sm:flex-row text-center h-72">
+                    <div className="flex flex-col items-center justify-center px-4 py-8 sm:flex-row text-center h-72">
                         <div className="text-center mt-10 rounded-4">
                             <h1 className="inline-block p-1 mb-4 text-3xl font-extrabold text-white md:text-5xl lg:text-7xl bg-[#E8E1D9] bg-opacity-80 rounded-3 "><span className=" text-transparent bg-clip-text bg-gradient-to-r to-[#081EAC] from-[#516BE7]">APPBITO</span></h1>
                             <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Habitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
@@ -135,7 +135,7 @@ function LandingPage() {
                 </section>
 
                 {/* <-- Section 4 --> */}
-                <section className="">
+                <section id="link2" className="">
                     <div className="px-5 py-12 " id="cards">
 
                         <div className="max-w-screen-xl mx-auto text-center mb-12">
@@ -319,6 +319,7 @@ function LandingPage() {
 
                 </div>
             </div>
+            {/* <Footer /> */}
         </>
     );
 }

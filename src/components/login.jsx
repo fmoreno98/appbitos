@@ -60,6 +60,8 @@ function Login() {
           setToken(data.token);
           setShow(false);
           setError('');
+          
+          
           navigate('/home');
         } else {
           setError(data.msg);
@@ -88,7 +90,7 @@ function Login() {
         <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: 'rgba(232, 225, 217, 0.85)', borderRadius: '10px', textAlign: 'center' }}>
           <div style={{ marginBottom: '20px' }}>
             <div style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/img/ImagenMiniLogoRedondo.png" alt="" width={'45%'} />
+              <img src="/img/MiniLogo.png" alt="" width={'40%'} />
             </div>
           </div>
           <h1 style={{ textAlign: 'left' }}>Inicio de sesión</h1>
@@ -125,7 +127,7 @@ function Login() {
               Iniciar sesión
             </button>
           </form>
-          <p style={{ marginTop: '10px', textAlign: 'center' }}>¿No tienes cuenta? <a href="#" style={{ color: '#0000FF' }}>Regístrate</a></p>
+          <p style={{ marginTop: '10px', textAlign: 'center' }}>¿No tienes cuenta? <a href="/register" style={{ color: '#0000FF' }}>Regístrate</a></p>
         </div>
       ) : (
         <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: 'rgba(232, 225, 217, 0.85)', borderRadius: '10px', textAlign: 'center' }}>

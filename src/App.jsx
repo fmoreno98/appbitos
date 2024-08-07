@@ -1,23 +1,18 @@
-
-import { useState, useContext, useEffect } from 'react'
-import Register from './components/Register'
-import Login from './components/Login'
+import { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import Footer from './components/Footer'
-import Header from './components/Header'
-import Home from './assets/Home'
-import LandingPage from './components/LandingPage'
-import Home from './components/Home'
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import './App.css'
 import LoginContext from './components/LoginContext';
-import BotonCrear from './components/BotonCrear';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Outlet, NavLink } from "react-router-dom";
-function App() {
 
+function App() {
+  const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Nuevo estado para controlar el dropdown
+
   if (token) {
     console.log(token);
   }
@@ -37,7 +32,10 @@ function App() {
     setUser(null); // Limpiar el estado del usuario
     setToken(null); // Limpiar el estado del token
     localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
+    setDropdownOpen(false); // Cerrar el dropdown al hacer logout
+    navigate('/'); // Redirigir al usuario a la página de inicio de sesión
   }
+
   return (
     <LoginContext.Provider value={{ user, setUser, token, setToken }}>
       <Navbar expand="lg">
@@ -45,32 +43,43 @@ function App() {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
-              {token === null ? (
-                // Mostrar enlaces de Login y Register si no hay usuario logueado
-                <>
+              {/* Otros elementos del Nav */}
+            </Nav>
+            <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
+              <NavDropdown 
+                id="benja" 
+                title="Usuario" 
+                show={dropdownOpen} 
+                onMouseEnter={() => setDropdownOpen(true)}
+                onMouseLeave={() => setDropdownOpen(false)} // Cerrar el dropdown al salir
+              >
+                {token === null ? (
+                  // Mostrar enlaces de Login y Register si no hay usuario logueado
+                  <>
+                    <NavLink 
+                      to="/login" 
+                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                    >
+                      Login
+                    </NavLink>
+                    <NavLink 
+                      to="/register" 
+                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                    >
+                      Register
+                    </NavLink>
+                  </>
+                ) : (
+                  // Mostrar enlace de Logout si hay un usuario logueado
                   <NavLink
-                    to="/login"
-                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                    to="/"
+                    className="nav-link"
+                    onClick={handleLogout}
                   >
-                    Login
+                    Logout
                   </NavLink>
-                  <NavLink
-                    to="/register"
-                    className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-                  >
-                    Register
-                  </NavLink>
-                </>
-              ) : (
-                // Mostrar enlace de Logout si hay un usuario logueado
-                <NavLink
-                  to="/"
-                  className="nav-link"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </NavLink>
-              )}
+                )}
+              </NavDropdown>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -80,4 +89,5 @@ function App() {
     </LoginContext.Provider>
   )
 }
-export default App
+
+export default App;

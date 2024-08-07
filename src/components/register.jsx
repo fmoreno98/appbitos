@@ -130,7 +130,7 @@ function Register() {
             Registrarse
           </button>
         </form>
-        <p style={{ marginTop: '10px', textAlign: 'center' }}>¿Ya tienes cuenta? <a href="#" style={{ color: '#0000FF' }}>Inicia sesión</a></p>
+        <p style={{ marginTop: '10px', textAlign: 'center' }}>¿Ya tienes cuenta? <a href="/login" style={{ color: '#0000FF' }}>Inicia sesión</a></p>
       </div>
     </div>
   );

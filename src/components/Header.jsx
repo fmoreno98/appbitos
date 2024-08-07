@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink } from "react-router-dom";
 import './Header.css';
 
 
@@ -25,8 +26,8 @@ function Header() {
                             <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
                         <NavDropdown className="usuario" title="Usuario" href="#link">
-                            <NavDropdown.Item href="#action/3.1">Perfil</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Cerrar Sesión</NavDropdown.Item>
+                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <NavLink className="nav-link" to="/register"> Register </NavLink>
                         </NavDropdown>
                     </Navbar.Collapse>
                 </Container>
