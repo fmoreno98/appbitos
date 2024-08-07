@@ -1,6 +1,5 @@
-import React, { useState, useEffect,useContext } from 'react';
+import { useState, useEffect,useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {jwtDecode} from "jwt-decode";
 import { login } from './tools/api';
 import LoginContext from './LoginContext';
 
@@ -14,7 +13,7 @@ function Login() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [show, setShow] = useState(true);
-  const { setUser, setToken,token } = useContext(LoginContext); 
+  const { setUser,setToken,token } = useContext(LoginContext); 
 
   useEffect(() => {
     const tk = localStorage.getItem('loginfront');
@@ -33,15 +32,7 @@ function Login() {
     }
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token);
-      localStorage.setItem('loginfront', token);
-      setUser(decoded.id);
-    } else {
-      setEmail('');
-    }
-  }, [token]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -56,7 +47,9 @@ function Login() {
     console.log('Formulario enviado:');
     login(formData.email, formData.contrasena)
       .then(data => {
-        if (data.ok === true) {
+        if (data.ok === true) {+
+          console.log("Atun:" + data.token);
+          // localStorage.setItem('loginfront', data.token);
           setToken(data.token);
           setShow(false);
           setError('');
