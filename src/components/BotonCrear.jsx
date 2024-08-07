@@ -1,9 +1,11 @@
 import React from 'react'
-import { useState } from 'react'
+import LoginContext from './LoginContext';
+import { useState,useContext } from 'react'
 import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './fontawesome'
 import './BotonCrear.css'
+
 
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
@@ -13,12 +15,18 @@ function BotonCrear(props) {
     const [nombreHabito, setNombreHabito] = useState('')
     const [descripcion, setDescripcion] = useState('')
     const [frecuencia, setFrecuencia] = useState(1)
-    const [fechaCreacion, setFechaCreacion] = useState('')
-    const [activo, setActivo] = useState('')
-    const [idUsuario, setIdUsuario] = useState(0)
+    const [tipo_habito, setTipoHabito] = useState(1)
+    const { user } = useContext(LoginContext);
     
     const manejarCambio = (evento) => {
         setOpcionSeleccionada(evento.target.value);
+        if (evento.target.value === 'gradual'){
+            setTipoHabito(1)
+        }else if(evento.target.value === 'acciones'){
+            setTipoHabito(2)
+        }else if(evento.target.value === 'cumplimiento'){
+            setTipoHabito(3)
+        }
     };
 
     const handleClose = () => setShow(false);
@@ -38,7 +46,8 @@ function BotonCrear(props) {
             "frecuencia": frecuencia,
             "fecha_creacion": now,
             "activo": "1",
-            "id_usuario": "10"
+            "id_usuario": user,
+            "tipo_habito": tipo_habito
         }
 
         const fetchOptions = {
@@ -49,12 +58,13 @@ function BotonCrear(props) {
             body: JSON.stringify(ob)
         }
 
-        fetch('http://localhost:3000/api/crearHabitos', fetchOptions)
+        fetch('http://localhost:3000/api/habitos', fetchOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 borrarCampos()
                 setOpcionSeleccionada('')
+                props.creado()
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -68,9 +78,7 @@ function BotonCrear(props) {
         setNombreHabito('');
         setDescripcion('');
         setFrecuencia(1);
-        setFechaCreacion('');
-        setActivo('');
-        setIdUsuario(0);
+        setTipoHabito(1) 
     }
 
     return (
@@ -143,8 +151,8 @@ function BotonCrear(props) {
                                     onChange={(event) => setFrecuencia(event.target.value)}
                                 />
                             </Form.Group>
-                        )
-                        }
+                        )}
+                        
                         {opcionSeleccionada === 'acciones' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Acciones</Form.Label>
@@ -157,8 +165,8 @@ function BotonCrear(props) {
                                     onChange={(event) => setFrecuencia(event.target.value)}
                                 />
                             </Form.Group>
-                        )
-                        }
+                        )}
+                        
                         {opcionSeleccionada === 'cumplimiento' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Cumplimiento</Form.Label>
@@ -166,8 +174,7 @@ function BotonCrear(props) {
                                 <p className='cumpl p-2'>Cumplimiento estará siempre activo. Se desactivará en el momento que incumplas el hábito.</p>
 
                             </Form.Group>
-                        )
-                        }
+                        )}
                         <Button variant="primary" type="submit">Enviar</Button>
                     </Form>
                 </Modal.Body>

@@ -1,6 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import './BotonesGrid.css'; 
+import BotonCrear from './BotonCrear';
+import './BotonCrear.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
@@ -17,6 +19,11 @@ const BotonesGrid = () => {
     const buttonRows = [];
     for (let i = 0; i < buttons.length; i += 2) {
         buttonRows.push(buttons.slice(i, i + 2));
+    }
+
+    // Asegúrate de que siempre haya un lugar para el botón de creación al final
+    if (buttonRows.length === 0 || buttonRows[buttonRows.length - 1].length === 2) {
+        buttonRows.push([]);
     }
 
     useEffect(() => {
@@ -47,18 +54,15 @@ const BotonesGrid = () => {
                                 </Button>
                             </Col>
                         ))}
+                        {rowIndex === buttonRows.length - 1 && (
+                            <Col className="d-flex justify-content-right align-items-bottom">
+                                <Form className="mb-3 botoform">
+                                    <BotonCrear progress={100} creado={handleAddButton} ref={addButtonRef} />
+                                </Form>
+                            </Col>
+                        )}
                     </Row>
-                ))}
-                <Form className="mb-3 botoform">
-                    <Button 
-                        variant="primary" 
-                        onClick={handleAddButton} 
-                        className="mt-2"
-                        ref={addButtonRef}
-                    >
-                        Add Button
-                    </Button>
-                </Form>
+                ))} 
             </div>
         </Container>
     );

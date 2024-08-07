@@ -1,18 +1,20 @@
-import React, { useState, useEffect,useContext } from 'react';
-import {jwtDecode} from "jwt-decode";
+import { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { login } from './tools/api';
-import LoginContext from './LoginContext';
+import { jwtDecode } from "jwt-decode";
+  import LoginContext from './LoginContext';
+
 
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
     contrasena: '',
   });
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [show, setShow] = useState(true);
-  const { setUser, setToken,token } = useContext(LoginContext); 
+  const { setUser, setToken, token } = useContext(LoginContext);
 
   useEffect(() => {
     const tk = localStorage.getItem('loginfront');
@@ -31,16 +33,6 @@ function Login() {
     }
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      const decoded = jwtDecode(token);
-      localStorage.setItem('loginfront', token);
-      setUser(decoded.id);
-    } else {
-      setEmail('');
-    }
-  }, [token]);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -51,13 +43,15 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:', formData);
+    console.log('Formulario enviado:');
     login(formData.email, formData.contrasena)
       .then(data => {
         if (data.ok === true) {
+          console.log("Atun:" + data.token);
           setToken(data.token);
           setShow(false);
           setError('');
+          navigate('/');
         } else {
           setError(data.msg);
         }
@@ -85,7 +79,7 @@ function Login() {
         <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: 'rgba(232, 225, 217, 0.85)', borderRadius: '10px', textAlign: 'center' }}>
           <div style={{ marginBottom: '20px' }}>
             <div style={{ height: '100px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-              <img src="/img/ImagenMiniLogoRedondo.png" alt="" width={'45%'} />
+              <img src="/img/MiniLogo.png" alt="" width={'40%'} />
             </div>
           </div>
           <h1 style={{ textAlign: 'left' }}>Inicio de sesión</h1>
@@ -122,7 +116,7 @@ function Login() {
               Iniciar sesión
             </button>
           </form>
-          <p style={{ marginTop: '10px', textAlign: 'center' }}>¿No tienes cuenta? <a href="#" style={{ color: '#0000FF' }}>Regístrate</a></p>
+          <p style={{ marginTop: '10px', textAlign: 'center' }}>¿No tienes cuenta? <a href="/register" style={{ color: '#0000FF' }}>Regístrate</a></p>
         </div>
       ) : (
         <div style={{ maxWidth: '400px', margin: '0 auto', padding: '20px', backgroundColor: 'rgba(232, 225, 217, 0.85)', borderRadius: '10px', textAlign: 'center' }}>

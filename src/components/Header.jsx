@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { NavLink } from "react-router-dom";
 import './Header.css';
 
 
@@ -11,22 +12,22 @@ function Header() {
             <Navbar className='custom-navbar' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
-                        src="/img/ImagenMiniLogoRedondo.png"
+                        src="/img/MiniLogo.png"
                         width="30"
                         height="30"
                         className="d-inline-block align-top"
-                        alt="Appbit Logo"
+                        alt="Appbito Logo"
                     /></Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link className="prova" href="#home">Home</Nav.Link>
-                            <Nav.Link href="#link">Sobre Nosotros</Nav.Link>
-                            <Nav.Link href="#link">Contacto</Nav.Link>
+                            <Nav.Link class="prova" href="#home">Home</Nav.Link>
+                            <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
+                            <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
                         <NavDropdown className="usuario" title="Usuario" href="#link">
-                            <NavDropdown.Item href="#action/3.1">Perfil</NavDropdown.Item>
-                            <NavDropdown.Item href="#action/3.2">Cerrar Sesión</NavDropdown.Item>
+                            <NavLink className="nav-link" to="/login">Login</NavLink>
+                            <NavLink className="nav-link" to="/register"> Register </NavLink>
                         </NavDropdown>
                     </Navbar.Collapse>
                 </Container>
