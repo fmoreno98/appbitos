@@ -1,5 +1,5 @@
 import React from 'react'
-import ReactDOMClient from 'react-dom/client'
+import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import LandingPage from './components/LandingPage.jsx'
 import Login from './components/Login.jsx'
