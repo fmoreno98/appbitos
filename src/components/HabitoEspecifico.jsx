@@ -1,14 +1,16 @@
 import React from 'react';
 import  './HabitoEspecifico.css';
-import './fontawesome'
+// import './fontawesome.js'
+import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-
+import {iconos} from './fontawesome.js';
 
 function HabitoEspecifico(props) {
 
     const [progress, setProgress] = useState(props.progress);
     const [nombreHabito, setNombreHabito] = useState(props.nombreHabito);
-    
+
     return (
         <>
             <div className="circular-progress">
@@ -29,7 +31,7 @@ function HabitoEspecifico(props) {
                         />
                     </svg>
                     <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{ color: '#0E28C0' }} />
+                        <FontAwesomeIcon icon={iconos.ojo} size='2x' style={{ color: '#0E28C0' }} />
                     </div>
                 </div>
             </div>

@@ -2,7 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import './BotonesGrid.css'; 
 import BotonCrear from './BotonCrear';
-import './BotonCrear.css';
+// import './BotonCrear.css';
+import HabitoEspecifico from './HabitoEspecifico';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
@@ -46,12 +47,14 @@ const BotonesGrid = () => {
                     <Row key={rowIndex} className="mb-4">
                         {row.map((button, buttonIndex) => (
                             <Col key={buttonIndex}>
-                                <Button
+                                {/* <Button
                                     variant="primary"
                                     className="round-button"
                                 >
                                     <FontAwesomeIcon icon={faBell} />
-                                </Button>
+                                </Button> */}
+                                <HabitoEspecifico progress={100} nombreHabito="Habito 1" />
+
                             </Col>
                         ))}
                         {rowIndex === buttonRows.length - 1 && (

@@ -3,9 +3,10 @@ import LoginContext from './LoginContext';
 import { useState,useContext } from 'react'
 import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import './fontawesome'
+// import './fontawesome.js'
 import './BotonCrear.css'
 
+import {iconos} from './fontawesome.js';
 
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
@@ -102,7 +103,8 @@ function BotonCrear(props) {
                         />
                     </svg>
                     <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{ color: '#0E28C0' }} />
+                        <FontAwesomeIcon icon={iconos.plus} size='2x' style={{ color: '#0E28C0' }} />
+
                     </div>
                 </div>
             </div>
