@@ -26,9 +26,20 @@ const login = (email, password) => {
       
   }
   
+  const estadisticas = (token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+  
+    return fetch(API_URL + "/estadisticas/countByDate", requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
   
   
   export {
     login,
-    checkToken
+    checkToken,
+    estadisticas
   };

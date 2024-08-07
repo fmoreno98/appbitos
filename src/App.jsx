@@ -38,6 +38,7 @@ function App() {
       {/*//<BotonCrear progress={100}/>} */}
       <Login />
       {/* <Register /> */}
+      <Home />
       <Footer />
     </LoginContext.Provider>
   )
