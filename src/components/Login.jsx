@@ -60,8 +60,6 @@ function Login() {
           setToken(data.token);
           setShow(false);
           setError('');
-          
-          
           navigate('/home');
         } else {
           setError(data.msg);
