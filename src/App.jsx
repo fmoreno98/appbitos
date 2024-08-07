@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Footer from './components/Footer'
 import NavDropdown from 'react-bootstrap/NavDropdown';
-import {jwtDecode} from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import './App.css'
 import LoginContext from './components/LoginContext';
 import { Navbar, Nav, Container } from 'react-bootstrap';
@@ -19,8 +19,8 @@ function App() {
     const loginfront = localStorage.getItem('loginfront');
     if (loginfront) {
       setUser(loginfront);
-      setToken(loginfront);
-      console.log(user);
+      setToken(loginfront);      
+      navigate('/home');
     }
   }, []);
 
@@ -29,13 +29,11 @@ function App() {
     const decoded = jwtDecode(tk);
     if (token) {
       localStorage.setItem('loginfront', token);
-      console.log('atun');
       const decoded = jwtDecode(token);
-      
       setUser(decoded.id);
-    } 
+      navigate('/home');
+    }
   }, [token]);
-
   // Función para manejar el logout del usuario
   function handleLogout() {
     setUser(null); // Limpiar el estado del usuario
