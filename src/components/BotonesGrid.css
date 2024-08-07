@@ -29,8 +29,6 @@ body {
     align-items: center;
     justify-content: center;
     padding: 0;
-    margin-left: 2em;
-    margin-top: 2em;
     margin-right: 0; /* Ajusta o elimina el margen derecho si es necesario */
 }
 

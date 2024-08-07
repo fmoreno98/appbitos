@@ -58,12 +58,13 @@ function BotonCrear(props) {
             body: JSON.stringify(ob)
         }
 
-        fetch('http://localhost:3000/api/crearHabitos', fetchOptions)
+        fetch('http://localhost:3000/api/habitos', fetchOptions)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
                 borrarCampos()
                 setOpcionSeleccionada('')
+                props.creado()
             })
             .catch(error => {
                 console.error('Error:', error);
