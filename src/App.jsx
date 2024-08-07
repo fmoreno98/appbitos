@@ -25,8 +25,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log("el token ha canviat!")
-    const decoded = jwtDecode(tk);
     if (token) {
       localStorage.setItem('loginfront', token);
       const decoded = jwtDecode(token);
