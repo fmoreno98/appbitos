@@ -55,7 +55,7 @@ const BotonesGrid = () => {
                             </Col>
                         ))}
                         {rowIndex === buttonRows.length - 1 && (
-                            <Col>
+                            <Col className="d-flex justify-content-right align-items-bottom">
                                 <Form className="mb-3 botoform">
                                     <BotonCrear progress={100} creado={handleAddButton} ref={addButtonRef} />
                                 </Form>
