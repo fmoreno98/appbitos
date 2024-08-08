@@ -26,13 +26,13 @@ const login = (email, password) => {
       
   }
   
-  const estadisticas = (token) => {
+  const estadisticas = (token, id) => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', authorization: token },
     };
   
-    return fetch(API_URL + "/estadisticas/countByDate", requestOptions)
+    return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
       .then(response => response.json())
       .catch(error => []);
   }
