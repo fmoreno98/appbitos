@@ -2,8 +2,9 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import your icons
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
-library.add(
-  faPlus,
-);
+export const iconos = {
+    ojo: faEye,
+    plus: faPlus
+}
