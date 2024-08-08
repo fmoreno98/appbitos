@@ -6,7 +6,6 @@ import Estadisticas from './Estadisticas';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import Footer from './Footer';
 import LoginContext from './LoginContext';
 
 const Home = () => {
@@ -26,17 +25,17 @@ const Home = () => {
     return (
         <>
             <Container>
-            <Row className='contenedor'>
-                <Col>
-                  <BotonesGrid />
-                </Col>
-                <Col id=''>
-                  <div id='estadisticas'>
-                    <Estadisticas />
-                  </div>
-                 </Col>
-              </Row>
-          </Container>
+                <Row className='contenedor'>
+                    <Col>
+                        <BotonesGrid />
+                    </Col>
+                    <Col id=''>
+                        <div id='estadisticas'>
+                            <Estadisticas />
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };

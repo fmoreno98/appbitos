@@ -1,14 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import LoginContext from './LoginContext';
 import { useState,useContext } from 'react'
 import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import './fontawesome.js'
-import './BotonCrear.css'
+import './fontawesome'
+// import './FormEditarHabito.css'
 
-import {iconos} from './fontawesome.js';
+import { editarHabito, buscarHabito } from './tools/api';
 
-function BotonCrear(props) {
+
+function FormEditar(props) {
+    const idHabito = props.idHabito;
     const [show, setShow] = useState(false);
     const [progress, setProgress] = useState(props.progress);
     const [opcionSeleccionada, setOpcionSeleccionada] = useState('')
@@ -33,45 +35,25 @@ function BotonCrear(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    useEffect(() => {
+        buscarHabito(idHabito).then(data => {
+            setNombreHabito(data.nombre_habito);
+            setDescripcion(data.descripcion);
+            setFrecuencia(data.frecuencia);
+            setTipoHabito(data.tipo_habito);
+        })
+        
+        .catch(err => console.log(err));
+    }, []);
+
+
     function handleSubmit(event) {
         event.preventDefault();
         // Aquí puedes realizar acciones adicionales con los datos del formulario
 
         // Generar fecha y hora actuales
-        let now = new Date();
-        now = now.getTime(); // Puedes modificar esta lógica para generar un código más específico
 
-        const ob = {
-            "nombre_habito": nombreHabito,
-            "descripcion": descripcion,
-            "frecuencia": frecuencia,
-            "fecha_creacion": now,
-            "activo": "1",
-            "id_usuario": user,
-            "tipo_habito": tipo_habito
-        }
-
-        const fetchOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(ob)
-        }
-
-        fetch('http://localhost:3000/api/habitos', fetchOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                props.refresca()
-                borrarCampos()
-                setOpcionSeleccionada('')
-                props.creado()
-            })
-            .catch(error => {
-                console.error('Error:', error);
-            });
-
+        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito);
         setShow(false);
     }
 
@@ -86,6 +68,7 @@ function BotonCrear(props) {
     return (
 
         <>
+        {nombreHabito}
             <div onClick={handleShow} className="circular-progress">
                 <div className="circular-progress__circle">
                     <svg viewBox="0 0 36 36" className="circular-chart">
@@ -104,20 +87,19 @@ function BotonCrear(props) {
                         />
                     </svg>
                     <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={iconos.plus} size='2x' style={{ color: '#0E28C0' }} />
-
+                        <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{ color: '#0E28C0' }} />
                     </div>
                 </div>
             </div>
 
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Creación de Hábitos</Modal.Title>
+                    <Modal.Title>Editar Hábito</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Hábito</Form.Label>
+                            <Form.Label>Editar Hábito</Form.Label>
                             <Form.Control
                                 type="text"
                                 placeholder="Ej: Caminar"
@@ -127,7 +109,7 @@ function BotonCrear(props) {
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Descripción</Form.Label>
+                            <Form.Label>Editar Descripción</Form.Label>
                             <Form.Control
                                 type="text" 
                                 placeholder="Ej: Caminar 30 minutos"
@@ -136,7 +118,7 @@ function BotonCrear(props) {
                             />
                         </Form.Group>
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
-                            <FormLabel>Tipo de hábito</FormLabel>
+                            <FormLabel>Editar Tipo de hábito</FormLabel>
                             <FormSelect onChange={manejarCambio}>
                                 <option value=''>Seleccionar opción</option>
                                 <option value='gradual'>Avance gradual</option>
@@ -178,7 +160,7 @@ function BotonCrear(props) {
 
                             </Form.Group>
                         )}
-                        <Button variant="primary" type="submit">Enviar</Button>
+                        <Button variant="primary" type="submit">Aceptar Edicion</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
@@ -189,4 +171,4 @@ function BotonCrear(props) {
     )
 }
 
-export default BotonCrear;
+export default FormEditar;
