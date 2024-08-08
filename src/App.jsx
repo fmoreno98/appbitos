@@ -17,10 +17,9 @@ function App() {
   useEffect(() => {
     // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
     const loginfront = localStorage.getItem('loginfront');
+    console.log("loginfront", loginfront);
     if (loginfront) {
-      setUser(loginfront);
       setToken(loginfront);      
-      navigate('/home');
     }
   }, []);
 
