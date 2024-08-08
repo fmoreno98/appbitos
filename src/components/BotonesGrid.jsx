@@ -37,6 +37,27 @@ const BotonesGrid = () => {
                 top: top - offset,
                 behavior: 'smooth',
             });
+
+            const fetchOptions = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(ob)
+            }
+    
+            fetch('http://localhost:3000/api/habitos', fetchOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    borrarCampos()
+                    setOpcionSeleccionada('')
+                    props.creado()
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
         }
     }, [buttons]);
 

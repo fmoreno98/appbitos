@@ -6,5 +6,5 @@ import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
 
 export const iconos = {
     ojo: faEye,
-    plus: faPlus
+    plus: faPlus,
 }
