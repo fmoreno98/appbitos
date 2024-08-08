@@ -54,8 +54,13 @@ const API_URL = 'http://localhost:3000/api';
     const requestOptions = {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({})
+      body: JSON.stringify({id})
     };
+      
+    return fetch(API_URL + "/habitos", requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
 
   const estadisticas = (token) => {
     const requestOptions = {
@@ -67,17 +72,13 @@ const API_URL = 'http://localhost:3000/api';
       .then(response => response.json())
       .catch(error => []);
   }
-  
-    return fetch(API_URL + "/habitos", requestOptions)
-      .then(response => response.json())
-      .catch(error => []);
-  }
+
   
   export {
     login,
     checkToken,
     editarHabito,
     buscarHabito,
-    eliminarHabito
+    eliminarHabito,
     estadisticas
   };

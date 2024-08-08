@@ -3,6 +3,7 @@ import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import BotonesGrid from './BotonesGrid';
 import FormEditar from './FormEditarHabito';
+import FormEliminar from './FormEliminarHabito';
 import Estadisticas from './Estadisticas';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,21 +27,20 @@ const Home = () => {
 
     return (
         <>
-        <Container>
-            <Container>
+            {/* <Container> */}
             <Row className='contenedor'>
                 <Col>
-                  <BotonesGrid />
+                  {/* <BotonesGrid /> */}
                 </Col>
                 <Col id=''>
                   <div id='estadisticas'>
-                    <Estadisticas />
-      //             <FormEditar idHabito={10} />
-
+                    {/* <Estadisticas /> */}
+                    {/* <FormEditar idHabito={10} /> */}
+                    <FormEliminar />
                   </div>
                  </Col>
               </Row>
-          </Container>
+          {/* </Container> */}
         </>
     );
 };
