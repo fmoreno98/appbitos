@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Footer from './components/Footer'
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import { jwtDecode } from "jwt-decode";
 import './App.css'
 import LoginContext from './components/LoginContext';
 import { Navbar, Nav, Container } from 'react-bootstrap';
@@ -11,22 +12,26 @@ function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [dropdownOpen, setDropdownOpen] = useState(false); // Nuevo estado para controlar el dropdown
-
-  if (token) {
-    console.log(token);
-  }
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Nuevo estado para controlar el dropdow
 
   useEffect(() => {
     // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
     const loginfront = localStorage.getItem('loginfront');
     if (loginfront) {
       setUser(loginfront);
-      setToken(loginfront);
-      console.log(user);
+      setToken(loginfront);      
+      navigate('/home');
     }
   }, []);
 
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem('loginfront', token);
+      const decoded = jwtDecode(token);
+      setUser(decoded.id);
+      navigate('/home');
+    }
+  }, [token]);
   // Función para manejar el logout del usuario
   function handleLogout() {
     setUser(null); // Limpiar el estado del usuario
@@ -46,24 +51,24 @@ function App() {
               {/* Otros elementos del Nav */}
             </Nav>
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
-              <NavDropdown 
-                id="benja" 
-                title="Usuario" 
-                show={dropdownOpen} 
+              <NavDropdown
+                id="benja"
+                title="Usuario"
+                show={dropdownOpen}
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)} // Cerrar el dropdown al salir
               >
                 {token === null ? (
                   // Mostrar enlaces de Login y Register si no hay usuario logueado
                   <>
-                    <NavLink 
-                      to="/login" 
+                    <NavLink
+                      to="/login"
                       className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
                     >
                       Login
                     </NavLink>
-                    <NavLink 
-                      to="/register" 
+                    <NavLink
+                      to="/register"
                       className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
                     >
                       Register

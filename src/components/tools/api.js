@@ -56,6 +56,17 @@ const API_URL = 'http://localhost:3000/api';
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({})
     };
+
+  const estadisticas = (token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+  
+    return fetch(API_URL + "/estadisticas/countByDate", requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
   
     return fetch(API_URL + "/habitos", requestOptions)
       .then(response => response.json())
@@ -68,4 +79,5 @@ const API_URL = 'http://localhost:3000/api';
     editarHabito,
     buscarHabito,
     eliminarHabito
+    estadisticas
   };

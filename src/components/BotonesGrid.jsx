@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import './BotonesGrid.css'; 
+import BotonCrear from './BotonCrear';
+// import './BotonCrear.css';
+import HabitoEspecifico from './HabitoEspecifico';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
@@ -19,6 +22,11 @@ const BotonesGrid = () => {
         buttonRows.push(buttons.slice(i, i + 2));
     }
 
+    // Asegúrate de que siempre haya un lugar para el botón de creación al final
+    if (buttonRows.length === 0 || buttonRows[buttonRows.length - 1].length === 2) {
+        buttonRows.push([]);
+    }
+
     useEffect(() => {
         if (addButtonRef.current) {
             // Desplazar hacia el botón con un margen adicional
@@ -29,6 +37,27 @@ const BotonesGrid = () => {
                 top: top - offset,
                 behavior: 'smooth',
             });
+
+            const fetchOptions = {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(ob)
+            }
+    
+            fetch('http://localhost:3000/api/habitos', fetchOptions)
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);
+                    borrarCampos()
+                    setOpcionSeleccionada('')
+                    props.creado()
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+
         }
     }, [buttons]);
 
@@ -39,26 +68,25 @@ const BotonesGrid = () => {
                     <Row key={rowIndex} className="mb-4">
                         {row.map((button, buttonIndex) => (
                             <Col key={buttonIndex}>
-                                <Button
+                                {/* <Button
                                     variant="primary"
                                     className="round-button"
                                 >
                                     <FontAwesomeIcon icon={faBell} />
-                                </Button>
+                                </Button> */}
+                                <HabitoEspecifico progress={100} nombreHabito="Habito 1" />
+
                             </Col>
                         ))}
+                        {rowIndex === buttonRows.length - 1 && (
+                            <Col className="d-flex justify-content-right align-items-bottom">
+                                <Form className="mb-3 botoform">
+                                    <BotonCrear progress={100} creado={handleAddButton} ref={addButtonRef} />
+                                </Form>
+                            </Col>
+                        )}
                     </Row>
-                ))}
-                <Form className="mb-3 botoform">
-                    <Button 
-                        variant="primary" 
-                        onClick={handleAddButton} 
-                        className="mt-2"
-                        ref={addButtonRef}
-                    >
-                        Add Button
-                    </Button>
-                </Form>
+                ))} 
             </div>
         </Container>
     );
