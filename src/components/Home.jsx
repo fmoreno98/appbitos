@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import BotonesGrid from './BotonesGrid';
+import FormEditar from './FormEditarHabito';
 import Estadisticas from './Estadisticas';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,6 +26,7 @@ const Home = () => {
 
     return (
         <>
+        <Container>
             <Container>
             <Row className='contenedor'>
                 <Col>
@@ -33,6 +35,8 @@ const Home = () => {
                 <Col id=''>
                   <div id='estadisticas'>
                     <Estadisticas />
+      //             <FormEditar idHabito={10} />
+
                   </div>
                  </Col>
               </Row>
