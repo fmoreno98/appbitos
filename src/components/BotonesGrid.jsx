@@ -1,14 +1,20 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import './BotonesGrid.css'; 
 import BotonCrear from './BotonCrear';
-import './BotonCrear.css';
+// import './BotonCrear.css';
+import HabitoEspecifico from './HabitoEspecifico';
+import LoginContext from './LoginContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const BotonesGrid = () => {
     const [buttons, setButtons] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [habitos, setHabitos] = useState([]);
+    const [refrescar, setRefrescar] = useState(0)
     const addButtonRef = useRef(null);
+    const { user } = useContext(LoginContext);
 
     // Maneja la adición de un nuevo botón
     const handleAddButton = () => {
@@ -18,7 +24,7 @@ const BotonesGrid = () => {
     // Divide los botones en grupos de 2
     const buttonRows = [];
     for (let i = 0; i < buttons.length; i += 2) {
-        buttonRows.push(buttons.slice(i, i + 2));
+        // buttonRows.push(buttons.slice(i, i + 2));
     }
 
     // Asegúrate de que siempre haya un lugar para el botón de creación al final
@@ -36,28 +42,40 @@ const BotonesGrid = () => {
                 top: top - offset,
                 behavior: 'smooth',
             });
+
         }
     }, [buttons]);
+
+    useEffect(() =>{
+        async function obtenerHabitos() {
+          const res = await fetch('http://localhost:3000/api/habitos/'+user); 
+          const data = await res.json()
+          setHabitos(data.data)
+          console.log("data para : ",user,  data)
+          
+        }
+        if (user)  obtenerHabitos();
+      },[user, refrescar])
+
+      function refresca(){
+        setRefrescar(refrescar+1)
+      }
 
     return (
         <Container className="gridBotons">
             <div className="button-grid" id='button-grid'>
                 {buttonRows.map((row, rowIndex) => (
                     <Row key={rowIndex} className="mb-4">
-                        {row.map((button, buttonIndex) => (
-                            <Col key={buttonIndex}>
-                                <Button
-                                    variant="primary"
-                                    className="round-button"
-                                >
-                                    <FontAwesomeIcon icon={faBell} />
-                                </Button>
+                        {habitos.map((habito, index) => (
+                            <Col xs={6} key={index}>
+                                <HabitoEspecifico progress={33} nombreHabito={habito.nombre} />
+                                <h5>{habito.nombre_habito} </h5>
                             </Col>
                         ))}
                         {rowIndex === buttonRows.length - 1 && (
                             <Col className="d-flex justify-content-right align-items-bottom">
                                 <Form className="mb-3 botoform">
-                                    <BotonCrear progress={100} creado={handleAddButton} ref={addButtonRef} />
+                                    <BotonCrear progress={100} refresca={refresca} creado={handleAddButton} ref={addButtonRef} />
                                 </Form>
                             </Col>
                         )}
