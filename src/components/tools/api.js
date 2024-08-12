@@ -36,14 +36,6 @@ const login = (email, password) => {
       .then(response => response.json())
       .catch(error => []);
   }
-  
-  const requestOptions = {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email, password })
-  };
-
-
 
 const buscarHabito = (id) => {
   const requestOptions = {
