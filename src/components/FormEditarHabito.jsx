@@ -4,7 +4,7 @@ import { useState,useContext } from 'react'
 import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import './fontawesome'
-import './FormEditarHabito.css'
+// import './FormEditarHabito.css'
 
 import { editarHabito, buscarHabito } from './tools/api';
 

@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
-import { AgCharts } from 'ag-charts-react'; // Importa AgCharts desde ag-charts-community
-import { estadisticas } from './tools/api'; // Asegúrate de que la ruta sea correcta
+import { AgCharts } from 'ag-charts-react';
+import { estadisticas } from './tools/api';
+import LoginContext from './LoginContext';
 
 const Estadisticas = () => {
+  const context = useContext(LoginContext); // Obtener el contexto
+  const { user } = context; // Obtener el usuario del contexto
   const [fechas, setFechas] = useState([]);
   const [chartOptions, setChartOptions] = useState({
     data: [],
@@ -32,8 +35,8 @@ const Estadisticas = () => {
   }, []);
 
   useEffect(() => {
-    if (fechas.length === 7) { // Verificar que `fechas` tenga el largo esperado
-      estadisticas().then(data => {
+    if (fechas.length === 7 ) { // Verificar que `fechas` tenga el largo esperado y que `user` esté definido
+      estadisticas(user,user).then(data => { // Pasar el ID de usuario a la función `estadisticas`
         const formattedData = fechas.map(fecha => {
           const fechaData = data.find(d => {
             const date = new Date(d.fecha);
@@ -52,7 +55,7 @@ const Estadisticas = () => {
         console.error('Error fetching statistics:', error);
       });
     }
-  }, [fechas]);
+  }, [fechas, user]);
 
   return (
     <div style={{ height: '500px', width: '100%' }}>

@@ -2,13 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import BotonesGrid from './BotonesGrid';
-import FormEditar from './FormEditarHabito';
-import FormEliminar from './FormEliminarHabito';
 import Estadisticas from './Estadisticas';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import Footer from './Footer';
 import LoginContext from './LoginContext';
 
 const Home = () => {
@@ -27,20 +24,18 @@ const Home = () => {
 
     return (
         <>
-            {/* <Container> */}
-            <Row className='contenedor'>
-                <Col>
-                  {/* <BotonesGrid /> */}
-                </Col>
-                <Col id=''>
-                  <div id='estadisticas'>
-                    {/* <Estadisticas /> */}
-                    {/* <FormEditar idHabito={10} /> */}
-                    <FormEliminar />
-                  </div>
-                 </Col>
-              </Row>
-          {/* </Container> */}
+            <Container>
+                <Row className='contenedor'>
+                    <Col>
+                        <BotonesGrid />
+                    </Col>
+                    <Col id=''>
+                        <div id='estadisticas'>
+                            <Estadisticas />
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };

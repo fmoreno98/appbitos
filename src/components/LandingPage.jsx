@@ -314,7 +314,7 @@ function LandingPage() {
                 </section>
                 <div style={{ position: 'fixed', bottom: '45px', right: '-5px' }}>
                     <a href="#top">
-                        <img class="h-[80px] -[30px]" src="/img/Flecha.png" alt="f" />
+                        <img className="h-[80px] -[30px]" src="/img/Flecha.png" alt="f" />
                     </a>
 
                 </div>

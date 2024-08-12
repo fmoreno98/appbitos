@@ -63,6 +63,7 @@ function BotonCrear(props) {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
+                props.refresca()
                 borrarCampos()
                 setOpcionSeleccionada('')
                 props.creado()
