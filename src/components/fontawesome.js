@@ -2,9 +2,19 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import your icons
-import { faPlus, faEye } from '@fortawesome/free-solid-svg-icons';
+import { faPlus, faEye, faHouse, faUser, faCircleXmark, faCircleCheck, faEnvelope, faPhone, faCircleUser, faPen, faCircleInfo, } from '@fortawesome/free-solid-svg-icons';
 
 export const iconos = {
-    ojo: faEye,
+    ojo: faEye, 
     plus: faPlus,
+    casa: faHouse,
+    perfiluser: faUser,
+    usuario: faCircleUser,
+    mail: faEnvelope,
+    telefon: faPhone,
+    circuloequis: faCircleXmark,
+    circulocheck: faCircleCheck,
+    editar: faPen,
+    info: faCircleInfo,
+
 }
