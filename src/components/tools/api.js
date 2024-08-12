@@ -25,18 +25,26 @@ const login = (email, password) => {
       .catch(error => []);
       
   }
-  
+  const eliminarHabito = (id) => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({id})
+    };
+      
+    return fetch(API_URL + "/habitos/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
   const estadisticas = (token, id) => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', authorization: token },
     };
-  
     return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
       .then(response => response.json())
       .catch(error => []);
   }
-
 const buscarHabito = (id) => {
   const requestOptions = {
     method: 'GET',

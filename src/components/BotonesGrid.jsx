@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import { Button, Container, Row, Col, Form } from 'react-bootstrap';
 import './BotonesGrid.css'; 
 import BotonCrear from './BotonCrear';
-// import './BotonCrear.css';
+import './BotonCrear.css';
 import HabitoEspecifico from './HabitoEspecifico';
 import LoginContext from './LoginContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
