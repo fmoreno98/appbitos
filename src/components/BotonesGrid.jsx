@@ -47,7 +47,7 @@ const BotonesGrid = () => {
 
     useEffect(() =>{
         async function obtenerHabitos() {
-          const res = await fetch('http://localhost:3000/api/habitos/'+user); //pasar el token, no el user
+          const res = await fetch('http://localhost:3000/api/habitos/'+user+'/usuario'); //pasar el token, no el user
           const data = await res.json()
           setHabitos(data.data)
           console.log("data para : ",user,  data)
@@ -69,7 +69,6 @@ const BotonesGrid = () => {
                             <Col xs={6} key={index}>
                                 <HabitoEspecifico progress={33} nombreHabito={habito.nombre} idHabito={habito.id} />
                                 <h5>{habito.nombre_habito} </h5> 
-                                <h4>{habito.id}</h4>
                             </Col>
                         ))}
                         {rowIndex === buttonRows.length - 1 && (
