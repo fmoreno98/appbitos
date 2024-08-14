@@ -9,7 +9,7 @@ import './Header.css';
 function Header() {
     return (
         <>
-            <Navbar className='custom-navbar' expand="lg" fixed='top'>
+            <Navbar className='custom-navbar0' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
                         src="/img/MiniLogo.png"
@@ -25,10 +25,12 @@ function Header() {
                             <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
                             <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
-                        <NavDropdown className="usuario" title="Usuario" href="#link">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
-                            <NavLink className="nav-link" to="/register"> Register </NavLink>
-                        </NavDropdown>
+                        <Nav>
+                            <NavDropdown className="usuario" title="Usuario" href="#link">
+                                <NavLink className="nav-link benja" to="/login">Login</NavLink>
+                                <NavLink className="nav-link benja" to="/register"> Register </NavLink>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

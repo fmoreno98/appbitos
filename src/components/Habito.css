@@ -1,0 +1,25 @@
+.proFreq{
+    font-size: 25px;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.btn-completar{
+    background-color: #516BE7;
+    color: white;
+    border-radius: 0;
+    /* border: 0px; */
+    width: 100px;
+    height: 45px;
+    margin-bottom: 10px;
+}
+
+.btn-completar:hover{
+    background-color: #7287f0;
+    color: white;
+    border-radius: 0;
+    /* border: 0px; */
+    width: 100px;
+    height: 45px;
+    margin-bottom: 10px;
+}
