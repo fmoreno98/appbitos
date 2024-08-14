@@ -94,12 +94,12 @@ function LandingPage() {
                             <div className="xl:w-1/3 md:w-1/2 p-4">
                                 <div className="border-2 border-[#B2AAA0] p-6 rounded-lg bg-[#E8E1D9]">
                                     <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-[#0E28C0] text-[#E8E1D9] mb-4">
-                                        <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-                                            className="w-6 h-6" viewBox="0 0 24 24">
-                                            <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1zM4 22v-7"></path>
-                                        </svg>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
+                                            className="w-6 h-6">
+                                                <svg ><path fill="#ffffff" d="M0 96C0 43 43 0 96 0l96 0 0 190.7c0 13.4 15.5 20.9 26 12.5L272 160l54 43.2c10.5 8.4 26 .9 26-12.5L352 0l32 0 32 0c17.7 0 32 14.3 32 32l0 320c0 17.7-14.3 32-32 32l0 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0L96 512c-53 0-96-43-96-96L0 96zM64 416c0 17.7 14.3 32 32 32l256 0 0-64L96 384c-17.7 0-32 14.3-32 32z"/></svg>
+                                            </svg>
                                     </div>
-                                    <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Ni Puta Idea</h2>
+                                    <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Historial</h2>
                                     <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                                 </div>
                             </div>

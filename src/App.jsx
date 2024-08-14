@@ -7,6 +7,9 @@ import './App.css'
 import LoginContext from './components/LoginContext';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Outlet, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { iconos } from './components/fontawesome.js';
 
 function App() {
   const navigate = useNavigate();
@@ -49,14 +52,19 @@ function App() {
             <Nav className="me-auto">
               {/* Otros elementos del Nav */}
             </Nav>
+
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
+            
+           
               <NavDropdown
+              
                 id="benja"
-                title="Usuario"
+                title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9" }}  />}
                 show={dropdownOpen}
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)} // Cerrar el dropdown al salir
               >
+                 
                 {token === null ? (
                   // Mostrar enlaces de Login y Register si no hay usuario logueado
                   <>
@@ -64,13 +72,13 @@ function App() {
                       to="/login"
                       className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
                     >
-                      Login
+                      Iniciar Sesión
                     </NavLink>
                     <NavLink
                       to="/register"
                       className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
                     >
-                      Register
+                      Registrarse
                     </NavLink>
                   </>
                 ) : (
@@ -80,7 +88,7 @@ function App() {
                     className="nav-link"
                     onClick={handleLogout}
                   >
-                    Logout
+                    Cerrar Sesión
                   </NavLink>
                 )}
               </NavDropdown>

@@ -4,6 +4,9 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from "react-router-dom";
 import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { iconos } from './fontawesome.js';
 
 
 function Header() {
@@ -25,7 +28,7 @@ function Header() {
                             <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
                             <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
-                        <NavDropdown className="usuario" title="Usuario" href="#link">
+                        <NavDropdown className="usuario" title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9",}} />} href="#link">
                             <NavLink className="nav-link" to="/login">Login</NavLink>
                             <NavLink className="nav-link" to="/register"> Register </NavLink>
                         </NavDropdown>

@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { iconos } from './fontawesome.js';
 
 function Register() {
   const [formData, setFormData] = useState({
@@ -73,6 +76,7 @@ function Register() {
         <form onSubmit={handleSubmit}>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Nombre</b></label>
+            <FontAwesomeIcon icon={iconos.usuario} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="text"
               name="nombre"
@@ -84,6 +88,7 @@ function Register() {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Email</b></label>
+            <FontAwesomeIcon icon={iconos.mail} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="email"
               name="email"
@@ -95,6 +100,7 @@ function Register() {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Telefono</b></label>
+            <FontAwesomeIcon icon={iconos.telefon} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="number"
               name="telefono"
@@ -105,7 +111,8 @@ function Register() {
             />
           </div>
           <div style={{ marginBottom: '10px' }}>
-            <label><b>contrasena</b></label>
+            <label><b>Contraseña</b></label>
+            <FontAwesomeIcon icon={iconos.candado} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="password"
               name="password"
@@ -116,7 +123,9 @@ function Register() {
             />
           </div>
           <div style={{ marginBottom: '10px' }}>
-            <label><b>Repita la contrasena</b></label>
+            <label><b>Repita la Contraseña</b></label>
+            <FontAwesomeIcon icon={iconos.candado} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
+            <FontAwesomeIcon icon={iconos.check} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="password"
               name="repetircontrasena"

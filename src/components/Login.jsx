@@ -2,8 +2,10 @@ import { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { login } from './tools/api';
 import { jwtDecode } from "jwt-decode";
-  import LoginContext from './LoginContext';
+import LoginContext from './LoginContext';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import {iconos} from './fontawesome.js';
 
 function Login() {
   const [formData, setFormData] = useState({
@@ -82,11 +84,12 @@ function Login() {
               <img src="/img/MiniLogo.png" alt="" width={'40%'} />
             </div>
           </div>
-          <h1 style={{ textAlign: 'left' }}>Inicio de sesión</h1>
+          <h1 style={{ textAlign: 'center' }}>Inicio de sesión</h1>
           <p>Inicio de sesión con tu cuenta de Appbitos.</p>
           <form onSubmit={handleSubmit}>
             <div style={{ marginBottom: '10px' }}>
               <label><b>Email</b></label>
+              <FontAwesomeIcon icon={iconos.mail} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
               <input
                 type="email"
                 name="email"
@@ -98,6 +101,7 @@ function Login() {
             </div>
             <div style={{ marginBottom: '10px' }}>
               <label><b>Contraseña</b></label>
+              <FontAwesomeIcon icon={iconos.candado} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
               <input
                 type="password"
                 name="contrasena"
