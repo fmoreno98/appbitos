@@ -35,12 +35,31 @@ const login = (email, password) => {
       .then(response => response.json())
       .catch(error => []);
   }
-  const estadisticas = (token, id) => {
+  const estadisticas = (id) => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json', authorization: token },
+      headers: { 'Content-Type': 'application/json' },
     };
     return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+  const habitoGraph = (id, habito_id) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch(API_URL + "/estadisticas/progreso/"+id+"/"+habito_id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+  const historial = (id) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch(API_URL + "/estadisticas/historial/"+id, requestOptions)
       .then(response => response.json())
       .catch(error => []);
   }
@@ -73,5 +92,7 @@ export {
   editarHabito,
   buscarHabito,
   eliminarHabito,
-  estadisticas
+  estadisticas,
+  habitoGraph,
+  historial
 }
