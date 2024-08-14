@@ -66,8 +66,8 @@ function Habito(props) {
 
     return(
         <>
-            <h1>{idHabito}</h1>
             <Container>
+                <br />
                 <Row>
                     <Col className="">
                         <Row className="justify-content-left">
@@ -92,27 +92,26 @@ function Habito(props) {
                                         />
                                     </svg>
                                     <div className="circular-progress__text">
-                                        {progreso}/{frecuencia}
-                                        <br />
-                                        <br />
+                                        <div className="proFreq text-center">
+                                            {progreso}/{frecuencia}
+                                        </div>
                                         <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }}/>
                                     </div>
                                 </div>
                             </div>
                         </Row>
-                        <Row>
+                        <Row className="text-center">
                             <h2>{nombre}</h2>
                         </Row>
-                        <Row>
+                        <Row className="text-center">
                             <h4>{descripcion}</h4>
                         </Row>
-                        <Row>
-                     
-
+                        <Row className="text-center">                     
                             <h4>{nomTipoHabito}</h4>
                         </Row>
-                        <Row>
-                            <button>Completar</button>
+                        <Row className="justify-content-center">
+                            {/* <button className="btn btn-completar" style={{width: '160px'}}><FontAwesomeIcon icon={iconos.check} size='2x' style={{ color: '#E8E1D9' }} /></button> */}
+                            <button className="btn btn-completar" style={{width: '160px', fontSize: '20px'}}>Completar</button>
                         </Row>
                     </Col>
                     <Col className="bg-light"></Col>
