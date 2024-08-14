@@ -13,7 +13,7 @@ const BotonesGrid = () => {
     const [habitos, setHabitos] = useState([]);
     const [refrescar, setRefrescar] = useState(0)
     const addButtonRef = useRef(null);
-    const { user } = useContext(LoginContext);
+    const { user,token } = useContext(LoginContext);
 
     // Maneja la adición de un nuevo botón
     const handleAddButton = () => {
@@ -47,7 +47,14 @@ const BotonesGrid = () => {
 
     useEffect(() =>{
         async function obtenerHabitos() {
-          const res = await fetch('http://localhost:3000/api/habitos/'+user+'/usuario'); //pasar el token, no el user
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': token
+                },
+            };
+          const res = await fetch('http://localhost:3000/api/habitos/'+user+'/usuario', options); //pasar el token, no el user
           const data = await res.json()
           setHabitos(data.data)
           console.log("data para : ",user,  data)
