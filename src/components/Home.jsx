@@ -10,7 +10,7 @@ import LoginContext from './LoginContext';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { setToken } = useContext(LoginContext);
+    const { token,setToken } = useContext(LoginContext);
 
     useEffect(() => {
         // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
@@ -20,7 +20,7 @@ const Home = () => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [token]);
 
     return (
         <>
