@@ -7,6 +7,8 @@ import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import LoginContext from './LoginContext';
+import HabitoEstadistica from './HabitoEstadistica';
+import Calendario from './calendario/Calendario';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -31,6 +33,7 @@ const Home = () => {
                     </Col>
                     <Col id=''>
                         <div id='estadisticas'>
+                            <Calendario />
                             <Estadisticas />
                         </div>
                     </Col>
