@@ -9,6 +9,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import HabitoEspecifico from './components/HabitoEspecifico.jsx'
+import Habito from './components/Habito.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
@@ -18,6 +20,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
         <Route path="home" element={<Home />} />
+        <Route path="habito/:idHabito" element={<Habito />} />
       </Route>
     </Routes>
   </BrowserRouter>
