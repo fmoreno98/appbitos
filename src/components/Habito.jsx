@@ -15,7 +15,7 @@ function Habito(props) {
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [tipoHabito, setTipoHabito] = useState(1);
-    const { user } = useContext(LoginContext);
+    const { user,token } = useContext(LoginContext);
     const [progreso, setProgreso] = useState(0);
     const [frecuencia, setFrecuencia] = useState(0);
     let seguimiento = 0
@@ -25,7 +25,14 @@ function Habito(props) {
 
     useEffect(() =>{
         async function obtenerHabitos() {
-          const res = await fetch('http://localhost:3000/api/habitos/'+idHabito); //pasar el token, no el user
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': token
+                },
+            };
+          const res = await fetch('http://localhost:3000/api/habitos/'+idHabito, options); //pasar el token, no el user
           let data = await res.json()
           habito = data.data
 

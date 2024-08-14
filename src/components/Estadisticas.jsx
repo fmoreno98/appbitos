@@ -6,7 +6,7 @@ import LoginContext from './LoginContext';
 
 const Estadisticas = () => {
   const context = useContext(LoginContext); // Obtener el contexto
-  const { user } = context; // Obtener el usuario del contexto
+  const { user,token } = context; // Obtener el usuario del contexto
   const [fechas, setFechas] = useState([]);
   const [chartOptions, setChartOptions] = useState({
     data: [],
@@ -36,7 +36,7 @@ const Estadisticas = () => {
 
   useEffect(() => {
     if (fechas.length === 7 ) { // Verificar que `fechas` tenga el largo esperado y que `user` esté definido
-      estadisticas(user,user).then(data => { // Pasar el ID de usuario a la función `estadisticas`
+      estadisticas(user,token).then(data => { // Pasar el ID de usuario a la función `estadisticas`
         const formattedData = fechas.map(fecha => {
           const fechaData = data.find(d => {
             const date = new Date(d.fecha);
