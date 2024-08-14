@@ -20,7 +20,7 @@ function Login() {
     if (tk) {
       try {
         const decoded = jwtDecode(tk);
-        if (decoded.exp > new Date().getTime() / 1000) { // Cambiado a segundos
+        if (decoded.expiredAt > new Date().getTime()) { // Cambiado a segundos
           setToken(tk);
           setShow(false);
         } else {
