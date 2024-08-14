@@ -19,7 +19,7 @@ function App() {
     const loginfront = localStorage.getItem('loginfront');
     console.log("loginfront", loginfront);
     if (loginfront) {
-      setToken(loginfront);      
+      setToken(loginfront);
     }
   }, []);
 
@@ -46,12 +46,8 @@ function App() {
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              {/* Otros elementos del Nav */}
-            </Nav>
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
               <NavDropdown
-                id="benja"
                 title="Usuario"
                 show={dropdownOpen}
                 onMouseEnter={() => setDropdownOpen(true)}
@@ -62,13 +58,13 @@ function App() {
                   <>
                     <NavLink
                       to="/login"
-                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                      className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
                       Login
                     </NavLink>
                     <NavLink
                       to="/register"
-                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                      className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
                       Register
                     </NavLink>
@@ -77,7 +73,7 @@ function App() {
                   // Mostrar enlace de Logout si hay un usuario logueado
                   <NavLink
                     to="/"
-                    className="nav-link"
+                    className="nav-link benja"
                     onClick={handleLogout}
                   >
                     Logout
