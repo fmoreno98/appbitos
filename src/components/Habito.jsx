@@ -5,8 +5,7 @@ import {iconos} from './fontawesome.js';
 import React, { useState, useEffect, useContext } from'react';
 import LoginContext from './LoginContext';
 import './Habito.css';
-
-
+import BotonCompletar from './BotonCompletar.jsx';
 
 function Habito(props) {
     const {idHabito} = useParams();
@@ -111,7 +110,8 @@ function Habito(props) {
                         </Row>
                         <Row className="justify-content-center">
                             {/* <button className="btn btn-completar" style={{width: '160px'}}><FontAwesomeIcon icon={iconos.check} size='2x' style={{ color: '#E8E1D9' }} /></button> */}
-                            <button className="btn btn-completar" style={{width: '160px', fontSize: '20px'}}>Completar</button>
+                            {/* <button className="btn btn-completar" style={{width: '160px', fontSize: '20px'}}>Completar</button> */}
+                            <BotonCompletar idHabito={idHabito} />
                         </Row>
                     </Col>
                     <Col className="bg-light"></Col>
