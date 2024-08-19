@@ -39,7 +39,7 @@ const login = (email, password) => {
   const estadisticas = (id,token) => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', authorization: token },
     };
     return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
       .then(response => response.json())
