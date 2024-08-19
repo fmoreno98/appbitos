@@ -15,7 +15,7 @@ function FormEditar(props) {
     const [descripcion, setDescripcion] = useState('');
     const [frecuencia, setFrecuencia] = useState(1);
     const [tipo_habito, setTipoHabito] = useState(1);
-    const { user } = useContext(LoginContext);
+    const { user,token } = useContext(LoginContext);
     const [error, setError] = useState('');
 
     const manejarCambio = (evento) => {
@@ -33,7 +33,7 @@ function FormEditar(props) {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        buscarHabito(idHabito)
+        buscarHabito(idHabito,token)
             .then(data => {
                 setNombreHabito(data.nombre_habito);
                 setDescripcion(data.descripcion);
@@ -60,7 +60,7 @@ function FormEditar(props) {
         setError(''); // Limpiar errores antes de enviar el formulario
 
         // Aquí puedes realizar acciones adicionales con los datos del formulario
-        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito)
+        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito,token)
             .then(() => {
                 setShow(false);
                 borrarCampos();
