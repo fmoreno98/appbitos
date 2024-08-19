@@ -9,6 +9,7 @@ import { faBell } from '@fortawesome/free-solid-svg-icons';
 import LoginContext from './LoginContext';
 import HabitoEstadistica from './HabitoEstadistica';
 import Calendario from './calendario/Calendario';
+import Racha from './Racha';
 
 const Home = () => {
     const navigate = useNavigate();
@@ -34,6 +35,7 @@ const Home = () => {
                     <Col id=''>
                         <div id='estadisticas'>
                             <Calendario />
+                            <Racha />
                             <Estadisticas />
                         </div>
                     </Col>

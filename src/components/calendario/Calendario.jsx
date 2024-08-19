@@ -22,7 +22,7 @@ const Calendario = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [completionStatus, setCompletionStatus] = useState({});
-  const { user } = useContext(LoginContext);
+  const { user,token } = useContext(LoginContext);
   const [selectedDay, setSelectedDay] = useState(null);
   const [selectedDayNotes, setSelectedDayNotes] = useState([]);
 
@@ -31,7 +31,7 @@ const Calendario = () => {
       try {
         // Reemplaza con el ID del usuario actual
         const userId = user; 
-        const data = await historial(userId);
+        const data = await historial(userId,token);
 
         // Procesa la respuesta para establecer el estado de completado
         const statusMap = data.reduce((acc, { fecha, estado_retos }) => {
