@@ -78,7 +78,7 @@ function Habito(props) {
                 <Row>
                     <Col className="">
                         <Row className="justify-content-left">
-                            <button className="btn btn-light" style={{width: '60px'}}><FontAwesomeIcon icon={iconos.lapiz} size='2x' style={{ color: '#0E28C0' }} /></button>
+                            <button className="btn btn-light" style={{width: '60px'}}><FontAwesomeIcon icon={iconos.editar} size='2x' style={{ color: '#0E28C0' }} /></button>
                         </Row>
                         <Row className="justify-content-center">
                             <div className="circular-progress" style={{width: "250px", height: "250px"}}>
