@@ -14,7 +14,7 @@ import { iconos } from './components/fontawesome.js';
 function App() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
-  const [token, setToken] = useState(null);
+  const [token, setToken] = useState(null); 
   const [dropdownOpen, setDropdownOpen] = useState(false); // Nuevo estado para controlar el dropdow
 
   useEffect(() => {
@@ -22,7 +22,7 @@ function App() {
     const loginfront = localStorage.getItem('loginfront');
     console.log("loginfront", loginfront);
     if (loginfront) {
-      setToken(loginfront);      
+      setToken(loginfront);
     }
   }, []);
 
@@ -31,6 +31,12 @@ function App() {
       localStorage.setItem('loginfront', token);
       const decoded = jwtDecode(token);
       setUser(decoded.id);
+      const hoy=new Date();
+      if (decoded.expiredAt < hoy.getTime()) {
+        localStorage.removeItem('loginfront'); // Eliminar el usuario del localStorage al hacer logout
+        setToken(null); // Limpiar el estado del token
+        setUser(null); // Limpiar el estado del usuario
+      }
       navigate('/home');
     }
   }, [token]);
@@ -49,13 +55,7 @@ function App() {
         <Container>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="me-auto">
-              {/* Otros elementos del Nav */}
-            </Nav>
-
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
-            
-           
               <NavDropdown
               
                 id="benja"
@@ -64,19 +64,18 @@ function App() {
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)} // Cerrar el dropdown al salir
               >
-                 
                 {token === null ? (
                   // Mostrar enlaces de Login y Register si no hay usuario logueado
                   <>
                     <NavLink
                       to="/login"
-                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                      className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
                       Iniciar Sesión
                     </NavLink>
                     <NavLink
                       to="/register"
-                      className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
+                      className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
                       Registrarse
                     </NavLink>
@@ -85,7 +84,7 @@ function App() {
                   // Mostrar enlace de Logout si hay un usuario logueado
                   <NavLink
                     to="/"
-                    className="nav-link"
+                    className="nav-link benja"
                     onClick={handleLogout}
                   >
                     Cerrar Sesión

@@ -24,10 +24,10 @@ const login = (email, password) => {
       .catch(error => []);
       
   }
-  const eliminarHabito = (id) => {
+  const eliminarHabito = (id,token) => {
     const requestOptions = {
       method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', authorization: token },
       body: JSON.stringify({id})
     };
       
@@ -35,7 +35,8 @@ const login = (email, password) => {
       .then(response => response.json())
       .catch(error => []);
   }
-  const estadisticas = (token, id) => {
+
+  const estadisticas = (id,token) => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', authorization: token },
@@ -44,10 +45,30 @@ const login = (email, password) => {
       .then(response => response.json())
       .catch(error => []);
   }
-const buscarHabito = (id) => {
+  const habitoGraph = (id, habito_id) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch(API_URL + "/estadisticas/progreso/"+id+"/"+habito_id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+  const historial = (id,token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+    return fetch(API_URL + "/estadisticas/historial/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+const buscarHabito = (id,token) => {
   const requestOptions = {
     method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', authorization: token },
   };
 
   return fetch(API_URL + "/habitos/" + id, requestOptions)
@@ -56,10 +77,10 @@ const buscarHabito = (id) => {
     .catch(error => console.log(error));
 }
 
-const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id) => {
+const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,token) => {
   const requestOptions = {
     method: 'PUT',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', authorization: token },
     body: JSON.stringify({ nombre_habito, descripcion, tipo_habito, frecuencia })
   };
 
@@ -73,5 +94,7 @@ export {
   editarHabito,
   buscarHabito,
   eliminarHabito,
-  estadisticas
+  estadisticas,
+  habitoGraph,
+  historial
 }

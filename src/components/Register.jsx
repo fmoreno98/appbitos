@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import { iconos } from './fontawesome.js';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     nombre: '',
     email: '',
@@ -13,6 +14,8 @@ function Register() {
     repetircontrasena: ''
   });
 
+  const [error, setError] = useState('');
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
@@ -21,24 +24,56 @@ function Register() {
     });
   };
 
+  const validatePassword = (password) => {
+    const minLength = 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    if (password.length < minLength) return 'La contraseña debe tener al menos 8 caracteres.';
+    if (!hasUpperCase) return 'La contraseña debe contener al menos una letra mayúscula.';
+    if (!hasLowerCase) return 'La contraseña debe contener al menos una letra minúscula.';
+    if (!hasNumber) return 'La contraseña debe contener al menos un número.';
+    if (!hasSpecialChar) return 'La contraseña debe contener al menos un carácter especial.';
+    return '';
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+    
+    // Validaciones
+    if (!formData.nombre || !formData.email || !formData.password || !formData.repetircontrasena || !formData.telefono) {
+      setError('Todos los campos son obligatorios.');
+      return;
+    }
 
-    // Aquí puedes añadir la lógica para manejar el envío del formulario
+    if (formData.password !== formData.repetircontrasena) {
+      setError('Las contraseñas no coinciden.');
+      return;
+    }
+
+    const passwordError = validatePassword(formData.password);
+    if (passwordError) {
+      setError(passwordError);
+      return;
+    }
+
+    if (formData.telefono.length < 10) {
+      setError('El número de teléfono debe tener al menos 10 dígitos.');
+      return;
+    }
+
     const opciones = {
       method: 'POST',
       body: JSON.stringify(formData),
       headers: { "Content-Type": "application/json" }
     };
-    console.log("opcions", opciones);
 
     fetch('http://localhost:3000/api/register', opciones)
       .then(response => response.json())
       .then(data => {
-        // Aquí puedes gestionar la respuesta de la API si es necesario
-        console.log(data);
         if (data.ok) {
-          // Resetear el formulario si el registro fue exitoso
           setFormData({
             nombre: '',
             email: '',
@@ -47,13 +82,15 @@ function Register() {
             estado: 0,
             repetircontrasena: ''
           });
+          navigate('/login');
+          setError('');
         } else {
-          // Manejar errores si es necesario
-          console.error('Error:', data.error);
+          setError(data.error || 'Error en el registro. Inténtalo de nuevo más tarde.');
         }
       })
       .catch(error => {
         console.error('Error:', error);
+        setError('Error en el registro. Inténtalo de nuevo más tarde.');
       });
   };
 
@@ -74,6 +111,11 @@ function Register() {
         <h1>Registro</h1>
         <p>Date de alta llenando los siguientes datos.</p>
         <form onSubmit={handleSubmit}>
+          {error && (
+            <div style={{ color: 'red', marginBottom: '10px', border: '1px solid red', borderRadius: '5px', padding: '10px', backgroundColor: '#ffe6e6' }}>
+              {error}
+            </div>
+          )}
           <div style={{ marginBottom: '10px' }}>
             <label><b>Nombre</b></label>
             <FontAwesomeIcon icon={iconos.usuario} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
@@ -102,12 +144,12 @@ function Register() {
             <label><b>Telefono</b></label>
             <FontAwesomeIcon icon={iconos.telefon} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
-              type="number"
+              type="text" // Cambiado a text para permitir formato de número con caracteres
               name="telefono"
               value={formData.telefono}
               onChange={handleChange}
               style={{ width: '90%', padding: '10px', border: '2px solid #0E28C0', borderRadius: '5px', marginTop: '10px' }}
-              placeholder='012345678'
+              placeholder='+34 666 66 66 66'
             />
           </div>
           <div style={{ marginBottom: '10px' }}>

@@ -7,10 +7,13 @@ import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
 import LoginContext from './LoginContext';
+import HabitoEstadistica from './HabitoEstadistica';
+import Calendario from './calendario/Calendario';
+import Racha from './Racha';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { setToken } = useContext(LoginContext);
+    const { token,setToken } = useContext(LoginContext);
 
     useEffect(() => {
         // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
@@ -20,7 +23,7 @@ const Home = () => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [token]);
 
     return (
         <>
@@ -31,6 +34,8 @@ const Home = () => {
                     </Col>
                     <Col id=''>
                         <div id='estadisticas'>
+                            <Calendario />
+                            <Racha />
                             <Estadisticas />
                         </div>
                     </Col>

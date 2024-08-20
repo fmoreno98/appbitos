@@ -1,0 +1,27 @@
+/* BotonCalendario.css */
+
+.BotonCalendario {
+    /* otros estilos */
+  }
+  
+  .BotonCalendario.completed {
+    background-color: green;
+    color: black;
+  }
+  
+  .BotonCalendario.not-completed {
+    background-color: red;
+    color: black;
+  }
+  
+  .BotonCalendario.previous-month {
+    background-color: white;
+  }
+  
+  .BotonCalendario.next-month {
+    background-color: white;
+  }
+  .BotonCalendario.no-habit {
+    background-color: white;
+  }
+  

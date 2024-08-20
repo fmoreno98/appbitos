@@ -12,7 +12,7 @@ import { iconos } from './fontawesome.js';
 function Header() {
     return (
         <>
-            <Navbar className='custom-navbar' expand="lg" fixed='top'>
+            <Navbar className='custom-navbar0' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
                         src="/img/MiniLogo.png"

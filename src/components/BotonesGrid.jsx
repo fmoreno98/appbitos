@@ -6,7 +6,6 @@ import './BotonCrear.css';
 import HabitoEspecifico from './HabitoEspecifico';
 import LoginContext from './LoginContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell } from '@fortawesome/free-solid-svg-icons';
 
 const BotonesGrid = () => {
     const [buttons, setButtons] = useState([]);
@@ -14,7 +13,7 @@ const BotonesGrid = () => {
     const [habitos, setHabitos] = useState([]);
     const [refrescar, setRefrescar] = useState(0)
     const addButtonRef = useRef(null);
-    const { user } = useContext(LoginContext);
+    const { user,token } = useContext(LoginContext);
 
     // Maneja la adición de un nuevo botón
     const handleAddButton = () => {
@@ -48,7 +47,14 @@ const BotonesGrid = () => {
 
     useEffect(() =>{
         async function obtenerHabitos() {
-          const res = await fetch('http://localhost:3000/api/habitos/'+user); 
+            const options = {
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'authorization': token
+                },
+            };
+          const res = await fetch('http://localhost:3000/api/habitos/'+user+'/usuario', options); //pasar el token, no el user
           const data = await res.json()
           setHabitos(data.data)
           console.log("data para : ",user,  data)
@@ -68,8 +74,8 @@ const BotonesGrid = () => {
                     <Row key={rowIndex} className="mb-4">
                         {habitos.map((habito, index) => (
                             <Col xs={6} key={index}>
-                                <HabitoEspecifico progress={33} nombreHabito={habito.nombre} />
-                                <h5>{habito.nombre_habito} </h5>
+                                <HabitoEspecifico progress={33} nombreHabito={habito.nombre} idHabito={habito.id} />
+                                <h5>{habito.nombre_habito} </h5> 
                             </Col>
                         ))}
                         {rowIndex === buttonRows.length - 1 && (

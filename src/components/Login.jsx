@@ -6,7 +6,6 @@ import LoginContext from './LoginContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import {iconos} from './fontawesome.js';
-
 function Login() {
   const [formData, setFormData] = useState({
     email: '',
@@ -23,7 +22,7 @@ function Login() {
     if (tk) {
       try {
         const decoded = jwtDecode(tk);
-        if (decoded.expiredAt > new Date().getTime()) {
+        if (decoded.expiredAt > new Date().getTime()) { // Cambiado a segundos
           setToken(tk);
           setShow(false);
         } else {
@@ -33,7 +32,7 @@ function Login() {
         console.error('Token decoding failed', e);
       }
     }
-  }, []);
+  }, [setToken]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,11 +44,20 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Formulario enviado:');
+    
+    // Validación básica
+    if (!formData.email || !formData.contrasena) {
+      setError('Todos los campos son obligatorios.');
+      return;
+    }
+    if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      setError('Por favor ingresa un email válido.');
+      return;
+    }
+
     login(formData.email, formData.contrasena)
       .then(data => {
         if (data.ok === true) {
-          console.log("Atun:" + data.token);
           setToken(data.token);
           setShow(false);
           setError('');
@@ -112,7 +120,7 @@ function Login() {
               />
             </div>
             {error && (
-              <div style={{ color: 'red', marginBottom: '10px' }}>
+              <div style={{ color: 'red', marginBottom: '10px', border: '1px solid red', borderRadius: '5px', padding: '10px', backgroundColor: '#ffe6e6' }}>
                 {error}
               </div>
             )}
