@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { iconos } from './fontawesome.js';
 import { useNavigate } from 'react-router-dom';
 
 function Register() {
@@ -116,6 +118,7 @@ function Register() {
           )}
           <div style={{ marginBottom: '10px' }}>
             <label><b>Nombre</b></label>
+            <FontAwesomeIcon icon={iconos.usuario} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="text"
               name="nombre"
@@ -127,6 +130,7 @@ function Register() {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Email</b></label>
+            <FontAwesomeIcon icon={iconos.mail} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="email"
               name="email"
@@ -137,7 +141,8 @@ function Register() {
             />
           </div>
           <div style={{ marginBottom: '10px' }}>
-            <label><b>Teléfono</b></label>
+            <label><b>Telefono</b></label>
+            <FontAwesomeIcon icon={iconos.telefon} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="text" // Cambiado a text para permitir formato de número con caracteres
               name="telefono"
@@ -149,6 +154,7 @@ function Register() {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Contraseña</b></label>
+            <FontAwesomeIcon icon={iconos.candado} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="password"
               name="password"
@@ -160,6 +166,8 @@ function Register() {
           </div>
           <div style={{ marginBottom: '10px' }}>
             <label><b>Repita la Contraseña</b></label>
+            <FontAwesomeIcon icon={iconos.candado} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
+            <FontAwesomeIcon icon={iconos.check} size='1x' style={{ color: '#black', marginLeft: '5px' }} />
             <input
               type="password"
               name="repetircontrasena"

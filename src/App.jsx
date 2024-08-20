@@ -7,6 +7,9 @@ import './App.css'
 import LoginContext from './components/LoginContext';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import { Outlet, NavLink } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { iconos } from './components/fontawesome.js';
 
 function App() {
   const navigate = useNavigate();
@@ -54,12 +57,13 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
               <NavDropdown
-                title="Usuario"
+              
+                id="benja"
+                title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9" }}  />}
                 show={dropdownOpen}
                 onMouseEnter={() => setDropdownOpen(true)}
                 onMouseLeave={() => setDropdownOpen(false)} // Cerrar el dropdown al salir
               >
-                
                 {token === null ? (
                   // Mostrar enlaces de Login y Register si no hay usuario logueado
                   <>
@@ -67,13 +71,13 @@ function App() {
                       to="/login"
                       className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
-                      Login
+                      Iniciar Sesión
                     </NavLink>
                     <NavLink
                       to="/register"
                       className={({ isActive }) => isActive ? 'nav-link active benja' : 'nav-link benja'}
                     >
-                      Register
+                      Registrarse
                     </NavLink>
                   </>
                 ) : (
@@ -83,7 +87,7 @@ function App() {
                     className="nav-link benja"
                     onClick={handleLogout}
                   >
-                    Logout
+                    Cerrar Sesión
                   </NavLink>
                 )}
               </NavDropdown>
