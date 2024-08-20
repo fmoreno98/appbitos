@@ -10,13 +10,13 @@ const Racha = () => {
 
     const styles = {
         container: {
-            backgroundColor: '#D2CBC2',
+            // backgroundColor: '#E8E1D9',
             padding: '20px',
             borderRadius: '10px',
-            maxWidth: '400px',
+            // maxWidth: '400px',
             margin: '0 auto',
             textAlign: 'center',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+            boxShadow: '0 4px 8px rgb(147, 138, 127)',
         },
         heading: {
             color: '#2F49D4',
@@ -63,11 +63,11 @@ const Racha = () => {
     }, [user, token]);
 
     return (
-        <div>
+        <div style={styles.container}>
         <h1 style={styles.heading}>Racha</h1>
-        <p style={styles.paragraph}>Hábitos completados: {totalCompleted}</p>
-        <p style={styles.paragraph}>Días con todos los hábitos completados: {completados}</p>
-        <p style={styles.paragraph}>Porcentaje completado: {porcentajeCompletado}%</p>
+        <p style={styles.paragraph}>Hábitos completados: <b>{totalCompleted}</b></p>
+        <p style={styles.paragraph}>Días con todos los hábitos completados:<b>{completados}</b></p>
+        <p style={styles.paragraph}>Porcentaje completado:<b> {porcentajeCompletado}%</b></p>
     </div>
     );
 };
