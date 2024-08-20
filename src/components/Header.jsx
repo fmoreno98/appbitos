@@ -28,10 +28,12 @@ function Header() {
                             <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
                             <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
-                        <NavDropdown className="usuario" title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9",}} />} href="#link">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
-                            <NavLink className="nav-link" to="/register"> Register </NavLink>
-                        </NavDropdown>
+                        <Nav>
+                            <NavDropdown className="usuario" title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9", }} />} href="#link">
+                                <NavLink className="nav-link benja" to="/login">Login</NavLink>
+                                <NavLink className="nav-link benja" to="/register"> Register </NavLink>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>

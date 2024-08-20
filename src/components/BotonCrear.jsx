@@ -17,13 +17,18 @@ function BotonCrear(props) {
     const { user } = useContext(LoginContext);
     
     const manejarCambio = (evento) => {
-        setOpcionSeleccionada(evento.target.value);
-        if (evento.target.value === 'gradual') {
+        const valorSeleccionado = evento.target.value;
+        setOpcionSeleccionada(valorSeleccionado);
+        
+        if (valorSeleccionado === 'gradual') {
             setTipoHabito(1);
-        } else if (evento.target.value === 'acciones') {
+            setFrecuencia(''); // Limpiar frecuencia si cambia a gradual
+        } else if (valorSeleccionado === 'acciones') {
             setTipoHabito(2);
-        } else if (evento.target.value === 'cumplimiento') {
+            setFrecuencia(''); // Limpiar frecuencia si cambia a acciones
+        } else if (valorSeleccionado === 'cumplimiento') {
             setTipoHabito(3);
+            setFrecuencia('1'); // Establecer frecuencia a 1 si es cumplimiento
         }
     };
 
@@ -149,7 +154,7 @@ function BotonCrear(props) {
                         </Form.Group>
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
                             <FormLabel>Tipo de hábito</FormLabel>
-                            <FormSelect onChange={manejarCambio}>
+                            <FormSelect onChange={manejarCambio} value={opcionSeleccionada}>
                                 <option value=''>Seleccionar opción</option>
                                 <option value='gradual'>Avance gradual</option>
                                 <option value='acciones'>Acciones</option>

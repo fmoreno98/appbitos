@@ -57,7 +57,6 @@ function App() {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto"> {/* Mueve benja a la derecha */}
               <NavDropdown
-              
                 id="benja"
                 title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9" }}  />}
                 show={dropdownOpen}
