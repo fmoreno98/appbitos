@@ -4,45 +4,54 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './BotonCrear.css';
 import LoginContext from './LoginContext';
 import { iconos } from './fontawesome.js';
+import ModalSeleccionIcono from './ModalSeleccionIcono'; 
 
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
     const [progress, setProgress] = useState(props.progress);
-    const [opcionSeleccionada, setOpcionSeleccionada] = useState('')
-    const [nombreHabito, setNombreHabito] = useState('')
-    const [descripcion, setDescripcion] = useState('')
-    const [frecuencia, setFrecuencia] = useState('')
-    const [tipo_habito, setTipoHabito] = useState(1)
-    const [error, setError] = useState(''); // Para mostrar mensajes de error
-    const { user } = useContext(LoginContext);
-    
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState('');
+    const [nombreHabito, setNombreHabito] = useState('');
+    const [iconoHabito, setIconoHabito] = useState('');
+    const [descripcion, setDescripcion] = useState('');
+    const [frecuencia, setFrecuencia] = useState('');
+    const [tipo_habito, setTipoHabito] = useState(1);
+    const [selectedIcon, setSelectedIcon] = useState(iconos.plus); 
+    const [showIconSelector, setShowIconSelector] = useState(false); 
+    const [error, setError] = useState('');
+    const { user, token } = useContext(LoginContext);
+
     const manejarCambio = (evento) => {
         const valorSeleccionado = evento.target.value;
         setOpcionSeleccionada(valorSeleccionado);
-        
+
         if (valorSeleccionado === 'gradual') {
             setTipoHabito(1);
-            setFrecuencia(''); // Limpiar frecuencia si cambia a gradual
+            setFrecuencia('');
         } else if (valorSeleccionado === 'acciones') {
             setTipoHabito(2);
-            setFrecuencia(''); // Limpiar frecuencia si cambia a acciones
+            setFrecuencia('');
         } else if (valorSeleccionado === 'cumplimiento') {
             setTipoHabito(3);
-            setFrecuencia('1'); // Establecer frecuencia a 1 si es cumplimiento
+            setFrecuencia('1');
         }
     };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const handleIconSelect = (icon) => {
+        console.log("ICONA",icon)
+        setIconoHabito(icon); // Actualizar el ícono seleccionado
+        setShowIconSelector(false); // Cerrar el modal de selección de íconos
+    };
+
     function handleSubmit(event) {
         event.preventDefault();
-        
-        // Validaciones
+
         if (nombreHabito.trim() === '') {
             setError('El nombre del hábito no puede estar vacío.');
             return;
-        } else if (nombreHabito.length > 50) { // Limita el nombre a 50 caracteres
+        } else if (nombreHabito.length > 50) {
             setError('El nombre del hábito no puede tener más de 50 caracteres.');
             return;
         } else if (frecuencia.trim() === '') {
@@ -52,13 +61,11 @@ function BotonCrear(props) {
             setError('La frecuencia debe ser un número positivo mayor que cero.');
             return;
         }
-        
-        // Limpiar mensaje de error
+
         setError('');
 
-        // Generar fecha y hora actuales
         let now = new Date();
-        now = now.getTime(); // Puedes modificar esta lógica para generar un código más específico
+        now = now.getTime();
 
         const ob = {
             "nombre_habito": nombreHabito,
@@ -67,13 +74,16 @@ function BotonCrear(props) {
             "fecha_creacion": now,
             "activo": "1",
             "id_usuario": user,
-            "tipo_habito": tipo_habito
+            "tipo_habito": tipo_habito,
+            "icono_habito": iconoHabito,
         }
 
         const fetchOptions = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                'authorization': token
+
             },
             body: JSON.stringify(ob)
         }
@@ -94,12 +104,11 @@ function BotonCrear(props) {
         setShow(false);
     }
 
-    // Borrar los campos una vez enviado el formulario
     function borrarCampos() {
         setNombreHabito('');
         setDescripcion('');
         setFrecuencia('');
-        setTipoHabito(1); 
+        setTipoHabito(1);
     }
 
     return (
@@ -107,22 +116,11 @@ function BotonCrear(props) {
             <div onClick={handleShow} className="circular-progress">
                 <div className="circular-progress__circle">
                     <svg viewBox="0 0 36 36" className="circular-chart">
-                        <path
-                            className="circle-bg"
-                            d="M18 2.0845
-                    a 15.9155 15.9155 0 0 1 0 31.831
-                    a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                        <path
-                            className="circle"
-                            strokeDasharray={`${progress}, 100`}
-                            d="M18 2.0845
-                    a 15.9155 15.9155 0 0 1 0 31.831
-                    a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
+                        <path className="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path className="circle" strokeDasharray={`${progress}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
                     <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={iconos.plus} size='2x' style={{ color: '#0E28C0' }} />
+                        <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: '#0E28C0' }} />
                     </div>
                 </div>
             </div>
@@ -130,6 +128,10 @@ function BotonCrear(props) {
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Creación de Hábitos</Modal.Title>
+                    <Button style={{ marginLeft:"30px" }} variant="primary" onClick={() => setShowIconSelector(true)}>Seleccionar Ícono</Button>
+                    {iconoHabito && (<div className="selected-icon">
+                    <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{margin:"20px", color: 'Black' }} />
+                        </div>)}
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
@@ -146,12 +148,14 @@ function BotonCrear(props) {
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                             <Form.Label>Descripción</Form.Label>
                             <Form.Control
-                                type="text" 
+                                type="text"
                                 placeholder="Ej: Caminar 30 minutos"
-                                value={descripcion} 
-                                onChange={(event) => setDescripcion(event.target.value)}   
+                                value={descripcion}
+                                onChange={(event) => setDescripcion(event.target.value)}
                             />
                         </Form.Group>
+
+
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
                             <FormLabel>Tipo de hábito</FormLabel>
                             <FormSelect onChange={manejarCambio} value={opcionSeleccionada}>
@@ -161,6 +165,7 @@ function BotonCrear(props) {
                                 <option value='cumplimiento'>Cumplimiento</option>
                             </FormSelect>
                         </FormGroup>
+
                         {opcionSeleccionada === 'gradual' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Gradual</Form.Label>
@@ -172,7 +177,7 @@ function BotonCrear(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'acciones' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Acciones</Form.Label>
@@ -186,7 +191,7 @@ function BotonCrear(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'cumplimiento' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Cumplimiento</Form.Label>
@@ -194,11 +199,19 @@ function BotonCrear(props) {
                                 <p className='cumpl p-2'>Cumplimiento estará siempre activo. Se desactivará en el momento que incumplas el hábito.</p>
                             </Form.Group>
                         )}
-                        {error && <p className="text-danger">{error}</p>} {/* Mostrar mensaje de error */}
+                        {error && <p className="text-danger">{error}</p>}
                         <Button variant="primary" type="submit">Enviar</Button>
                     </Form>
                 </Modal.Body>
             </Modal>
+
+            {/* Modal de selección de íconos */}
+            <ModalSeleccionIcono
+                show={showIconSelector}
+                handleClose={() => setShowIconSelector(false)}
+                handleIconSelect={handleIconSelect}
+                iconoHabito={iconoHabito}
+            />
         </>
     );
 }
