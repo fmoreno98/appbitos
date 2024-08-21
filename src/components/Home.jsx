@@ -32,7 +32,6 @@ const Home = () => {
                 <Row className='contenedor'>
                     <Col>
                         <BotonesGrid />
-                        <FormEditarHabito idHabito={151} />
                     </Col>
                     <Col id=''>
                         <div id='estadisticas'>
