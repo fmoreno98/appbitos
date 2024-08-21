@@ -28,7 +28,7 @@ const Calendario = () => {
   const fetchCompletionStatus = async (month, year) => {
     try {
       const userId = user; 
-      const data = await historial(userId, month, year);
+      const data = await historial(userId, token, month, year);
 
       const statusMap = data.reduce((acc, { fecha, estado_retos }) => {
         acc[fecha] = estado_retos === 'Completado';
