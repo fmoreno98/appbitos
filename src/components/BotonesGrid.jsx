@@ -74,7 +74,7 @@ const BotonesGrid = () => {
                     <Row key={rowIndex} className="mb-4">
                         {habitos.map((habito, index) => (
                             <Col xs={6} key={index}>
-                                <HabitoEspecifico progress={33} nombreHabito={habito.nombre} idHabito={habito.id} />
+                                <HabitoEspecifico progress={33} nombreHabito={habito.nombre} idHabito={habito.id} iconoHabito={habito.icono_habito} descripcion={habito.descripcion} frecuencia={habito.frecuencia} tipo_habito={habito.tipo_habito} refresca={refresca}/>
                                 <h5>{habito.nombre_habito} </h5> 
                             </Col>
                         ))}

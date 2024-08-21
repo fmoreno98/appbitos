@@ -77,11 +77,11 @@ const buscarHabito = (id,token) => {
     .catch(error => console.log(error));
 }
 
-const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,token) => {
+const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,token, icono_habito) => {
   const requestOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', authorization: token },
-    body: JSON.stringify({ nombre_habito, descripcion, tipo_habito, frecuencia })
+    body: JSON.stringify({ nombre_habito, descripcion, tipo_habito, frecuencia, icono_habito })
   };
 
   return fetch(API_URL + "/habitos/" + id, requestOptions)
