@@ -10,7 +10,7 @@ function LandingPage() {
                     <div className="flex flex-col items-center justify-center px-4 py-8 sm:flex-row text-center h-72">
                         <div className="text-center mt-10 rounded-4">
                             <h1 className="inline-block p-1 mb-4 text-3xl font-extrabold text-white md:text-5xl lg:text-7xl bg-[#E8E1D9] bg-opacity-80 rounded-3 "><span className=" text-transparent bg-clip-text bg-gradient-to-r to-[#081EAC] from-[#516BE7]">APPBITO</span></h1>
-                            <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Habitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
+                            <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Hábitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
                         </div>
                     </div>
                 </section>
@@ -30,7 +30,7 @@ function LandingPage() {
                             <h3 className="m-0 text-xl font-semibold leading-tight border-0 border-[#938A7F] lg:text-3xl md:text-2xl">
                                 Bievenido a APPBITO!
                             </h3>
-                            <h4 className="text-[#2F49D4]">La mejor App de Habitos Saludables!</h4>
+                            <h4 className="text-[#2F49D4]">La mejor App de Hábitos Saludables!</h4>
                             <p className="pt-4 pb-8 m-0 leading-7 text-black border-0 border-[#938A7F]  lg:text-lg">
                                 Hemos creado AppBito, una aplicación diseñada para ayudar a las personas a cumplir objetivos diarios que ellos mismos podran ponerse. Con el apoyo de la comunidad, AppBito se convertirá en un lugar seguro y acogedor donde los usuarios pueden conectarse, compartir experiencias y aprender de otros.
                             </p>
@@ -64,7 +64,7 @@ function LandingPage() {
                                             <path fill="#ffffff" d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z" /></svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Calendario</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base"> Nuestro calendario te muestra los días en los que has completado algun hábito, ayudándote a visualizar tu progreso y mantener el enfoque en tus metas.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -76,7 +76,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Autoseguimiento</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Ofrecemos una función de autoseguimiento que destaca tus logros diarios, ayudándote a visualizar tu progreso y mantener la motivación para alcanzar tus metas.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -88,7 +88,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Comunidad</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -100,7 +100,7 @@ function LandingPage() {
                                             </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Historial</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -112,7 +112,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Consejos Diarios</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Brindamos consejos diarios personalizados que te inspiran a mantenerte en el camino correcto, ayudándote a lograr tus metas y a mejorar cada día, pudiendo obtener ideas de tu nuevo hábito objetivo.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -124,7 +124,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Uso Sencillo</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Una experiencia sencilla y agradable para que alcanzar tus metas sea más fácil. Una app intuitiva, lo que te permite enfocarte en lo que realmente importa construir hábitos que transformen tu vida.</p>
                                 </div>
                             </div>
                         </div>
