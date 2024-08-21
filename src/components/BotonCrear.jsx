@@ -83,7 +83,6 @@ function BotonCrear(props) {
             headers: {
                 "Content-Type": "application/json",
                 'authorization': token
-
             },
             body: JSON.stringify(ob)
         }

@@ -19,7 +19,7 @@ function FormEditar(props) {
     const [descripcion, setDescripcion] = useState('');
     const [frecuencia, setFrecuencia] = useState(1);
     const [tipo_habito, setTipoHabito] = useState(1);
-    const { token } = useContext(LoginContext);
+    const { user, token } = useContext(LoginContext);
     const [error, setError] = useState('');
 
     const manejarCambio = (evento) => {
@@ -30,6 +30,7 @@ function FormEditar(props) {
             setTipoHabito(2);
         } else if (evento.target.value === 'cumplimiento') {
             setTipoHabito(3);
+            setFrecuencia(1);  // Cumplimiento tiene frecuencia fija, la podemos establecer aquí si es necesario.
         }
     };
 
@@ -43,13 +44,20 @@ function FormEditar(props) {
     };
 
     useEffect(() => {
-        buscarHabito(idHabito,token)
+        buscarHabito(idHabito, token)
             .then(data => {
                 setNombreHabito(data.nombre_habito);
                 setDescripcion(data.descripcion);
                 setFrecuencia(data.frecuencia);
                 setTipoHabito(data.tipo_habito);
                 setIconoHabito(data.icono_habito);
+                if (data.tipo_habito === 1) {
+                    setOpcionSeleccionada('gradual');
+                } else if (data.tipo_habito === 2) {
+                    setOpcionSeleccionada('acciones');
+                } else if (data.tipo_habito === 3) {
+                    setOpcionSeleccionada('cumplimiento');
+                }
             })
             .catch(err => console.log(err));
     }, [idHabito]);
@@ -69,10 +77,11 @@ function FormEditar(props) {
         }
 
         setError(''); // Limpiar errores antes de enviar el formulario
-
         // Aquí puedes realizar acciones adicionales con los datos del formulario
         editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito,token, iconoHabito)
+
             .then(() => {
+                props.refresca();
                 setShow(false);
                 borrarCampos();
             })
@@ -100,6 +109,7 @@ function FormEditar(props) {
                     </div>
                 </div>
             </div>
+
 
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -136,7 +146,7 @@ function FormEditar(props) {
                         </Form.Group>
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
                             <FormLabel>Editar Tipo de hábito</FormLabel>
-                            <FormSelect onChange={manejarCambio}>
+                            <FormSelect onChange={manejarCambio} value={opcionSeleccionada}>
                                 <option value=''>Seleccionar opción</option>
                                 <option value='gradual'>Avance gradual</option>
                                 <option value='acciones'>Acciones</option>
@@ -154,7 +164,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'acciones' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Acciones</Form.Label>
@@ -168,7 +178,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'cumplimiento' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Cumplimiento</Form.Label>
@@ -191,4 +201,3 @@ function FormEditar(props) {
 }
 
 export default FormEditar;
-    

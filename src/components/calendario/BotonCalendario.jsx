@@ -1,7 +1,7 @@
 import React from 'react';
 import './BotonCalendario.css';
 
-const BotonCalendario = ({ day, isEmpty, isPreviousMonth, isNextMonth, isCompleted, onClick }) => {
+const BotonCalendario = ({ day, isEmpty, isPreviousMonth, isNextMonth, isCompleted, isFuture, onClick }) => {
   let BotonCalendarioClass = 'BotonCalendario';
 
   if (isPreviousMonth) {
@@ -12,8 +12,9 @@ const BotonCalendario = ({ day, isEmpty, isPreviousMonth, isNextMonth, isComplet
     BotonCalendarioClass += ' next-month';
   }
 
-
-  if (isCompleted) {
+  if (isFuture) {
+    BotonCalendarioClass += ' future'; // Nueva clase para días futuros
+  } else if (isCompleted) {
     BotonCalendarioClass += ' completed';
   } else {
     BotonCalendarioClass += ' not-completed';
