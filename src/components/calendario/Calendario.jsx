@@ -159,18 +159,14 @@ const Calendario = () => {
         <div className='buttonsContainer'>
           <a className="fancy" onClick={handlePreviousMonth}>
             <span className="top-key"></span>
-            <span className="text">PREVIOUS</span>
-            <span className="bottom-key-1"></span>
-            <span className="bottom-key-2"></span>
+            <button className="custom-btn btn">&lt;</button>
           </a>
           <h3 className='monthAndYearTitle'>
             {months[currentMonth]} {currentYear}
           </h3>
           <a className={`fancy ${isNextDisabled ? 'disabled' : ''}`} onClick={!isNextDisabled ? handleNextMonth : null}>
             <span className="top-key"></span>
-            <span className="text">NEXT</span>
-            <span className="bottom-key-1"></span>
-            <span className="bottom-key-2"></span>
+            <button className="custom-btn btn">&gt;</button>
           </a>
         </div>
         <div className="calendario">

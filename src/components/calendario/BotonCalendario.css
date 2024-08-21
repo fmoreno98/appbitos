@@ -13,7 +13,13 @@
   font-size: 1rem; /* Tamaño de fuente base */
   box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho y alto */
 }
-
+@media (min-width: 1200px) {
+  .BotonCalendario {
+    height: 2.5em; /* Ajusta el tamaño del botón si es necesario */
+    width: 2.5em;
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente si es necesario */
+  }
+}
 /* Tamaño del número del día dentro del botón */
 .day-number {
   text-align: center;

@@ -60,6 +60,16 @@
   }
 }
 
+@media (min-width: 1200px) {
+  .day-name {
+    padding: 6px;
+  }
+  .days{
+    margin-left: 10px;
+
+  }
+}
+
 /* Contenedor de los días del mes */
 .days {
   display: grid;
@@ -68,20 +78,7 @@
   font-size: 20px;
   grid-template-columns: repeat(7, 1fr);
   gap: 10px;
-}
-
-/* Estilo de los botones de calendario */
-.carta {
-  background-color: transparent;
-  /* background-image: url("./elementos/huella.png"); */
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 60px;
-  width: 60px;
-  border: 1px solid white;
-  padding: 10px;
-  backdrop-filter: blur(10px);
-  border-radius: 50%;
+  justify-content: center; /* Centra los botones en la grilla */
 }
 
 .empty {
