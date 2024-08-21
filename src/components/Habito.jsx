@@ -1,29 +1,26 @@
+import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
-import {Container, Row, Col} from'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {iconos} from './fontawesome.js';
-import React, { useState, useEffect, useContext } from'react';
+import { iconos } from './fontawesome.js';
 import LoginContext from './LoginContext';
+import FormEditar from './FormEditarHabito.jsx';
 import './Habito.css';
 
-
-
-function Habito(props) {
-    const {idHabito} = useParams();
-
-    const [habitos, setHabitos] = useState([]);
+function Habito() {
+    const { idHabito } = useParams();
+    const { user, token } = useContext(LoginContext);
+    const [refrescar, setRefrescar] = useState(0)
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [tipoHabito, setTipoHabito] = useState(1);
-    const { user,token } = useContext(LoginContext);
     const [progreso, setProgreso] = useState(0);
     const [frecuencia, setFrecuencia] = useState(0);
-    let seguimiento = 0
-    let habito = null;
+    const [showModal, setShowModal] = useState(false);
+
     let nomTipoHabito = '';
 
-
-    useEffect(() =>{
+    useEffect(() => {
         async function obtenerHabitos() {
             const options = {
                 method: 'GET',
@@ -32,56 +29,55 @@ function Habito(props) {
                     'authorization': token
                 },
             };
-          const res = await fetch('http://localhost:3000/api/habitos/'+idHabito, options); //pasar el token, no el user
-          let data = await res.json()
-          habito = data.data
+            const res = await fetch('http://localhost:3000/api/habitos/' + idHabito, options);
+            let data = await res.json();
+            let habito = data.data;
 
-          setNombre(habito.nombre_habito)
-          setDescripcion(habito.descripcion)
-          setTipoHabito(habito.tipo_habito)
-          setFrecuencia(habito.frecuencia)
-          console.log("data para : ",user,  nombreHabito)
+            setNombre(habito.nombre_habito);
+            setDescripcion(habito.descripcion);
+            setTipoHabito(habito.tipo_habito);
+            setFrecuencia(habito.frecuencia);
         }
 
-        async function obtenerProgreso(){
-            //obtener dia de hoy
+        async function obtenerProgreso() {
             const fecha = new Date().toISOString().slice(0, 10);
-            console.log("fecha: ",fecha)
-            const res = await fetch('http://localhost:3000/api/seguimientoHabitos/'+fecha+'/'+idHabito); //pasar el token, no el user
-            let data = await res.json()
-            console.log("data para : ",data)
-            seguimiento = data.data
-            setProgreso(seguimiento.progreso)
-
-
+            const res = await fetch('http://localhost:3000/api/seguimientoHabitos/' + fecha + '/' + idHabito);
+            let data = await res.json();
+            let seguimiento = data.data;
+            setProgreso(seguimiento.progreso);
         }
 
-        obtenerProgreso()
+        obtenerProgreso();
         if (user) obtenerHabitos();
-    },[user])
- 
-    if(tipoHabito == 1) {
-        nomTipoHabito = "Avance Gradual"
-    }
-    if(tipoHabito == 2) {
-        nomTipoHabito = "Acciones"
-    }
-    if(tipoHabito == 3) {
-        nomTipoHabito = "Cumplimiento"
-    }
+    }, [user, idHabito, token,refrescar]);
 
+    if (tipoHabito === 1) nomTipoHabito = "Avance Gradual";
+    if (tipoHabito === 2) nomTipoHabito = "Acciones";
+    if (tipoHabito === 3) nomTipoHabito = "Cumplimiento";
 
-    return(
+    const handleEditClick = () => {
+        setShowModal(true);
+    };
+
+    function refresca(){
+        setRefrescar(refrescar+1)
+      }
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
+
+    return (
         <>
             <Container>
                 <br />
                 <Row>
-                    <Col className="">
+                    <Col>
                         <Row className="justify-content-left">
-                            <button className="btn btn-light" style={{width: '60px'}}><FontAwesomeIcon icon={iconos.lapiz} size='2x' style={{ color: '#0E28C0' }} /></button>
+                                <FormEditar refresca={refresca} idHabito={idHabito} />
                         </Row>
                         <Row className="justify-content-center">
-                            <div className="circular-progress" style={{width: "250px", height: "250px"}}>
+                            <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
                                 <div className="circular-progress__circle">
                                     <svg viewBox="0 0 36 36" className="circular-chart">
                                         <path
@@ -92,7 +88,7 @@ function Habito(props) {
                                         />
                                         <path
                                             className="circle"
-                                            strokeDasharray={`${34}, 100`}
+                                            strokeDasharray={`${progreso}, 100`}
                                             d="M18 2.0845
                                                 a 15.9155 15.9155 0 0 1 0 31.831
                                                 a 15.9155 15.9155 0 0 1 0 -31.831"
@@ -102,7 +98,7 @@ function Habito(props) {
                                         <div className="proFreq text-center">
                                             {progreso}/{frecuencia}
                                         </div>
-                                        <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }}/>
+                                        <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }} />
                                     </div>
                                 </div>
                             </div>
@@ -113,19 +109,27 @@ function Habito(props) {
                         <Row className="text-center">
                             <h4>{descripcion}</h4>
                         </Row>
-                        <Row className="text-center">                     
+                        <Row className="text-center">
                             <h4>{nomTipoHabito}</h4>
                         </Row>
                         <Row className="justify-content-center">
-                            {/* <button className="btn btn-completar" style={{width: '160px'}}><FontAwesomeIcon icon={iconos.check} size='2x' style={{ color: '#E8E1D9' }} /></button> */}
-                            <button className="btn btn-completar" style={{width: '160px', fontSize: '20px'}}>Completar</button>
+                            <button className="btn btn-completar" style={{ width: '160px', fontSize: '20px' }}>Completar</button>
                         </Row>
                     </Col>
                     <Col className="bg-light"></Col>
                 </Row>
             </Container>
+
+            {/* Modal para editar el hábito */}
+            {showModal && (
+                <FormEditar
+                    idHabito={idHabito}
+                    progress={progreso}
+                    onHide={handleCloseModal}
+                />
+            )}
         </>
-    )
+    );
 }
 
 export default Habito;

@@ -22,7 +22,7 @@ const Calendario = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [completionStatus, setCompletionStatus] = useState({});
-  const { user } = useContext(LoginContext);
+  const { user,token } = useContext(LoginContext);
   const [selectedDay, setSelectedDay] = useState(null);
 
   const fetchCompletionStatus = async (month, year) => {

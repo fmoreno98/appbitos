@@ -4,6 +4,7 @@ import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-boo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { editarHabito, buscarHabito } from './tools/api';
+import { iconos } from './fontawesome';
 
 function FormEditar(props) {
     const { idHabito } = props;
@@ -15,7 +16,7 @@ function FormEditar(props) {
     const [descripcion, setDescripcion] = useState('');
     const [frecuencia, setFrecuencia] = useState(1);
     const [tipo_habito, setTipoHabito] = useState(1);
-    const { user } = useContext(LoginContext);
+    const { user, token } = useContext(LoginContext);
     const [error, setError] = useState('');
 
     const manejarCambio = (evento) => {
@@ -26,6 +27,7 @@ function FormEditar(props) {
             setTipoHabito(2);
         } else if (evento.target.value === 'cumplimiento') {
             setTipoHabito(3);
+            setFrecuencia(1);  // Cumplimiento tiene frecuencia fija, la podemos establecer aquí si es necesario.
         }
     };
 
@@ -33,12 +35,19 @@ function FormEditar(props) {
     const handleShow = () => setShow(true);
 
     useEffect(() => {
-        buscarHabito(idHabito)
+        buscarHabito(idHabito, token)
             .then(data => {
                 setNombreHabito(data.nombre_habito);
                 setDescripcion(data.descripcion);
                 setFrecuencia(data.frecuencia);
                 setTipoHabito(data.tipo_habito);
+                if (data.tipo_habito === 1) {
+                    setOpcionSeleccionada('gradual');
+                } else if (data.tipo_habito === 2) {
+                    setOpcionSeleccionada('acciones');
+                } else if (data.tipo_habito === 3) {
+                    setOpcionSeleccionada('cumplimiento');
+                }
             })
             .catch(err => console.log(err));
     }, [idHabito]);
@@ -58,10 +67,10 @@ function FormEditar(props) {
         }
 
         setError(''); // Limpiar errores antes de enviar el formulario
-
         // Aquí puedes realizar acciones adicionales con los datos del formulario
-        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito)
+        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito, token)
             .then(() => {
+                props.refresca();
                 setShow(false);
                 borrarCampos();
             })
@@ -81,25 +90,12 @@ function FormEditar(props) {
 
     return (
         <>
-            {nombreHabito}
-            <div onClick={handleShow} className="circular-progress">
-                <div className="circular-progress__circle">
-                    <svg viewBox="0 0 36 36" className="circular-chart">
-                        <path
-                            className="circle-bg"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                        <path
-                            className="circle"
-                            strokeDasharray={`${progress}, 100`}
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                    </svg>
-                    <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{ color: '#0E28C0' }} />
-                    </div>
-                </div>
-            </div>
+            <button
+                onClick={handleShow}
+                style={{ width: "10px", height: "10px" }}
+                className="circular-progress">
+                <FontAwesomeIcon icon={iconos.editar} size='2x' style={{ color: '#0E28C0' }} />
+            </button>
 
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
@@ -133,7 +129,7 @@ function FormEditar(props) {
                         </Form.Group>
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
                             <FormLabel>Editar Tipo de hábito</FormLabel>
-                            <FormSelect onChange={manejarCambio}>
+                            <FormSelect onChange={manejarCambio} value={opcionSeleccionada}>
                                 <option value=''>Seleccionar opción</option>
                                 <option value='gradual'>Avance gradual</option>
                                 <option value='acciones'>Acciones</option>
@@ -151,7 +147,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'acciones' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Acciones</Form.Label>
@@ -165,7 +161,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'cumplimiento' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Cumplimiento</Form.Label>
@@ -182,4 +178,3 @@ function FormEditar(props) {
 }
 
 export default FormEditar;
-    

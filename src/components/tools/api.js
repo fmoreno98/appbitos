@@ -55,10 +55,10 @@ const login = (email, password) => {
       .catch(error => []);
   }
 
-  const historial = (id) => {
+  const historial = (id,token) => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', authorization: token },
     };
     return fetch(API_URL + "/estadisticas/historial/"+id, requestOptions)
       .then(response => response.json())
@@ -77,7 +77,7 @@ const buscarHabito = (id,token) => {
     .catch(error => console.log(error));
 }
 
-const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id) => {
+const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,token) => {
   const requestOptions = {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json', authorization: token },
