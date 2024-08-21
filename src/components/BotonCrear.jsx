@@ -130,8 +130,7 @@ function BotonCrear(props) {
                     <Modal.Title>Creación de Hábitos</Modal.Title>
                     <Button style={{ marginLeft:"30px" }} variant="primary" onClick={() => setShowIconSelector(true)}>Seleccionar Ícono</Button>
                     {iconoHabito && (<div className="selected-icon">
-                    <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{margin:"20px", color: 'Black' }} />
-                        </div>)}
+                    <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{margin:"20px", color: 'Black' }} /> </div>)}
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
