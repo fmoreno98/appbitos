@@ -59,7 +59,7 @@ const Estadisticas = () => {
   
 
   return (
-    <div style={{ height: '500px', width: '100%', margin: '10px' }}>
+    <div style={{ height: '500px', width: '100%', marginTop: '40px' }}>
       <AgCharts
         options={chartOptions}
       />

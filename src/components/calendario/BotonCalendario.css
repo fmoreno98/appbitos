@@ -1,27 +1,79 @@
 /* BotonCalendario.css */
 
+/* Estilo base del botón de calendario */
 .BotonCalendario {
-    /* otros estilos */
+  border-radius: 50%;
+  height: 2em;
+  width: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 1rem; /* Tamaño de fuente base */
+  box-sizing: border-box; /* Incluye padding y border en el cálculo del ancho y alto */
+}
+@media (min-width: 1200px) {
+  .BotonCalendario {
+    height: 2.5em; /* Ajusta el tamaño del botón si es necesario */
+    width: 2.5em;
+    font-size: 1.2rem; /* Ajusta el tamaño de la fuente si es necesario */
   }
-  
-  .BotonCalendario.completed {
-    background-color: green;
-    color: black;
+}
+/* Tamaño del número del día dentro del botón */
+.day-number {
+  text-align: center;
+  vertical-align: middle;
+}
+
+/* Estado completado */
+.BotonCalendario.completed {
+  background-color: green;
+  color: black;
+}
+
+/* Estado no completado */
+.BotonCalendario.not-completed {
+  background-color: red;
+  color: black;
+}
+
+/* Botón del mes anterior */
+.BotonCalendario.previous-month {
+  background-color: transparent;
+  color: #ccc;
+}
+
+/* Botón del mes siguiente */
+.BotonCalendario.next-month {
+  background-color: transparent;
+  color: #ccc;
+}
+
+/* Botón sin hábito (opcional) */
+.BotonCalendario.no-habit {
+  background-color: white;
+}
+
+/* Botón futuro */
+.BotonCalendario.future {
+  background-color: transparent;
+  color: #ccc;
+}
+
+/* Media Queries para tamaños de pantalla más pequeños */
+@media (max-width: 768px) {
+  .BotonCalendario {
+    height: 1.5em; /* Reduce el tamaño del botón en pantallas más pequeñas */
+    width: 1.5em;
+    font-size: 0.9rem; /* Tamaño de fuente más pequeño */
   }
-  
-  .BotonCalendario.not-completed {
-    background-color: red;
-    color: black;
+}
+
+@media (max-width: 480px) {
+  .BotonCalendario {
+    height: 1.2em; /* Reduce aún más el tamaño del botón en pantallas muy pequeñas */
+    width: 1.2em;
+    font-size: 0.8rem; /* Tamaño de fuente aún más pequeño */
   }
-  
-  .BotonCalendario.previous-month {
-    background-color: white;
-  }
-  
-  .BotonCalendario.next-month {
-    background-color: white;
-  }
-  .BotonCalendario.no-habit {
-    background-color: white;
-  }
-  
+}
