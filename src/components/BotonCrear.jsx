@@ -14,7 +14,7 @@ function BotonCrear(props) {
     const [frecuencia, setFrecuencia] = useState('')
     const [tipo_habito, setTipoHabito] = useState(1)
     const [error, setError] = useState(''); // Para mostrar mensajes de error
-    const { user } = useContext(LoginContext);
+    const { user, token } = useContext(LoginContext);
     
     const manejarCambio = (evento) => {
         setOpcionSeleccionada(evento.target.value);
@@ -62,13 +62,15 @@ function BotonCrear(props) {
             "fecha_creacion": now,
             "activo": "1",
             "id_usuario": user,
-            "tipo_habito": tipo_habito
+            "tipo_habito": tipo_habito,
+            "icono_habito": "fa-solid fa-heart"
         }
 
         const fetchOptions = {
             method: "POST",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Authorization": token
             },
             body: JSON.stringify(ob)
         }
