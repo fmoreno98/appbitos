@@ -12,34 +12,89 @@ const login = (email, password) => {
       .catch(error => []);
   }
   
-  
   const checkToken = (token) => {
   
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', authorization: token },
     };
-  
+
     return fetch(API_URL + "/users/checktoken", requestOptions)
       .then(response => response.json())
       .catch(error => []);
       
   }
-  
-  const estadisticas = (token) => {
+  const eliminarHabito = (id,token) => {
+    const requestOptions = {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+      body: JSON.stringify({id})
+    };
+      
+    return fetch(API_URL + "/habitos/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+  const estadisticas = (id,token) => {
     const requestOptions = {
       method: 'GET',
       headers: { 'Content-Type': 'application/json', authorization: token },
     };
-  
-    return fetch(API_URL + "/estadisticas/countByDate", requestOptions)
+    return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
       .then(response => response.json())
       .catch(error => []);
   }
-  
-  
-  export {
-    login,
-    checkToken,
-    estadisticas
+  const habitoGraph = (id, habito_id) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch(API_URL + "/estadisticas/progreso/"+id+"/"+habito_id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+  const historial = (id,token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+    return fetch(API_URL + "/estadisticas/historial/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+
+const buscarHabito = (id,token) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', authorization: token },
   };
+
+  return fetch(API_URL + "/habitos/" + id, requestOptions)
+    .then(response => response.json())
+    .then(r => r.data)
+    .catch(error => console.log(error));
+}
+
+const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,token, icono_habito) => {
+  const requestOptions = {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json', authorization: token },
+    body: JSON.stringify({ nombre_habito, descripcion, tipo_habito, frecuencia, icono_habito })
+  };
+
+  return fetch(API_URL + "/habitos/" + id, requestOptions)
+    .then(response => response.json())
+    .catch(error => []);
+} 
+export {
+  login,
+  checkToken,
+  editarHabito,
+  buscarHabito,
+  eliminarHabito,
+  estadisticas,
+  habitoGraph,
+  historial
+}

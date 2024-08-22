@@ -6,12 +6,15 @@ import Estadisticas from './Estadisticas';
 import './Home.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell } from '@fortawesome/free-solid-svg-icons';
-import Footer from './Footer';
 import LoginContext from './LoginContext';
+import HabitoEstadistica from './HabitoEstadistica';
+import Calendario from './calendario/Calendario';
+import Racha from './Racha';
+import FormEditarHabito from './FormEditarHabito';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { setToken } = useContext(LoginContext);
+    const { token,setToken } = useContext(LoginContext);
 
     useEffect(() => {
         // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
@@ -21,22 +24,24 @@ const Home = () => {
         } else {
             navigate('/login');
         }
-    }, []);
+    }, [token]);
 
     return (
         <>
             <Container>
-            <Row className='contenedor'>
-                <Col>
-                  <BotonesGrid />
-                </Col>
-                <Col id=''>
-                  <div id='estadisticas'>
-                    <Estadisticas />
-                  </div>
-                 </Col>
-              </Row>
-          </Container>
+                <Row className='contenedor'>
+                    <Col>
+                        <BotonesGrid />
+                    </Col>
+                    <Col id=''>
+                        <div id='estadisticas'>
+                            <Calendario />
+                            <Racha />
+                            <Estadisticas />
+                        </div>
+                    </Col>
+                </Row>
+            </Container>
         </>
     );
 };

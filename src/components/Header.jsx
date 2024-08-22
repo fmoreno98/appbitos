@@ -4,12 +4,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink } from "react-router-dom";
 import './Header.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+import { iconos } from './fontawesome.js';
 
 
 function Header() {
     return (
         <>
-            <Navbar className='custom-navbar' expand="lg" fixed='top'>
+            <Navbar className='custom-navbar0' expand="lg" fixed='top'>
                 <Container>
                     <Navbar.Brand href="#home"><img
                         src="/img/MiniLogo.png"
@@ -21,14 +24,16 @@ function Header() {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link class="prova" href="#home">Home</Nav.Link>
+                            <Nav.Link className="prova" href="#home">Home</Nav.Link>
                             <Nav.Link href="#link1">Sobre Nosotros</Nav.Link>
                             <Nav.Link href="#link2">Contacto</Nav.Link>
                         </Nav>
-                        <NavDropdown className="usuario" title="Usuario" href="#link">
-                            <NavLink className="nav-link" to="/login">Login</NavLink>
-                            <NavLink className="nav-link" to="/register"> Register </NavLink>
-                        </NavDropdown>
+                        <Nav>
+                            <NavDropdown className="usuario" title={<FontAwesomeIcon icon={iconos.usuario} size='2x' style={{ color: "#E8E1D9", }} />} href="#link">
+                                <NavLink className="nav-link benja" to="/login">Login</NavLink>
+                                <NavLink className="nav-link benja" to="/register"> Register </NavLink>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
