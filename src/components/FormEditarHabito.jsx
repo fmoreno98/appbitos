@@ -7,6 +7,7 @@ import { editarHabito, buscarHabito } from './tools/api';
 import { iconos } from './fontawesome.js';
 import { useNavigate } from 'react-router-dom';
 import ModalSeleccionIcono from './ModalSeleccionIcono';
+import { text } from '@fortawesome/fontawesome-svg-core';
 
 function FormEditar(props) {
     const navigate = useNavigate();
@@ -113,8 +114,9 @@ function FormEditar(props) {
             margin: 'auto',
         },
         btn: {
-            width: '50px',
-            height: '50px',
+            width: '75px',
+            textAlign: 'center',
+            height: '75px',
             borderRadius: '50%',
             backgroundColor: '#2F49D4',
             overflow: 'hidden',
@@ -124,8 +126,8 @@ function FormEditar(props) {
         },
         btn2: {
             marginLeft: '500px',
-            width: '100px',
-            height: '100px',
+            width: '75px',
+            height: '75px',
             borderRadius: '50%',
             backgroundColor: '#2F49D4',
             overflow: 'hidden',
@@ -181,7 +183,7 @@ function FormEditar(props) {
     // Estilo para el estado hover
     const handleMouseOver = (event) => {
         event.currentTarget.style.transform = 'rotate(-90deg)';
-        event.currentTarget.style.backgroundColor = '#2F49D4';
+        event.currentTarget.style.backgroundColor = '#938A7F';
 
         const square = event.currentTarget.querySelector('.btn__sq');
         square.style.width = '18px';
