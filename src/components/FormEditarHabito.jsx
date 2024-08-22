@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { editarHabito, buscarHabito } from './tools/api';
 import { iconos } from './fontawesome.js';
+import { useNavigate } from 'react-router-dom';
 import ModalSeleccionIcono from './ModalSeleccionIcono';
 
 function FormEditar(props) {
+    const navigate = useNavigate();
     const { idHabito } = props;
     const [show, setShow] = useState(false);
     const [progress, setProgress] = useState(props.progress);
@@ -99,15 +101,25 @@ function FormEditar(props) {
         setTipoHabito(1);
     }
 
+    function volverHome() {
+        navigate('/home');
+    }
+
     return (
         <>
-            <div onClick={handleShow}>
-                <div>
+            <div style={{ display: 'flex'}}>
+                <div onClick={handleShow}>
+                    <button>
+                    <FontAwesomeIcon icon={iconos.casa} size='2x' style={{ color: '#0E28C0' }} />
+                        
+                    </button>
+                </div>
+                <div onClick={volverHome}>
+                    <button>
                     <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: '#0E28C0' }} />
+                    </button>
                 </div>
             </div>
-
-
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Editar Hábito</Modal.Title>
