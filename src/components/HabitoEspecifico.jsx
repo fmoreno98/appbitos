@@ -23,7 +23,7 @@ function HabitoEspecifico({ habito }) {
             let porcentaje = 0;
             if (progreso > 0 && frecuencia > 0) {
                 porcentaje = (progreso / frecuencia) * 100;
-            } 
+            }
             setProgress(porcentaje);
         };
 
@@ -48,10 +48,11 @@ function HabitoEspecifico({ habito }) {
                                 d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
                     a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                    </svg>
+                            />
+                        </svg>
+                    </div>
                     <div className="circular-progress__text">
-                <FontAwesomeIcon icon={props.iconoHabito ? iconos[props.iconoHabito] : iconos.ojo} size='2x' style={{    color: '#0E28C0' }} />
+                        <FontAwesomeIcon icon={habito.icono_habito ? iconos[habito.icono_habito] : iconos.ojo} size='2x' style={{ color: '#0E28C0' }} />
                     </div>
                 </div>
             </Link>
