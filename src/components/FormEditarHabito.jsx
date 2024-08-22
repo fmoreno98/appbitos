@@ -4,18 +4,23 @@ import { Form, Modal, Button, FormGroup, FormLabel, FormSelect } from 'react-boo
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './fontawesome';
 import { editarHabito, buscarHabito } from './tools/api';
+import { iconos } from './fontawesome.js';
+import { useNavigate } from 'react-router-dom';
+import ModalSeleccionIcono from './ModalSeleccionIcono';
 
 function FormEditar(props) {
+    const navigate = useNavigate();
     const { idHabito } = props;
     const [show, setShow] = useState(false);
-    const [progress, setProgress] = useState(props.progress);
     const [opcionSeleccionada, setOpcionSeleccionada] = useState('');
-
+    const [iconoHabito, setIconoHabito] = useState('');
+    const [selectedIcon, setSelectedIcon] = useState(iconos.editar);
+    const [showIconSelector, setShowIconSelector] = useState(false);
     const [nombreHabito, setNombreHabito] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [frecuencia, setFrecuencia] = useState(1);
     const [tipo_habito, setTipoHabito] = useState(1);
-    const { user } = useContext(LoginContext);
+    const { user, token } = useContext(LoginContext);
     const [error, setError] = useState('');
 
     const manejarCambio = (evento) => {
@@ -26,19 +31,33 @@ function FormEditar(props) {
             setTipoHabito(2);
         } else if (evento.target.value === 'cumplimiento') {
             setTipoHabito(3);
+            setFrecuencia(1);  // Cumplimiento tiene frecuencia fija, la podemos establecer aquí si es necesario.
         }
     };
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
+    const handleIconSelect = (icon) => {
+        setIconoHabito(icon); // Actualizar el ícono seleccionado
+        setShowIconSelector(false); // Cerrar el modal de selección de íconos
+    };
+
     useEffect(() => {
-        buscarHabito(idHabito)
+        buscarHabito(idHabito, token)
             .then(data => {
                 setNombreHabito(data.nombre_habito);
                 setDescripcion(data.descripcion);
                 setFrecuencia(data.frecuencia);
                 setTipoHabito(data.tipo_habito);
+                setIconoHabito(data.icono_habito);
+                if (data.tipo_habito === 1) {
+                    setOpcionSeleccionada('gradual');
+                } else if (data.tipo_habito === 2) {
+                    setOpcionSeleccionada('acciones');
+                } else if (data.tipo_habito === 3) {
+                    setOpcionSeleccionada('cumplimiento');
+                }
             })
             .catch(err => console.log(err));
     }, [idHabito]);
@@ -58,10 +77,10 @@ function FormEditar(props) {
         }
 
         setError(''); // Limpiar errores antes de enviar el formulario
-
         // Aquí puedes realizar acciones adicionales con los datos del formulario
-        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito)
+        editarHabito(nombreHabito, descripcion, tipo_habito, frecuencia, idHabito, token, iconoHabito)
             .then(() => {
+                props.refresca();
                 setShow(false);
                 borrarCampos();
             })
@@ -79,47 +98,164 @@ function FormEditar(props) {
         setTipoHabito(1);
     }
 
+    function volverHome() {
+        navigate('/home');
+    }
+
+    // Definir los estilos en línea como objetos de JavaScript
+    const styles = {
+        centerAbs: {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            margin: 'auto',
+        },
+        btn: {
+            width: '50px',
+            height: '50px',
+            borderRadius: '50%',
+            backgroundColor: '#2F49D4',
+            overflow: 'hidden',
+            transform: 'translate3d(0)',
+            transition: 'transform 350ms ease-out, background 350ms ease-out',
+            position: 'relative',
+        },
+        btn2: {
+            marginLeft: '500px',
+            width: '100px',
+            height: '100px',
+            borderRadius: '50%',
+            backgroundColor: '#2F49D4',
+            overflow: 'hidden',
+            transform: 'translate3d(0)',
+            transition: 'transform 350ms ease-out, background 350ms ease-out',
+            position: 'relative',
+        },
+        btnLink: {
+            display: 'block',
+            height: '100%',
+        },
+        btnSq: {
+            width: '50px',
+            height: '32px',
+            backgroundColor: '#FFFFFF',
+            position: 'absolute',
+            top: '10px',
+            left: '0',
+            right: '0',
+            bottom: '0',
+            margin: 'auto',
+            transform: 'translate3d(0)',
+            transition: 'width 350ms ease-out, top 350ms ease-out',
+        },
+        btnBefore: {
+            position: 'absolute',
+            content: '""',
+            width: 0,
+            height: 0,
+            bottom: '100%',
+            left: 0,
+            borderStyle: 'solid',
+            borderWidth: '0 25px 16px 25px',
+            borderColor: 'transparent transparent #FFF transparent',
+            transform: 'translate3d(0)',
+            transition: 'left 350ms ease-out, border-width 350ms ease-out',
+        },
+        btnAfter: {
+            position: 'absolute',
+            content: '""',
+            width: '10px',
+            height: '20px',
+            backgroundColor: '#2F49D4',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            margin: 'auto',
+            opacity: 1,
+            transition: 'opacity 350ms ease-out',
+        },
+    };
+
+    // Estilo para el estado hover
+    const handleMouseOver = (event) => {
+        event.currentTarget.style.transform = 'rotate(-90deg)';
+        event.currentTarget.style.backgroundColor = '#2F49D4';
+
+        const square = event.currentTarget.querySelector('.btn__sq');
+        square.style.width = '18px';
+        square.style.top = '16px';
+
+        const before = square.querySelector('.btn__before');
+        before.style.left = '-16px';
+        before.style.borderWidth = '0 25px 20px 25px';
+
+        const after = square.querySelector('.btn__after');
+        after.style.opacity = 0;
+    };
+
+    const handleMouseOut = (event) => {
+        event.currentTarget.style.transform = 'rotate(0deg)';
+        event.currentTarget.style.backgroundColor = '#2F49D4';
+
+        const square = event.currentTarget.querySelector('.btn__sq');
+        square.style.width = '50px';
+        square.style.top = '10px';
+
+        const before = square.querySelector('.btn__before');
+        before.style.left = '0';
+        before.style.borderWidth = '0 25px 16px 25px';
+
+        const after = square.querySelector('.btn__after');
+        after.style.opacity = 1;
+    };
+
     return (
         <>
-            {nombreHabito}
-            <div onClick={handleShow} className="circular-progress">
-                <div className="circular-progress__circle">
-                    <svg viewBox="0 0 36 36" className="circular-chart">
-                        <path
-                            className="circle-bg"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                        <path
-                            className="circle"
-                            strokeDasharray={`${progress}, 100`}
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                        />
-                    </svg>
-                    <div className="circular-progress__text">
-                        <FontAwesomeIcon icon={['fa', 'plus']} size='2x' style={{ color: '#0E28C0' }} />
-                    </div>
+            <div style={{ display: 'flex' }}>
+                <div
+                    onClick={volverHome}
+                    style={styles.btn}
+                    onMouseOver={handleMouseOver}
+                    onMouseOut={handleMouseOut}
+                >
+                    <a style={styles.btnLink} href="#">
+                        <div style={styles.btnSq} className="btn__sq">
+                            <div style={styles.btnBefore} className="btn__before"></div>
+                            <div style={styles.btnAfter} className="btn__after"></div>
+                        </div>
+                    </a>
+                </div>
+
+                <div onClick={handleShow}>
+                    <button style={styles.btn2}>
+                        <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: 'white' }} />
+                    </button>
                 </div>
             </div>
 
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Editar Hábito</Modal.Title>
+                    <Button style={{ marginLeft: "30px" }} variant="primary" onClick={() => setShowIconSelector(true)}>Seleccionar Ícono</Button>
+                    {iconoHabito && (<div className="selected-icon">
+                        <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{ margin: "20px", color: 'Black' }} /> </div>)}
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>
                         {error && (
-                            <div style={{ color: 'red', marginBottom: '10px', border: '1px solid red', borderRadius: '5px', padding: '10px', backgroundColor: '#ffe6e6' }}>
+                            <div style={{ color: 'red', marginBottom: '10px', border: '1px solid red', borderRadius: '5px', padding: '10px', backgroundColor: '#f8d7da' }}>
                                 {error}
                             </div>
                         )}
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                            <Form.Label>Editar Hábito</Form.Label>
+                            <Form.Label>Editar Nombre</Form.Label>
                             <Form.Control
                                 type="text"
-                                placeholder="Ej: Caminar"
+                                placeholder="Ej: Leer 10 páginas"
                                 value={nombreHabito}
                                 onChange={(event) => setNombreHabito(event.target.value)}
-                                autoFocus
                             />
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -133,7 +269,7 @@ function FormEditar(props) {
                         </Form.Group>
                         <FormGroup className='mb-3' controlId='exampleform.ControlInput1'>
                             <FormLabel>Editar Tipo de hábito</FormLabel>
-                            <FormSelect onChange={manejarCambio}>
+                            <FormSelect onChange={manejarCambio} value={opcionSeleccionada}>
                                 <option value=''>Seleccionar opción</option>
                                 <option value='gradual'>Avance gradual</option>
                                 <option value='acciones'>Acciones</option>
@@ -151,7 +287,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'acciones' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Acciones</Form.Label>
@@ -165,7 +301,7 @@ function FormEditar(props) {
                                 />
                             </Form.Group>
                         )}
-                        
+
                         {opcionSeleccionada === 'cumplimiento' && (
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
                                 <Form.Label>Cumplimiento</Form.Label>
@@ -177,9 +313,14 @@ function FormEditar(props) {
                     </Form>
                 </Modal.Body>
             </Modal>
+            <ModalSeleccionIcono
+                show={showIconSelector}
+                handleClose={() => setShowIconSelector(false)}
+                handleIconSelect={handleIconSelect}
+                iconoHabito={iconoHabito}
+            />
         </>
     );
 }
 
 export default FormEditar;
-    

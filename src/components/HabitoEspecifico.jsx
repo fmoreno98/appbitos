@@ -48,11 +48,10 @@ function HabitoEspecifico({ habito }) {
                                 d="M18 2.0845
                     a 15.9155 15.9155 0 0 1 0 31.831
                     a 15.9155 15.9155 0 0 1 0 -31.831"
-                            />
-                        </svg>
-                        <div className="circular-progress__text">
-                            <FontAwesomeIcon icon={iconos.ojo} size='2x' style={{ color: '#0E28C0' }} />
-                        </div>
+                        />
+                    </svg>
+                    <div className="circular-progress__text">
+                <FontAwesomeIcon icon={props.iconoHabito ? iconos[props.iconoHabito] : iconos.ojo} size='2x' style={{    color: '#0E28C0' }} />
                     </div>
                 </div>
             </Link>

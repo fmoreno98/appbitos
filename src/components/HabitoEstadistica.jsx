@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import { AgCharts } from 'ag-charts-react';
-import { estadisticas } from './tools/api';
+import { habitoGraph } from './tools/api';
 import LoginContext from './LoginContext';
 
-const Estadisticas = () => {
-  const context = useContext(LoginContext); // Obtener el contexto
-  const { user,token } = context; // Obtener el usuario del contexto
+const HabitoEstadistica = () => {
+  const { user } = useContext(LoginContext); // Obtener el usuario del contexto
+
   const [fechas, setFechas] = useState([]);
   const [chartOptions, setChartOptions] = useState({
     data: [],
-    series: [{ type: 'bar', xKey: 'fecha', yKey: 'cantidadHabitos' }],
+    series: [{ type: 'line', xKey: 'fecha', yKey: 'progreso', yName: 'Progreso' }],
   });
 
   useEffect(() => {
@@ -35,8 +35,8 @@ const Estadisticas = () => {
   }, []);
 
   useEffect(() => {
-    if (fechas.length === 7 ) { // Verificar que `fechas` tenga el largo esperado y que `user` esté definido
-      estadisticas(user,token).then(data => { // Pasar el ID de usuario a la función `estadisticas`
+    if (fechas.length === 7 && user) { 
+      habitoGraph(user, 39).then(data => {
         const formattedData = fechas.map(fecha => {
           const fechaData = data.find(d => {
             const date = new Date(d.fecha);
@@ -44,22 +44,22 @@ const Estadisticas = () => {
             const mes = (date.getMonth() + 1).toString().padStart(2, '0');
             return `${dia}-${mes}` === fecha;
           });
-          return { fecha, cantidadHabitos: fechaData ? fechaData.count : 0 };
-        });
 
+          return { fecha, progreso: fechaData ? fechaData.progreso : 0 };
+        });
         setChartOptions({
           data: formattedData,
-          series: [{ type: 'bar', xKey: 'fecha', yKey: 'cantidadHabitos' }],
+          series: [{ type: 'line', xKey: 'fecha', yKey: 'progreso', yName: 'Progreso' }],
         });
+
       }).catch(error => {
         console.error('Error fetching statistics:', error);
       });
     }
   }, [fechas, user]);
-  
 
   return (
-    <div style={{ height: '500px', width: '100%', marginTop: '40px' }}>
+    <div style={{ height: '500px', width: '100%' }}>
       <AgCharts
         options={chartOptions}
       />
@@ -69,5 +69,5 @@ const Estadisticas = () => {
 
 // Render component inside root element
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<Estadisticas />);
-export default Estadisticas;
+root.render(<HabitoEstadistica />);
+export default HabitoEstadistica;

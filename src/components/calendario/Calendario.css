@@ -1,0 +1,110 @@
+/* Calendario.css */
+
+/* Estructura general del calendario */
+.rightContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.calendari {
+  max-width: 600px;
+  margin: auto;
+  text-align: center;
+  font-family: Arial, sans-serif;
+  backdrop-filter: brightness(90%);
+  padding-top: 10px;
+}
+
+/* Contenedor del mes y el año */
+.month {
+  margin-bottom: 20px;
+}
+
+.month h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+/* Contenedor de los días de la semana */
+.days-of-week {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  padding: 5px 0;
+  margin-bottom: 10px;
+  border-bottom: 2px solid black;
+}
+
+/* Nombre del día de la semana */
+.day-name {
+  background-color: transparent;
+  color: black;
+  text-shadow: 2px 2px 4px white;
+  width: 100%;
+  font-weight: bold;
+  text-align: center; /* Centra el texto dentro del contenedor */
+}
+
+/* Estilo responsivo para los nombres de los días de la semana */
+@media (max-width: 768px) {
+  .day-name {
+    font-size: 0.9rem; /* Tamaño de fuente más pequeño en pantallas pequeñas */
+    padding: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .day-name {
+    font-size: 0.8rem; /* Tamaño de fuente aún más pequeño en pantallas muy pequeñas */
+    padding: 3px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .day-name {
+    padding: 6px;
+  }
+  .days{
+    margin-left: 10px;
+
+  }
+}
+
+/* Contenedor de los días del mes */
+.days {
+  display: grid;
+  color: black;
+  font-weight: bold;
+  font-size: 20px;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 10px;
+  justify-content: center; /* Centra los botones en la grilla */
+}
+
+.empty {
+  visibility: hidden;
+}
+
+/* Contenedor de los botones de navegación */
+.buttonsContainer {
+  display: flex;
+  flex-direction: row;
+  max-width: 600px;
+  margin: auto;
+}
+
+/* Estilo del título de mes y año */
+.monthAndYearTitle {
+  border-bottom: 2px solid black;
+}
+
+/* Contenedor izquierdo (opcional) */
+.leftContainer {
+  margin: auto;
+}
+
+/* Estilo para elementos deshabilitados */
+.disabled {
+  opacity: 0;
+  pointer-events: none;
+}
