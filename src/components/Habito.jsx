@@ -1,16 +1,18 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useParams } from "react-router-dom";
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { iconos } from './fontawesome.js';
-import LoginContext from './LoginContext';
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { iconos } from "./fontawesome.js";
+import LoginContext from "./LoginContext";
+import BotonCompletar from "./BotonCompletar.jsx";
 import FormEditar from './FormEditarHabito.jsx';
-import './Habito.css';
+import "./Habito.css";
+import { obtenerFrecuencia } from "./tools/api.js";
 
 function Habito() {
     const { idHabito } = useParams();
     const { user, token } = useContext(LoginContext);
-    const [refrescar, setRefrescar] = useState(0)
+    const [refrescar, setRefrescar] = useState(0);
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [tipoHabito, setTipoHabito] = useState(1);
@@ -49,7 +51,7 @@ function Habito() {
 
         obtenerProgreso();
         if (user) obtenerHabitos();
-    }, [user, idHabito, token,refrescar]);
+    }, [user, idHabito, token, refrescar]);
 
     if (tipoHabito === 1) nomTipoHabito = "Avance Gradual";
     if (tipoHabito === 2) nomTipoHabito = "Acciones";
@@ -61,7 +63,7 @@ function Habito() {
 
     function refresca(){
         setRefrescar(refrescar+1)
-      }
+    }
 
     const handleCloseModal = () => {
         setShowModal(false);
@@ -113,14 +115,13 @@ function Habito() {
                             <h4>{nomTipoHabito}</h4>
                         </Row>
                         <Row className="justify-content-center">
-                            <button className="btn btn-completar" style={{ width: '160px', fontSize: '20px' }}>Completar</button>
+                            <BotonCompletar idHabito={idHabito} refresca={refresca} />
                         </Row>
                     </Col>
                     <Col className="bg-light"></Col>
                 </Row>
             </Container>
 
-            {/* Modal para editar el hábito */}
             {showModal && (
                 <FormEditar
                     idHabito={idHabito}
