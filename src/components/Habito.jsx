@@ -5,20 +5,18 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { iconos } from './fontawesome.js';
 import LoginContext from './LoginContext';
 import FormEditar from './FormEditarHabito.jsx';
+import CalendarioEspecifico from './CalendarioEspecifico.jsx'; // Importar el componente de Calendario
 import './Habito.css';
 
 function Habito() {
     const { idHabito } = useParams();
     const { user, token } = useContext(LoginContext);
-    const [refrescar, setRefrescar] = useState(0)
+    const [refrescar, setRefrescar] = useState(0);
     const [nombre, setNombre] = useState('');
     const [descripcion, setDescripcion] = useState('');
     const [tipoHabito, setTipoHabito] = useState(1);
     const [progreso, setProgreso] = useState(0);
-    const [frecuencia, setFrecuencia] = useState(0);
-    const [showModal, setShowModal] = useState(false);
-
-    let nomTipoHabito = '';
+    const [frecuencia, setFrecuencia] = useState(1); // Establecer un valor por defecto
 
     useEffect(() => {
         async function obtenerHabitos() {
@@ -49,8 +47,9 @@ function Habito() {
 
         obtenerProgreso();
         if (user) obtenerHabitos();
-    }, [user, idHabito, token,refrescar]);
+    }, [user, idHabito, token, refrescar]);
 
+    let nomTipoHabito = '';
     if (tipoHabito === 1) nomTipoHabito = "Avance Gradual";
     if (tipoHabito === 2) nomTipoHabito = "Acciones";
     if (tipoHabito === 3) nomTipoHabito = "Cumplimiento";
@@ -59,76 +58,55 @@ function Habito() {
         setShowModal(true);
     };
 
-    function refresca(){
-        setRefrescar(refrescar+1)
-      }
+    const refresca = () => {
+        setRefrescar(refrescar + 1);
+    };
 
     const handleCloseModal = () => {
         setShowModal(false);
     };
 
     return (
-        <>
-            <Container>
-                <br />
-                <Row>
-                    <Col>
-                        <Row className="justify-content-left">
-                                <FormEditar refresca={refresca} idHabito={idHabito} />
-                        </Row>
-                        <Row className="justify-content-center">
-                            <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
-                                <div className="circular-progress__circle">
-                                    <svg viewBox="0 0 36 36" className="circular-chart">
-                                        <path
-                                            className="circle-bg"
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                        <path
-                                            className="circle"
-                                            strokeDasharray={`${progreso}, 100`}
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                    </svg>
-                                    <div className="circular-progress__text">
-                                        <div className="proFreq text-center">
-                                            {progreso}/{frecuencia}
+        <Container>
+            <Row>
+                <Col md={6}>
+                    <div className="infoHabit">
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="6">
+                                <h2>{nombre}</h2>
+                                <h4>{descripcion}</h4>
+                                <h4>{nomTipoHabito}</h4>
+                                <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
+                                    <div className="circular-progress__circle">
+                                        <svg viewBox="0 0 36 36" className="circular-chart">
+                                            <path
+                                                className="circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                            <path
+                                                className="circle"
+                                                strokeDasharray={`${progreso}, 100`}
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                        </svg>
+                                        <div className="circular-progress__text">
+                                            <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }} />
                                         </div>
-                                        <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }} />
                                     </div>
                                 </div>
-                            </div>
-                        </Row>
-                        <Row className="text-center">
-                            <h2>{nombre}</h2>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{descripcion}</h4>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{nomTipoHabito}</h4>
+                                <Button className="btn btn-completar" style={{ width: '160px', fontSize: '20px' }}>Completar</Button>
+                            </Col>
                         </Row>
                         <Row className="justify-content-center">
-                            <button className="btn btn-completar" style={{ width: '160px', fontSize: '20px' }}>Completar</button>
+                            <FormEditar idHabito={idHabito} refresca={refresca} />
                         </Row>
-                    </Col>
-                    <Col className="bg-light"></Col>
-                </Row>
-            </Container>
-
-            {/* Modal para editar el hábito */}
-            {showModal && (
-                <FormEditar
-                    idHabito={idHabito}
-                    progress={progreso}
-                    onHide={handleCloseModal}
-                />
-            )}
-        </>
+                    </div>
+                </Col>
+                <Col md={6}>
+                    <CalendarioEspecifico idHabito={idHabito} /> {/* Incluir el componente de calendario */}
+                </Col>
+            </Row>
+        </Container>
     );
 }
 

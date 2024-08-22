@@ -88,6 +88,17 @@ const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id,to
     .then(response => response.json())
     .catch(error => []);
 } 
+
+const historialHabito = (id, idHabito, token) => {
+  const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', authorization: token },
+  };
+  return fetch(API_URL + "/estadisticas/historial/habito/"+id+"/"+idHabito, requestOptions)
+    .then(response => response.json())
+    .catch(error => []);
+};
+
 export {
   login,
   checkToken,
@@ -96,5 +107,6 @@ export {
   eliminarHabito,
   estadisticas,
   habitoGraph,
-  historial
+  historial,
+  historialHabito
 }
