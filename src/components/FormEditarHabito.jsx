@@ -107,16 +107,17 @@ function FormEditar(props) {
 
     return (
         <>
-            <div style={{ display: 'flex'}}>
-                <div onClick={handleShow}>
-                    <button>
-                    <FontAwesomeIcon icon={iconos.casa} size='2x' style={{ color: '#0E28C0' }} />
-                        
-                    </button>
-                </div>
+            <div style={{ display: 'flex' }}>
                 <div onClick={volverHome}>
                     <button>
-                    <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: '#0E28C0' }} />
+                        <FontAwesomeIcon icon={iconos.casa} size='2x' style={{ color: '#0E28C0' }} />
+
+                    </button>
+                </div>
+
+                <div onClick={handleShow}>
+                    <button style={{ marginLeft: "500px" }}>
+                        <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: '#0E28C0' }} />
                     </button>
                 </div>
             </div>
