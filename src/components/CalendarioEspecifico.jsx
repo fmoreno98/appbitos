@@ -140,9 +140,7 @@ const CalendarioEspecifico = (idHabito) => {
     return (
         <div className="month">
             <div className="days-of-week">
-                {['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb'].map(day => (
-                    <div key={day} className="day-name">{day}</div>
-                ))}
+            {daysOfWeek.map(day => <div key={day} className="day-name">{day}</div>)}
             </div>
             <div className="days">
                 {days}

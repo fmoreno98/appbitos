@@ -32,6 +32,12 @@
   color: black;
 }
 
+/*Estado parcialmente completado */
+.BotonCalendario.partial-day {
+  background-color: rgba(255, 170, 0, 0.914);
+  color: black;
+}
+
 /* Estado no completado */
 .BotonCalendario.not-completed {
   background-color: red;
