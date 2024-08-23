@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { iconos } from "./fontawesome.js";
 import React, { useState, useEffect, useContext } from "react";
@@ -11,6 +12,7 @@ import { obtenerFrecuencia } from "./tools/api.js";
 import "./Habito.css";
 
 function Habito(props) {
+    const navigate = useNavigate();
     const { idHabito } = useParams();
     const { user, token } = useContext(LoginContext);
     const [habitos, setHabitos] = useState([]);
@@ -28,6 +30,9 @@ function Habito(props) {
     let nomTipoHabito = "";
 
     useEffect(() => {
+        if(!user) {
+            navigate("/login");
+        }
         async function obtenerHabitos() {
             const res = await fetch("http://localhost:3000/api/habitos/" + idHabito, {
                 method: "GET",

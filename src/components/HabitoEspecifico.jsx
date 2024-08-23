@@ -2,6 +2,7 @@ import React, { useEffect, useContext } from 'react';
 import './HabitoEspecifico.css';
 import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import LoginContext from './LoginContext';
 import { iconos } from './fontawesome.js';
@@ -12,9 +13,13 @@ function HabitoEspecifico({ habito }) {
     const [progress, setProgress] = useState(0);
     const [nombreHabito, setNombreHabito] = useState(habito.nombreHabito);
     const idHabito = habito.id;
+    const navigate = useNavigate();
     const { token } = useContext(LoginContext);
 
     useEffect(() => {
+        if (!token) {
+            navigate('/login');
+        }
         const actualizarProgreso = async () => {
             const data = await obtenerProgreso(idHabito, token)
             const dataFrecuencia = await obtenerFrecuencia(idHabito, token)
