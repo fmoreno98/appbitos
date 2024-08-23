@@ -135,7 +135,7 @@ function Habito() {
                                     <h4>{nomTipoHabito}</h4>
                                 </Row>
                             </Col>
-                            <Row>
+                            <Row className="justify-content-center">
                                 <BotonCompletar idHabito={idHabito} refresca={refresca} />
                             </Row>
                         </Row>
