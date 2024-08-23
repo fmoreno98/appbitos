@@ -9,17 +9,17 @@ import ModalSeleccionIcono from './ModalSeleccionIcono';
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
     const [progress, setProgress] = useState(props.progress);
-    const [opcionSeleccionada, setOpcionSeleccionada] = useState('');
-    const [nombreHabito, setNombreHabito] = useState('');
+    const [opcionSeleccionada, setOpcionSeleccionada] = useState('')
+    const [nombreHabito, setNombreHabito] = useState('')
     const [iconoHabito, setIconoHabito] = useState('');
-    const [descripcion, setDescripcion] = useState('');
-    const [frecuencia, setFrecuencia] = useState('');
-    const [tipo_habito, setTipoHabito] = useState(1);
-    const [selectedIcon, setSelectedIcon] = useState(iconos.plus); 
-    const [showIconSelector, setShowIconSelector] = useState(false); 
-    const [error, setError] = useState('');
+    const [descripcion, setDescripcion] = useState('')
+    const [frecuencia, setFrecuencia] = useState('')
+    const [tipo_habito, setTipoHabito] = useState(1)
+    const [selectedIcon, setSelectedIcon] = useState(iconos.plus);
+  const [showIconSelector, setShowIconSelector] = useState(false); 
+    const [error, setError] = useState(''); // Para mostrar mensajes de error
     const { user, token } = useContext(LoginContext);
-
+   
     const manejarCambio = (evento) => {
         const valorSeleccionado = evento.target.value;
         setOpcionSeleccionada(valorSeleccionado);
@@ -82,7 +82,7 @@ function BotonCrear(props) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                'authorization': token
+                "Authorization": token
             },
             body: JSON.stringify(ob)
         }

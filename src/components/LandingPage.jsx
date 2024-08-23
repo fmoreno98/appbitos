@@ -10,7 +10,7 @@ function LandingPage() {
                     <div className="flex flex-col items-center justify-center px-4 py-8 sm:flex-row text-center h-72">
                         <div className="text-center mt-10 rounded-4">
                             <h1 className="inline-block p-1 mb-4 text-3xl font-extrabold text-white md:text-5xl lg:text-7xl bg-[#E8E1D9] bg-opacity-80 rounded-3 "><span className=" text-transparent bg-clip-text bg-gradient-to-r to-[#081EAC] from-[#516BE7]">APPBITO</span></h1>
-                            <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Habitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
+                            <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Hábitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
                         </div>
                     </div>
                 </section>
@@ -30,29 +30,30 @@ function LandingPage() {
                             <h3 className="m-0 text-xl font-semibold leading-tight border-0 border-[#938A7F] lg:text-3xl md:text-2xl">
                                 Bievenido a APPBITO!
                             </h3>
-                            <h4 className="text-[#2F49D4]">La mejor App de Habitos Saludables!</h4>
-                            <p className="pt-4 pb-8 m-0 leading-7 text-black border-0 border-[#938A7F]  lg:text-lg">
-                                Hemos creado AppBito, una aplicación diseñada para ayudar a las personas a cumplir objetivos diarios que ellos mismos podran ponerse. Con el apoyo de la comunidad, AppBito se convertirá en un lugar seguro y acogedor donde los usuarios pueden conectarse, compartir experiencias y aprender de otros.
-                            </p>
-                            <ul className="p-0 m-0 leading-6 border-0 border-[#938A7F]">
-                                <li className="box-border relative py-4 pl-0 text-left text-black border-solid">
-                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span></span> BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA.
+                            <h4 className="text-[#2F49D4]">La mejor App de Hábitos Saludables!</h4>
+                            <p className="pt-2 pb-2 m-0 leading-7 text-black border-0 border-[#938A7F]  lg:text-lg">
+                            Hemos creado AppBito, una aplicación innovadora diseñada para ayudarte a alcanzar tus objetivos de salud y bienestar diarios. AppBito ofrece un entorno inspirador y motivador, con herramientas personalizadas para que puedas seguir tus hábitos saludables, monitorear tu progreso y celebrar cada logro en tu camino hacia una vida más equilibrada. </p>                            <ul className="p-0 m-0 leading-6 border-0 border-[#938A7F]">
+                                <li className="box-border relative py-3 pl-0 text-left text-black border-solid">
+                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
+                                    </span>Optimiza tu salud y calidad de vida con una app que te permite gestionar y mejorar tus hábitos diarios, facilitando el camino hacia una vida más plena y saludable.
                                 </li>
-                                <li className="box-border relative py-4 pl-0 text-left text-black border-solid">
-                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span></span> BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA.
+                                <li className="box-border relative py-3 pl-0 text-left text-black border-solid">
+                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
+                                    </span>Monitorea y mejora tus hábitos diarios: desde prácticas saludables hasta la reducción de los menos beneficiosos, AppBito te ayuda a crear un estilo de vida equilibrado y satisfactorio..
                                 </li>
-                                <li className="box-border relative py-4 pl-0 text-left ttext-black border-solid">
-                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span></span> BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA BLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLABLA.
+                                <li className="box-border relative py-3 pl-0 text-left ttext-black border-solid">
+                                    <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
+                                    </span>Sigue tus hábitos, celebra tus éxitos y ajusta lo necesario para mejorar tu bienestar. Con AppBito, cada día es una oportunidad para vivir mejor.
                                 </li>
                             </ul>
                         </div>
                     </div>
                 </section>
-
+                <p id="link1"></p>
                 {/* Section 3 --> */}
-                <section id="link1" className="text-gray-700 body-font">
+                <section  className="text-gray-700 body-font">
                     <div className="container bg-[#516BE7] rounded-5 px-5 py-12 mx-auto">
-                        <div className="flex flex-wrap w-full mb-12 flex-col items-center text-center">
+                        <div className="flex flex-wrap w-full mb-4 flex-col items-center text-center">
                             <h2 className="sm:text-5xl text-2xl font-medium title-font mb-2 text-[#E8E1D9] font-semibold">Sobre Nosotros</h2>
                         </div>
                         <div className="flex flex-wrap -m-4">
@@ -64,7 +65,7 @@ function LandingPage() {
                                             <path fill="#ffffff" d="M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L64 64C28.7 64 0 92.7 0 128l0 16 0 48L0 448c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-256 0-48 0-16c0-35.3-28.7-64-64-64l-40 0 0-40c0-13.3-10.7-24-24-24s-24 10.7-24 24l0 40L152 64l0-40zM48 192l80 0 0 56-80 0 0-56zm0 104l80 0 0 64-80 0 0-64zm128 0l96 0 0 64-96 0 0-64zm144 0l80 0 0 64-80 0 0-64zm80-48l-80 0 0-56 80 0 0 56zm0 160l0 40c0 8.8-7.2 16-16 16l-64 0 0-56 80 0zm-128 0l0 56-96 0 0-56 96 0zm-144 0l0 56-64 0c-8.8 0-16-7.2-16-16l0-40 80 0zM272 248l-96 0 0-56 96 0 0 56z" /></svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Calendario</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Nuestro calendario muestra los días en los que has completado algún hábito, permitiéndote ver cómo evolucionas y celebrando cada paso hacia el cambio.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -76,7 +77,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Autoseguimiento</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Ofrecemos una función de autoseguimiento que destaca tus logros diarios, ayudándote a visualizar tu progreso y mantener la motivación para alcanzar tus metas.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -84,11 +85,10 @@ function LandingPage() {
                                     <div className="w-10 h-10 inline-flex items-center justify-center rounded-full bg-[#0E28C0] text-[#E8E1D9] mb-4">
                                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
                                             className="w-6 h-6">
-                                            <path fill="#ffffff" d="M208 352c114.9 0 208-78.8 208-176S322.9 0 208 0S0 78.8 0 176c0 38.6 14.7 74.3 39.6 103.4c-3.5 9.4-8.7 17.7-14.2 24.7c-4.8 6.2-9.7 11-13.3 14.3c-1.8 1.6-3.3 2.9-4.3 3.7c-.5 .4-.9 .7-1.1 .8l-.2 .2s0 0 0 0s0 0 0 0C1 327.2-1.4 334.4 .8 340.9S9.1 352 16 352c21.8 0 43.8-5.6 62.1-12.5c9.2-3.5 17.8-7.4 25.2-11.4C134.1 343.3 169.8 352 208 352zM448 176c0 112.3-99.1 196.9-216.5 207C255.8 457.4 336.4 512 432 512c38.2 0 73.9-8.7 104.7-23.9c7.5 4 16 7.9 25.2 11.4c18.3 6.9 40.3 12.5 62.1 12.5c6.9 0 13.1-4.5 15.2-11.1c2.1-6.6-.2-13.8-5.8-17.9c0 0 0 0 0 0s0 0 0 0l-.2-.2c-.2-.2-.6-.4-1.1-.8c-1-.8-2.5-2-4.3-3.7c-3.6-3.3-8.5-8.1-13.3-14.3c-5.5-7-10.7-15.4-14.2-24.7c24.9-29 39.6-64.7 39.6-103.4c0-92.8-84.9-168.9-192.6-175.5c.4 5.1 .6 10.3 .6 15.5z" />                                            <circle cx="12" cy="7" r="4"></circle>
-                                        </svg>
-                                    </div>
-                                    <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Comunidad</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                            <path fill="#ffffff" d="M353.8 54.1L330.2 6.3c-3.9-8.3-16.1-8.6-20.4 0L286.2 54.1l-52.3 7.5c-9.3 1.4-13.3 12.9-6.4 19.8l38 37-9 52.1c-1.4 9.3 8.2 16.5 16.8 12.2l46.9-24.8 46.6 24.4c8.6 4.3 18.3-2.9 16.8-12.2l-9-52.1 38-36.6c6.8-6.8 2.9-18.3-6.4-19.8l-52.3-7.5zM256 256c-17.7 0-32 14.3-32 32l0 192c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-192c0-17.7-14.3-32-32-32l-128 0zM32 320c-17.7 0-32 14.3-32 32L0 480c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-128c0-17.7-14.3-32-32-32L32 320zm416 96l0 64c0 17.7 14.3 32 32 32l128 0c17.7 0 32-14.3 32-32l0-64c0-17.7-14.3-32-32-32l-128 0c-17.7 0-32 14.3-32 32z"/></svg>                                    
+                                            </div>
+                                    <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Rachas</h2>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Sección dedicada a tus rachas de hábitos, donde podrás ver el registro de tus habitos continuos y el esfuerzo constante que has invertido en completarlos todos.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -100,7 +100,7 @@ function LandingPage() {
                                             </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Historial</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base"> Nuestra herramienta te muestra los días en los que has completado algún hábito, creando un historial que te permite visualizar tu progreso y evaluar cómo has avanzado con el tiempo.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -112,7 +112,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Consejos Diarios</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Brindamos consejos diarios personalizados que te inspiran a mantenerte en el camino correcto, ayudándote a lograr tus metas y a mejorar cada día, pudiendo obtener ideas de tu nuevo hábito objetivo.</p>
                                 </div>
                             </div>
                             <div className="xl:w-1/3 md:w-1/2 p-4">
@@ -124,7 +124,7 @@ function LandingPage() {
                                         </svg>
                                     </div>
                                     <h2 className="text-lg text-gray-900 font-medium title-font mb-2">Uso Sencillo</h2>
-                                    <p className="leading-relaxed text-base">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
+                                    <p style={{color: "black"}} className="leading-relaxed text-base">Una experiencia sencilla y agradable para que alcanzar tus metas sea más fácil. Una app intuitiva, lo que te permite enfocarte en lo que realmente importa construir hábitos que transformen tu vida.</p>
                                 </div>
                             </div>
                         </div>
@@ -142,7 +142,7 @@ function LandingPage() {
                             <div className="lg:mx-2 mb-4 flex flex-col items-center">
                                 <div className="flex-1 flex w-full max-w-sm pt-16 lg:pt-0">
                                     <div className="border-2 border-[#B2AAA0] bg-[#E8E1D9] w-full p-8 sm:p-12 lg:px-8 xl:px-12 shadow-lg rounded relative">
-                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Diseño</div>
+                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Backend</div>
                                         <div>
                                             <div className="flex justify-between mt-6 text-xs font-bold">
                                                 <div className="flex items-start">
@@ -181,7 +181,7 @@ function LandingPage() {
                             <div className="lg:mx-2 mb-4 flex flex-col items-center">
                                 <div className="flex-1 flex w-full max-w-sm pt-16 lg:pt-0">
                                     <div className="border-2 border-[#B2AAA0] bg-[#E8E1D9] w-full p-8 sm:p-12 lg:px-8 xl:px-12 shadow-lg rounded relative">
-                                        <div className="text-lg font-bold text-gray-700 leading-tight">Backend y Agua</div>
+                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Backend </div>
                                         <div>
                                             <div className="flex justify-between mt-6 text-xs font-bold">
                                                 <div className="flex items-start">
@@ -220,7 +220,7 @@ function LandingPage() {
                             <div className="lg:mx-2 mb-4 flex flex-col items-center">
                                 <div className="flex-1 flex w-full max-w-sm pt-16 lg:pt-0">
                                     <div className="border-2 border-[#B2AAA0] bg-[#E8E1D9] w-full p-8 sm:p-12 lg:px-8 xl:px-12 shadow-lg rounded relative">
-                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y BDD</div>
+                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Backend</div>
                                         <div>
                                             <div className="flex justify-between mt-6 text-xs font-bold">
                                                 <div className="flex items-start">
@@ -259,7 +259,7 @@ function LandingPage() {
                             <div className="lg:mx-2 mb-4 flex flex-col items-center">
                                 <div className="flex-1 flex w-full max-w-sm pt-16 lg:pt-0">
                                     <div className="border-2 border-[#B2AAA0] bg-[#E8E1D9] w-full p-8 sm:p-12 lg:px-8 xl:px-12 shadow-lg rounded relative">
-                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Cosas</div>
+                                        <div className="text-lg font-bold text-gray-700 leading-tight">Frontend y Backend</div>
                                         <div>
                                             <div className="flex justify-between mt-6 text-xs font-bold">
                                                 <div className="flex items-start">
