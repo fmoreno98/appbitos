@@ -1,48 +1,43 @@
-import { useParams } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { iconos } from "./fontawesome.js";
 import React, { useState, useEffect, useContext } from "react";
 import LoginContext from "./LoginContext";
 import BotonCompletar from "./BotonCompletar.jsx";
 import FormEditar from "./FormEditarHabito.jsx";
-import { obtenerFrecuencia } from "./tools/api.js";
-
+import CalendarioEspecifico from "./CalendarioEspecifico.jsx"; // Importar el componente de Calendario
+import HabitoEstadistica from "./HabitoEstadistica.jsx";
 import "./Habito.css";
 
-function Habito(props) {
+function Habito() {
     const navigate = useNavigate();
     const { idHabito } = useParams();
     const { user, token } = useContext(LoginContext);
-    const [habitos, setHabitos] = useState([]);
     const [nombre, setNombre] = useState("");
     const [descripcion, setDescripcion] = useState("");
     const [tipoHabito, setTipoHabito] = useState(1);
     const [iconoHabito, setIconoHabito] = useState("");
     const [progreso, setProgreso] = useState(0);
-    const [frecuencia, setFrecuencia] = useState(0);
+    const [frecuencia, setFrecuencia] = useState(1);
     const [refrescar, setRefrescar] = useState(0);
     const [progress, setProgress] = useState(0);
-    const [showModal, setShowModal] = useState(false);
-    let seguimiento = 0;
-    let habito = null;
-    let nomTipoHabito = "";
 
     useEffect(() => {
-        if(!user) {
+        if (!user) {
             navigate("/login");
         }
+
         async function obtenerHabitos() {
-            const res = await fetch("http://localhost:3000/api/habitos/" + idHabito, {
+            const res = await fetch(`http://localhost:3000/api/habitos/${idHabito}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                     Authorization: token,
                 },
             });
-            let data = await res.json();
-            habito = data.data;
+            const data = await res.json();
+            const habito = data.data;
 
             setNombre(habito.nombre_habito);
             setDescripcion(habito.descripcion);
@@ -50,12 +45,10 @@ function Habito(props) {
             setFrecuencia(habito.frecuencia);
             setIconoHabito(habito.icono_habito);
         }
+
         async function obtenerProgreso() {
             try {
-                // Obtener el día de hoy en formato 'YYYY-MM-DD'
                 const fecha = new Date().toISOString().slice(0, 10);
-
-                // Realizar la solicitud al servidor
                 const res = await fetch(
                     `http://localhost:3000/api/seguimientoHabitos/${fecha}/${idHabito}`,
                     {
@@ -67,23 +60,14 @@ function Habito(props) {
                     }
                 );
 
-                // Verificar si la respuesta fue exitosa
                 if (!res.ok) {
                     throw new Error(`Error en la solicitud: ${res.statusText}`);
                 }
 
-                // Parsear la respuesta a JSON
                 const data = await res.json();
-
-                // Asignar el seguimiento al valor recibido o establecerlo a un objeto vacío si no existe
                 const seguimiento = data.data || {};
-
-                // Establecer el progreso usando el valor de progreso o 0 si no está disponible
                 setProgreso(seguimiento.progreso || 0);
-                console.log("seguimiento: ", seguimiento.progreso);
-                console.log("progreso: ", progreso);
             } catch (error) {
-                // Manejo de errores: loguear el error o manejarlo de otra manera
                 console.error("Error al obtener el progreso:", error);
             }
         }
@@ -100,87 +84,64 @@ function Habito(props) {
                 porcentaje = (progreso / frecuencia) * 100;
             }
             setProgress(porcentaje);
-            console.log("porcentaje: ", porcentaje);
-            console.log("progresssss: ", progress);
         };
 
         actualizarProgreso();
     }, [progreso, frecuencia]);
 
-    if (tipoHabito == 1) {
-        nomTipoHabito = "Avance Gradual";
-    }
-    if (tipoHabito == 2) {
-        nomTipoHabito = "Acciones";
-    }
-    if (tipoHabito == 3) {
-        nomTipoHabito = "Cumplimiento";
-    }
-
-    function refresca() {
+    const refresca = () => {
         setRefrescar(refrescar + 1);
-    }
+    };
+
+    let nomTipoHabito = "";
+    if (tipoHabito === 1) nomTipoHabito = "Avance Gradual";
+    if (tipoHabito === 2) nomTipoHabito = "Acciones";
+    if (tipoHabito === 3) nomTipoHabito = "Cumplimiento";
 
     return (
-        <>
-            <Container>
-                <br />
-                <Row>
-                    <Col className="">
-                        <Row className="justify-content-left">
-                            <FormEditar refresca={refresca} idHabito={idHabito} />
-                        </Row>
-                        <Row className="justify-content-center">
-                            <div
-                                className="circular-progress"
-                                style={{ width: "250px", height: "250px" }}
-                            >
-                                <div className="circular-progress__circle">
-                                    <svg viewBox="0 0 36 36" className="circular-chart">
-                                        <path
-                                            className="circle-bg"
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                        <path
-                                            className="circle"
-                                            strokeDasharray={`${progress}, 100`}
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                    </svg>
-                                    <div className="circular-progress__text">
-                                        <div className="proFreq text-center">
-                                            {progreso}/{frecuencia}
+        <Container>
+            <Row>
+                <Col md={6}>
+                    <div className="infoHabit">
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="6">
+                                <h2>{nombre}</h2>
+                                <h4>{descripcion}</h4>
+                                <h4>{nomTipoHabito}</h4>
+                                <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
+                                    <div className="circular-progress__circle">
+                                        <svg viewBox="0 0 36 36" className="circular-chart">
+                                            <path
+                                                className="circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                            <path
+                                                className="circle"
+                                                strokeDasharray={`${progress}, 100`}
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                        </svg>
+                                        <div className="circular-progress__text">
+                                            <FontAwesomeIcon icon={iconos[iconoHabito]} size="6x" style={{ color: "#0E28C0" }} />
                                         </div>
-                                        <FontAwesomeIcon
-                                            icon={iconos[iconoHabito]}
-                                            size="6x"
-                                            style={{ color: "#0E28C0" }}
-                                        />
                                     </div>
                                 </div>
-                            </div>
-                        </Row>
-                        <Row className="text-center">
-                            <h2>{nombre}</h2>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{descripcion}</h4>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{nomTipoHabito}</h4>
+                            </Col>
                         </Row>
                         <Row className="justify-content-center">
                             <BotonCompletar idHabito={idHabito} refresca={refresca} />
                         </Row>
-                    </Col>
-                    <Col className="bg-light"></Col>
-                </Row>
-            </Container>
-        </>
+                        <Row className="justify-content-center">
+                            <FormEditar idHabito={idHabito} refresca={refresca} />
+                        </Row>
+                    </div>
+                </Col>
+                <Col md={6}>
+                    <CalendarioEspecifico idHabito={idHabito} />
+                    <HabitoEstadistica idHabito={idHabito} />
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
