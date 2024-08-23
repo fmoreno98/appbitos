@@ -45,10 +45,10 @@ const login = (email, password) => {
       .then(response => response.json())
       .catch(error => []);
   }
-  const habitoGraph = (id, habito_id) => {
+  const habitoGraph = (id, habito_id, token) => {
     const requestOptions = {
       method: 'GET',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', authorization: token },
     };
     return fetch(API_URL + "/estadisticas/progreso/"+id+"/"+habito_id, requestOptions)
       .then(response => response.json())

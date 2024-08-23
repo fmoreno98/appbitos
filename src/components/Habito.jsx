@@ -6,6 +6,7 @@ import { iconos } from './fontawesome.js';
 import LoginContext from './LoginContext';
 import FormEditar from './FormEditarHabito.jsx';
 import CalendarioEspecifico from './CalendarioEspecifico.jsx'; // Importar el componente de Calendario
+import HabitoEstadistica from './HabitoEstadistica.jsx';
 import './Habito.css';
 
 function Habito() {
@@ -104,6 +105,7 @@ function Habito() {
                 </Col>
                 <Col md={6}>
                     <CalendarioEspecifico idHabito={idHabito} /> {/* Incluir el componente de calendario */}
+                    <HabitoEstadistica idHabito={idHabito} />
                 </Col>
             </Row>
         </Container>

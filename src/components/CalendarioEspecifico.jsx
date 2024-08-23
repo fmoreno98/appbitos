@@ -24,22 +24,17 @@ const CalendarioEspecifico = (idHabito) => {
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [completionStatus, setCompletionStatus] = useState({});
   const { user,token } = useContext(LoginContext);
-  const [selectedDay, setSelectedDay] = useState(null);
 
   const fetchCompletionStatus = async (month, year) => {
     try {
       const userId = user;
-      const data = await historialHabito(userId, idHabito, token, month, year);
-      console.log(userId, idHabito, token, month, year);
-      console.log('Data from API:', data);
+      const data = await historialHabito(userId, idHabito.idHabito, token, month, year);
       
       const statusMap = data.reduce((acc, { fecha, estado_retos }) => {
-        console.log(`Processing Date: ${fecha}, Estado: ${estado_retos}`);
         acc[fecha] = estado_retos === 'Completado';
         return acc;
       }, {});
   
-      console.log('Status Map:', statusMap);
       setCompletionStatus(statusMap);
     } catch (error) {
       console.error('Error fetching completion status:', error);
@@ -118,7 +113,6 @@ const CalendarioEspecifico = (idHabito) => {
                 isEmpty={false}
                 isCompleted={isCompleted}
                 isFuture={isFuture}
-                onClick={() => setSelectedDay(day)}
             />
         );
     }

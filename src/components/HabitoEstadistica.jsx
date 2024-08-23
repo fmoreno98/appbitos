@@ -4,9 +4,8 @@ import { AgCharts } from 'ag-charts-react';
 import { habitoGraph } from './tools/api';
 import LoginContext from './LoginContext';
 
-const HabitoEstadistica = () => {
-  const { user } = useContext(LoginContext); // Obtener el usuario del contexto
-
+const HabitoEstadistica = (idHabito) => {
+  const { user,token } = useContext(LoginContext); // Obtener el usuario del contexto
   const [fechas, setFechas] = useState([]);
   const [chartOptions, setChartOptions] = useState({
     data: [],
@@ -36,7 +35,7 @@ const HabitoEstadistica = () => {
 
   useEffect(() => {
     if (fechas.length === 7 && user) { 
-      habitoGraph(user, 39).then(data => {
+      habitoGraph(user, idHabito.idHabito, token).then(data => {
         const formattedData = fechas.map(fecha => {
           const fechaData = data.find(d => {
             const date = new Date(d.fecha);
