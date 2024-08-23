@@ -25,12 +25,12 @@ function BotonCompletar(props) {
         });
         let data = await res.json()
         setProgreso(data.data.progreso)
-        setExiste(data.data.progreso)
+        setExiste(data.data)
     }
 
     async function handleSubmit1(e) {
         e.preventDefault();
-        if (existe != 0) {
+        if (existe) {
             const res = await fetch('http://localhost:3000/api/seguimientoHabitos/' + fecha + '/' + idHabito, {
                 method: 'PUT',
                 headers: {
