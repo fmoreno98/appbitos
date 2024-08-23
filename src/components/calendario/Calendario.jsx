@@ -18,7 +18,7 @@ const formatTwoDigits = (number) => {
   return number < 10 ? `0${number}` : number;
 };
 
-const Calendario = () => {
+const Calendario = ({refresh}) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [completionStatus, setCompletionStatus] = useState({});
@@ -46,7 +46,7 @@ const Calendario = () => {
 
   useEffect(() => {
     fetchCompletionStatus(currentMonth, currentYear);
-  }, [user, currentMonth, currentYear]);
+  }, [user, currentMonth, currentYear, refresh]);
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {

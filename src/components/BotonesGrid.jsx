@@ -8,7 +8,7 @@ import LoginContext from './LoginContext';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { obtenerProgreso, obtenerFrecuencia } from './tools/api';
 
-const BotonesGrid = () => {
+const BotonesGrid = (props) => {
     const [buttons, setButtons] = useState([]);
     const [progress, setProgress] = useState(0);
     const [habitos, setHabitos] = useState([]);
@@ -64,6 +64,7 @@ const BotonesGrid = () => {
 
       function refresca(){
         setRefrescar(refrescar+1)
+        props.setRefresh(refrescar+1)
       }
 
     return (
