@@ -99,15 +99,15 @@ function Habito() {
     if (tipoHabito === 3) nomTipoHabito = "Cumplimiento";
 
     return (
-        <Container>
+        <Container style={{ marginTop: "20px" }}>
+            <Row className="justify-content-center">
+                <FormEditar idHabito={idHabito} refresca={refresca} />
+            </Row>
             <Row>
                 <Col md={6}>
                     <div className="infoHabit">
                         <Row className="justify-content-md-center">
                             <Col xs lg="6">
-                                <h2>{nombre}</h2>
-                                <h4>{descripcion}</h4>
-                                <h4>{nomTipoHabito}</h4>
                                 <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
                                     <div className="circular-progress__circle">
                                         <svg viewBox="0 0 36 36" className="circular-chart">
@@ -122,17 +122,22 @@ function Habito() {
                                             />
                                         </svg>
                                         <div className="circular-progress__text">
+                                            <div className="proFreq text-center">
+                                                {progreso}/{frecuencia}
+                                            </div>
                                             <FontAwesomeIcon icon={iconos[iconoHabito]} size="6x" style={{ color: "#0E28C0" }} />
                                         </div>
                                     </div>
                                 </div>
+                                <Row className="text-center">
+                                    <h2>{nombre}</h2>
+                                    <h4>{descripcion}</h4>
+                                    <h4>{nomTipoHabito}</h4>
+                                </Row>
                             </Col>
-                        </Row>
-                        <Row className="justify-content-center">
-                            <BotonCompletar idHabito={idHabito} refresca={refresca} />
-                        </Row>
-                        <Row className="justify-content-center">
-                            <FormEditar idHabito={idHabito} refresca={refresca} />
+                            <Row>
+                                <BotonCompletar idHabito={idHabito} refresca={refresca} />
+                            </Row>
                         </Row>
                     </div>
                 </Col>

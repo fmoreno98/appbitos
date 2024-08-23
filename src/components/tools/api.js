@@ -49,15 +49,6 @@ const eliminarHabito = (id, token) => {
     .then(response => response.json())
     .catch(error => []);
 }
-const estadisticas = (id, token) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: token },
-  };
-  return fetch(API_URL + "/estadisticas/countByDate/" + id, requestOptions)
-    .then(response => response.json())
-    .catch(error => []);
-}
 
 const historial = (id, token) => {
   const requestOptions = {
