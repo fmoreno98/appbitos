@@ -1,7 +1,7 @@
 import React from 'react';
 import './BotonCalendarioEspecifico.css';
 
-const BotonCalendarioEspecifico = ({ day, isVacio, isPreviousMonth, isNextMonth, isCompleted, isNotCompleted, isFuture, onClick }) => {
+const BotonCalendarioEspecifico = ({ day, isVacio, isPreviousMonth, isNextMonth, isCompleted, isNotCompleted, isAfterCreation, isFuture, onClick }) => {
   let BotonCalendarioClass = 'BotonCalendario';
 
   // Aplica estilos condicionales según el estado
@@ -21,6 +21,9 @@ const BotonCalendarioEspecifico = ({ day, isVacio, isPreviousMonth, isNextMonth,
     BotonCalendarioClass += ' not-completed';  // Clase para días no completados
   }
 
+  if (isAfterCreation) {
+    BotonCalendarioClass += ' after-creation';
+  }
   return (
     <div className={BotonCalendarioClass} onClick={onClick}>
       <div className="day-number">{day}</div>  {/* Mostrar el número del día */}

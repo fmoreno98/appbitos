@@ -30,6 +30,11 @@
   color: #ccc;
 }
 
+.BotonCalendario.after-creation{
+  background-color: red;
+  color: black;
+}
+
 /* Estado completado */
 .BotonCalendario.completed {
   background-color: green;

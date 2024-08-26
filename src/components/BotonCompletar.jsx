@@ -120,7 +120,7 @@ function BotonCompletar(props) {
                                 <br />
                                 {(progreso === 0) ?
                                     <button className="btn btn-completar" onClick={() => setProgreso(1)} style={{ width: '160px', fontSize: '20px', marginTop: "10px" }}>Completar</button>
-                                    : <button className="btn btn-completar" onClick={() => setProgreso(0)} style={{ width: '160px', fontSize: '20px', marginTop: "10px" }}>Desompletar</button>
+                                    : <button className="btn btn-completar" onClick={() => setProgreso(0)} style={{ width: '160px', fontSize: '20px', marginTop: "10px" }}>Descompletar</button>
                                 }
                             </Form.Group>
                         )}

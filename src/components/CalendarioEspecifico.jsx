@@ -22,8 +22,8 @@ const formatTwoDigits = (number) => {
 const CalendarioEspecifico = (idHabito) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
-  const [completionStatus, setCompletionStatus] = useState({});
-  const { user,token } = useContext(LoginContext);
+  const [completionStatus, setCompletionStatus] = useState({ statusMap: {}, creationDate: new Date() });
+  const { user, token } = useContext(LoginContext);
 
   const fetchCompletionStatus = async (month, year) => {
     try {
@@ -34,17 +34,19 @@ const CalendarioEspecifico = (idHabito) => {
         acc[fecha] = estado_retos === 'Completado';
         return acc;
       }, {});
-  
-      setCompletionStatus(statusMap);
+
+      // Supongamos que la fecha de creación está en el primer elemento de la respuesta
+      const creationDate = data[0]?.fecha; // O ajusta según cómo obtengas la fecha de creación
+
+      setCompletionStatus({ statusMap, creationDate: new Date(creationDate) });
     } catch (error) {
       console.error('Error fetching completion status:', error);
     }
   };
-  
 
   useEffect(() => {
     fetchCompletionStatus(currentMonth, currentYear);
-  }, [user,idHabito, currentMonth, currentYear]);
+  }, [user, idHabito, currentMonth, currentYear]);
 
   const handlePreviousMonth = () => {
     if (currentMonth === 0) {
@@ -82,48 +84,51 @@ const CalendarioEspecifico = (idHabito) => {
 
     const today = new Date();
     const isCurrentMonthAndYear = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
+    const creationDate = new Date(completionStatus.creationDate || today); // Manejo de fecha de creación
 
     // Generar días del mes anterior
     for (let i = 0; i < adjustedFirstDay; i++) {
-        const date = `${previousYear}-${formatTwoDigits(previousMonth + 1)}-${formatTwoDigits(prevMonthDays - (adjustedFirstDay - i - 1))}`;
-        const isCompleted = completionStatus[date] || false;
-        days.push(
-            <BotonCalendarioEspecifico
-                key={`empty-start-${i}`}
-                day={prevMonthDays - (adjustedFirstDay - i - 1)}
-                isVacio={false}
-                isPreviousMonth={true}
-                isCompleted={isCompleted}
-            />
-        );
+      const date = new Date(previousYear, previousMonth, prevMonthDays - (adjustedFirstDay - i - 1));
+      const formattedDate = `${date.getFullYear()}-${formatTwoDigits(date.getMonth() + 1)}-${formatTwoDigits(date.getDate())}`;
+      const isCompleted = completionStatus.statusMap?.[formattedDate] || false;
+      const isAfterCreation = date >= creationDate && date <= today;
+
+      days.push(
+        <BotonCalendarioEspecifico
+          key={`empty-start-${i}`}
+          day={prevMonthDays - (adjustedFirstDay - i - 1)}
+          isVacio={false}
+          isPreviousMonth={true}
+          isCompleted={isCompleted}
+          isAfterCreation={isAfterCreation}
+        />
+      );
     }
 
-// Generar días del mes actual
-for (let day = 1; day <= daysInMonth; day++) {
-  const date = `${currentYear}-${formatTwoDigits(currentMonth + 1)}-${formatTwoDigits(day)}`;
+    // Generar días del mes actual
+    for (let day = 1; day <= daysInMonth; day++) {
+      const date = new Date(currentYear, currentMonth, day);
+      const formattedDate = `${date.getFullYear()}-${formatTwoDigits(date.getMonth() + 1)}-${formatTwoDigits(date.getDate())}`;
 
-  // Verifica si el día tiene datos de estado (completado o no completado)
-  const hasStatus = completionStatus.hasOwnProperty(date);
-  const isCompleted = hasStatus && completionStatus[date] === true;
-  const isNotCompleted = hasStatus && completionStatus[date] === false;
-  const isVacio = !hasStatus;  // Si no hay datos, se considera "empty"
-  const isFuture = isCurrentMonthAndYear && day > today.getDate();
+      const hasStatus = completionStatus.statusMap?.hasOwnProperty(formattedDate); // Usa el operador de encadenamiento opcional
+      const isCompleted = hasStatus && completionStatus.statusMap[formattedDate] === true;
+      const isNotCompleted = hasStatus && completionStatus.statusMap[formattedDate] === false;
+      const isVacio = !hasStatus;  // Si no hay datos, se considera "empty"
+      const isFuture = isCurrentMonthAndYear && day > today.getDate();
+      const isAfterCreation = date >= creationDate && date <= today;
 
-  days.push(
-    <BotonCalendarioEspecifico
-      key={`day-${day}`}
-      day={day}
-      isVacio={isVacio}
-      isCompleted={isCompleted}
-      isNotCompleted={isNotCompleted}
-      isFuture={isFuture}
-    />
-  );
-  console.log(`Rendering day ${day} - isVacio: ${isVacio}, isCompleted: ${isCompleted}, isNotCompleted: ${isNotCompleted}`);
-
-}
-
-
+      days.push(
+        <BotonCalendarioEspecifico
+          key={`day-${day}`}
+          day={day}
+          isVacio={isVacio}
+          isCompleted={isCompleted}
+          isNotCompleted={isNotCompleted}
+          isFuture={isFuture}
+          isAfterCreation={isAfterCreation}
+        />
+      );
+    }
 
     // Generar días del próximo mes
     const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
@@ -131,34 +136,34 @@ for (let day = 1; day <= daysInMonth; day++) {
 
     const remainingDays = 42 - days.length;
     for (let i = 0; i < remainingDays; i++) {
-        const date = `${nextYear}-${formatTwoDigits(nextMonth + 1)}-${formatTwoDigits(i + 1)}`;
-        const isCompleted = completionStatus[date] || false;
+      const date = new Date(nextYear, nextMonth, i + 1);
+      const formattedDate = `${date.getFullYear()}-${formatTwoDigits(date.getMonth() + 1)}-${formatTwoDigits(date.getDate())}`;
+      const isCompleted = completionStatus.statusMap?.[formattedDate] || false;
+      const isAfterCreation = date >= creationDate && date <= today;
 
-        days.push(
-            <BotonCalendarioEspecifico
-                key={`empty-end-${i}`}
-                day={i + 1}
-                isVacio={false}
-                isNextMonth={true}
-                isCompleted={isCompleted}
-            />
-        );
+      days.push(
+        <BotonCalendarioEspecifico
+          key={`empty-end-${i}`}
+          day={i + 1}
+          isVacio={false}
+          isNextMonth={true}
+          isCompleted={isCompleted}
+          isAfterCreation={isAfterCreation}
+        />
+      );
     }
 
     return (
-        <div className="month">
-            <div className="days-of-week">
-            {daysOfWeek.map(day => <div key={day} className="day-name">{day}</div>)}
-            </div>
-            <div className="days">
-                {days}
-            </div>
+      <div className="month">
+        <div className="days-of-week">
+          {daysOfWeek.map(day => <div key={day} className="day-name">{day}</div>)}
         </div>
+        <div className="days">
+          {days}
+        </div>
+      </div>
     );
-};
-
-  
-  
+  };
 
   const today = new Date();
   const isNextDisabled = currentMonth === today.getMonth() && currentYear === today.getFullYear();
