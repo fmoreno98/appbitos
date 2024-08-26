@@ -213,6 +213,102 @@ function FormEditar(props) {
         after.style.opacity = 1;
     };
 
+
+    // Añadir estilos y keyframes para el wiggle en un objeto
+    const keyframes = `
+@keyframes wiggle {
+  0% {transform: translate(0,0) rotate(45deg);}
+  25% {transform: translate(0,0) rotate(25deg);}
+  50% {transform: translate(0,0) rotate(45deg);}
+  75% {transform: translate(0,0) rotate(65deg);}
+  100% {transform: translate(0,0) rotate(45deg);}
+}
+`;
+
+    // Inyectar los keyframes en el documento
+    const styleSheet = document.styleSheets[0];
+    styleSheet.insertRule(keyframes, styleSheet.cssRules.length);
+
+    // Estilos para el botón
+    const editButtonStyles = {
+        width: '75px',
+        height: '75px',
+        backgroundColor: '#2F49D4',
+        border: 'none',
+        borderRadius: '50%',
+        color: '#fff',
+        cursor: 'pointer',
+        fontSize: '25px',
+        lineHeight: '40px',
+        outline: 'none',
+        padding: '0',
+        paddingRight: '10px',
+        position: 'relative',
+        transition: 'background 0.4s',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    };
+
+    const editIconStyles = {
+        height: '65px',
+        width: '65px',
+    };
+
+    const editIconBeforeStyles = {
+        border: '3px solid #fff',
+        borderRadius: '3px',
+        content: '""',
+        display: 'inline-block',
+        height: '50%',
+        left: '50%',
+        position: 'absolute',
+        top: '50%',
+        width: '50%',
+        transform: 'translate(-50%, -50%)',
+    };
+
+    const editIconAfterStyles = {
+        backgroundColor: '#2F49D4',
+        border: '2px solid #fff',
+        borderBottomLeftRadius: '5px 15px',
+        borderBottomRightRadius: '5px 15px',
+        borderTopLeftRadius: '3px',
+        borderTopRightRadius: '3px',
+        boxShadow: '0 0 0 2px #2F49D4',
+        content: '""',
+        display: 'inline-block',
+        height: '55%',
+        position: 'absolute',
+        top: '7%',
+        left: '45%',
+        width: '6px',
+        transform: 'rotate(45deg)',
+        transformOrigin: '50% 75%',
+        transition: 'background 0.4s, box-shadow 0.4s',
+    };
+
+    // Evento hover para cambiar estilos
+    const handleEditButtonMouseOver = (event) => {
+        event.currentTarget.style.backgroundColor = '#938A7F';
+        const iconAfter = event.currentTarget.querySelector('.edit-icon-after');
+        if (iconAfter) {
+            iconAfter.style.backgroundColor = '#938A7F';
+            iconAfter.style.boxShadow = '0 0 0 2px #938A7F';
+            iconAfter.style.animation = 'wiggle 0.25s 3 linear';
+        }
+    };
+
+    const handleEditButtonMouseOut = (event) => {
+        event.currentTarget.style.backgroundColor = '#2F49D4';
+        const iconAfter = event.currentTarget.querySelector('.edit-icon-after');
+        if (iconAfter) {
+            iconAfter.style.backgroundColor = '#2F49D4';
+            iconAfter.style.boxShadow = '0 0 0 2px #2F49D4';
+            iconAfter.style.animation = 'none';
+        }
+    };
+
     return (
         <>
             <div style={{ display: 'flex' }}>
@@ -230,9 +326,16 @@ function FormEditar(props) {
                     </a>
                 </div>
 
-                <div onClick={handleShow}>
-                    <button style={styles.btn2}>
-                        <FontAwesomeIcon icon={selectedIcon} size='2x' style={{ color: 'white' }} />
+                <div style={{marginLeft:'450px'}} onClick={handleShow}>
+                    <button
+                        style={editButtonStyles}
+                        onMouseOver={handleEditButtonMouseOver}
+                        onMouseOut={handleEditButtonMouseOut}
+                    >
+                        <span style={editIconStyles}>
+                            <span style={editIconBeforeStyles}></span>
+                            <span className="edit-icon-after" style={editIconAfterStyles}></span>
+                        </span>
                     </button>
                 </div>
             </div>

@@ -9,12 +9,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { obtenerHabitos3 } from "./tools/api";
 
 const BotonesGrid = (props) => {
-  const [buttons, setButtons] = useState([]);
-  const [habitos3, setHabitos3] = useState([]);
-  const [habitos, setHabitos] = useState([]);
-  const [refrescar, setRefrescar] = useState(0);
-  const addButtonRef = useRef(null);
-  const { user, token } = useContext(LoginContext);
+    const [buttons, setButtons] = useState([]);
+    const [progress, setProgress] = useState(0);
+    const [habitos, setHabitos] = useState([]);
+    const [refrescar, setRefrescar] = useState(0)
+    const addButtonRef = useRef(null);
+    const { user, token } = useContext(LoginContext);
 
   // Maneja la adición de un nuevo botón
   const handleAddButton = () => {
@@ -68,10 +68,12 @@ const BotonesGrid = (props) => {
     if (user) obtenerHabitos();
   }, [user, refrescar]);
 
-  function refresca() {
-    setRefrescar(refrescar + 1);
-    props.setRefresh(refrescar + 1);
-  }
+
+      function refresca(){
+        setRefrescar(refrescar+1)
+        props.setRefresh(refrescar+1)
+      }
+
 
   return (
     <Container className="gridBotons">

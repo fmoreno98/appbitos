@@ -11,16 +11,24 @@ const login = (email, password) => {
     .catch(error => []);
 }
 
-const checkToken = (token) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: token },
-  };
-  return fetch(API_URL + "/users/checktoken", requestOptions)
-    .then(response => response.json())
-    .catch(error => []);
-}
-
+  const estadisticas = (id,token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+    return fetch(API_URL + "/estadisticas/countByDate/"+id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
+  const habitoGraph = (id, habito_id, token) => {
+    const requestOptions = {
+      method: 'GET',
+      headers: { 'Content-Type': 'application/json', authorization: token },
+    };
+    return fetch(API_URL + "/estadisticas/progreso/"+id+"/"+habito_id, requestOptions)
+      .then(response => response.json())
+      .catch(error => []);
+  }
 const eliminarHabito = (id, token) => {
   const requestOptions = {
     method: 'DELETE',
@@ -28,26 +36,6 @@ const eliminarHabito = (id, token) => {
     body: JSON.stringify({ id })
   };
   return fetch(API_URL + "/habitos/" + id, requestOptions)
-    .then(response => response.json())
-    .catch(error => []);
-}
-
-const estadisticas = (id, token) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: token },
-  };
-  return fetch(API_URL + "/estadisticas/countByDate/" + id, requestOptions)
-    .then(response => response.json())
-    .catch(error => []);
-}
-
-const habitoGraph = (id, habito_id) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json' },
-  };
-  return fetch(API_URL + "/estadisticas/progreso/" + id + "/" + habito_id, requestOptions)
     .then(response => response.json())
     .catch(error => []);
 }
@@ -82,9 +70,19 @@ const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id, t
   return fetch(API_URL + "/habitos/" + id, requestOptions)
     .then(response => response.json())
     .catch(error => []);
+
 }
 
-const obtenerProgreso = (idHabito, token) => {
+const historialHabito = (id, idHabito, token) => {
+    const requestOptions = {
+    method: 'GET',
+    headers: { 'Content-Type': 'application/json', authorization: token },
+  };
+    return fetch(API_URL + "/estadisticas/historial/habito/"+id+"/"+idHabito, requestOptions)
+    .then(response => response.json())
+    .catch(error => []);
+};
+const obtenerProgreso = (idHabito, token) =>{
   const fecha = new Date().toISOString().slice(0, 10);
   const requestOptions = {
     method: 'GET',
@@ -94,8 +92,7 @@ const obtenerProgreso = (idHabito, token) => {
     .then(response => response.json())
     .catch(error => []);
 }
-
-const obtenerFrecuencia = (idHabito, token) => {
+const obtenerFrecuencia = (idHabito, token) =>{
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', authorization: token },
@@ -116,4 +113,5 @@ export {
   obtenerFrecuencia,
   habitoGraph,
   historial,
+  historialHabito
 }
