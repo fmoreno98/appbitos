@@ -5,6 +5,7 @@ import { iconos } from "./fontawesome.js";
 import React, { useState, useEffect, useContext } from "react";
 import LoginContext from "./LoginContext";
 import BotonCompletar from "./BotonCompletar.jsx";
+import FormEliminar from "./FormEliminarHabito.jsx";
 import FormEditar from "./FormEditarHabito.jsx";
 import CalendarioEspecifico from "./CalendarioEspecifico.jsx"; // Importar el componente de Calendario
 import HabitoEstadistica from "./HabitoEstadistica.jsx";
@@ -136,7 +137,8 @@ function Habito() {
                                 </Row>
                             </Col>
                             <Row className="justify-content-center">
-                                <BotonCompletar idHabito={idHabito} refresca={refresca} />
+                                <Col xs lg="4"><BotonCompletar idHabito={idHabito} refresca={refresca} /></Col>
+                                <Col xs lg="4"><FormEliminar idHabito={idHabito} /></Col>
                             </Row>
                         </Row>
                     </div>

@@ -1,7 +1,7 @@
 import { useEffect, useContext, useState } from 'react';
 import LoginContext from './LoginContext';
 
-const Racha = () => {
+const Racha = ({refresh}) => {
     const { user, token } = useContext(LoginContext);
     const [totalCompleted, setTotalCompleted] = useState(0);
     const [historial, setHistorial] = useState([]);
@@ -60,7 +60,7 @@ const Racha = () => {
         }
 
         if (user) obtenerTotalCompletados();
-    }, [user, token]);
+    }, [user, token,refresh]);
 
     return (
         <div style={styles.container}>

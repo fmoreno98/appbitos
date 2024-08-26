@@ -43,7 +43,6 @@ const eliminarHabito = (id, token) => {
   const requestOptions = {
     method: 'DELETE',
     headers: { 'Content-Type': 'application/json', authorization: token },
-    body: JSON.stringify({ id })
   };
   return fetch(API_URL + "/habitos/" + id, requestOptions)
     .then(response => response.json())
