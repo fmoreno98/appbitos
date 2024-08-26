@@ -109,7 +109,7 @@ function Habito() {
                     <div className="infoHabit">
                         <Row className="justify-content-md-center">
                             <Col xs lg="6">
-                                <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
+                                <div className="circular-progress" style={{ width: "250px", height: "250px", marginLeft:"25px" }}>
                                     <div className="circular-progress__circle">
                                         <svg viewBox="0 0 36 36" className="circular-chart">
                                             <path
