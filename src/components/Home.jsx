@@ -14,8 +14,8 @@ import FormEditarHabito from './FormEditarHabito';
 
 const Home = () => {
     const navigate = useNavigate();
-    const { token,setToken } = useContext(LoginContext);
-
+    const { token, setToken } = useContext(LoginContext);
+    const [refresh, setRefresh] = useState(false);
     useEffect(() => {
         // Comprobar si hay un usuario logueado en localStorage al cargar la aplicación
         const loginfront = localStorage.getItem('loginfront');
@@ -31,11 +31,11 @@ const Home = () => {
             <Container>
                 <Row className='contenedor'>
                     <Col>
-                        <BotonesGrid />
+                        <BotonesGrid setRefresh={setRefresh} />
                     </Col>
                     <Col id=''>
                         <div id='estadisticas'>
-                            <Calendario />
+                            <Calendario refresh={refresh} />
                             <Racha />
                             <Estadisticas />
                         </div>

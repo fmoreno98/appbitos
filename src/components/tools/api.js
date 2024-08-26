@@ -84,25 +84,25 @@ const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id, t
     .catch(error => []);
 }
 
-const obtenerProgreso = (idHabito, token) =>{
+const obtenerProgreso = (idHabito, token) => {
   const fecha = new Date().toISOString().slice(0, 10);
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', authorization: token },
   };
   return fetch(API_URL + "/seguimientoHabitos/" + fecha + "/" + idHabito, requestOptions)
-  .then(response => response.json())
-  .catch(error => []);
+    .then(response => response.json())
+    .catch(error => []);
 }
 
-const obtenerFrecuencia = (idHabito, token) =>{
+const obtenerFrecuencia = (idHabito, token) => {
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', authorization: token },
   };
   return fetch(API_URL + "/habitos/" + idHabito, requestOptions)
-  .then(response => response.json())
-  .catch(error => console.log(error));
+    .then(response => response.json())
+    .catch(error => console.log(error));
 }
 
 export {
@@ -115,5 +115,5 @@ export {
   obtenerProgreso,
   obtenerFrecuencia,
   habitoGraph,
-  historial
+  historial,
 }
