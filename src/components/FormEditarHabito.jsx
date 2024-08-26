@@ -326,7 +326,7 @@ function FormEditar(props) {
                     </a>
                 </div>
 
-                <div style={{marginLeft:'450px'}} onClick={handleShow}>
+                <div style={{marginLeft:'30%'}} onClick={handleShow}>
                     <button
                         style={editButtonStyles}
                         onMouseOver={handleEditButtonMouseOver}
