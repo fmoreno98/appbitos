@@ -1,134 +1,154 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useParams } from "react-router-dom";
-import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { iconos } from './fontawesome.js';
-import LoginContext from './LoginContext';
-import FormEditar from './FormEditarHabito.jsx';
-import './Habito.css';
+import { useParams, useNavigate } from "react-router-dom";
+import { Container, Row, Col, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { iconos } from "./fontawesome.js";
+import React, { useState, useEffect, useContext } from "react";
+import LoginContext from "./LoginContext";
+import BotonCompletar from "./BotonCompletar.jsx";
+import FormEliminar from "./FormEliminarHabito.jsx";
+import FormEditar from "./FormEditarHabito.jsx";
+import CalendarioEspecifico from "./CalendarioEspecifico.jsx"; // Importar el componente de Calendario
+import HabitoEstadistica from "./HabitoEstadistica.jsx";
+import "./Habito.css";
 
 function Habito() {
+    const navigate = useNavigate();
     const { idHabito } = useParams();
     const { user, token } = useContext(LoginContext);
-    const [refrescar, setRefrescar] = useState(0)
-    const [nombre, setNombre] = useState('');
-    const [descripcion, setDescripcion] = useState('');
+    const [nombre, setNombre] = useState("");
+    const [descripcion, setDescripcion] = useState("");
     const [tipoHabito, setTipoHabito] = useState(1);
+    const [iconoHabito, setIconoHabito] = useState("");
     const [progreso, setProgreso] = useState(0);
-    const [frecuencia, setFrecuencia] = useState(0);
-    const [showModal, setShowModal] = useState(false);
-
-    let nomTipoHabito = '';
+    const [frecuencia, setFrecuencia] = useState(1);
+    const [refrescar, setRefrescar] = useState(0);
+    const [progress, setProgress] = useState(0);
 
     useEffect(() => {
+        if (!user) {
+            navigate("/login");
+        }
+
         async function obtenerHabitos() {
-            const options = {
-                method: 'GET',
+            const res = await fetch(`http://localhost:3000/api/habitos/${idHabito}`, {
+                method: "GET",
                 headers: {
-                    'Content-Type': 'application/json',
-                    'authorization': token
+                    "Content-Type": "application/json",
+                    Authorization: token,
                 },
-            };
-            const res = await fetch('http://localhost:3000/api/habitos/' + idHabito, options);
-            let data = await res.json();
-            let habito = data.data;
+            });
+            const data = await res.json();
+            const habito = data.data;
 
             setNombre(habito.nombre_habito);
             setDescripcion(habito.descripcion);
             setTipoHabito(habito.tipo_habito);
             setFrecuencia(habito.frecuencia);
+            setIconoHabito(habito.icono_habito);
         }
 
         async function obtenerProgreso() {
-            const fecha = new Date().toISOString().slice(0, 10);
-            const res = await fetch('http://localhost:3000/api/seguimientoHabitos/' + fecha + '/' + idHabito);
-            let data = await res.json();
-            let seguimiento = data.data;
-            setProgreso(seguimiento.progreso);
+            try {
+                const fecha = new Date().toISOString().slice(0, 10);
+                const res = await fetch(
+                    `http://localhost:3000/api/seguimientoHabitos/${fecha}/${idHabito}`,
+                    {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                            Authorization: token,
+                        },
+                    }
+                );
+
+                if (!res.ok) {
+                    throw new Error(`Error en la solicitud: ${res.statusText}`);
+                }
+
+                const data = await res.json();
+                const seguimiento = data.data || {};
+                setProgreso(seguimiento.progreso || 0);
+            } catch (error) {
+                console.error("Error al obtener el progreso:", error);
+            }
         }
 
         obtenerProgreso();
-        if (user) obtenerHabitos();
-    }, [user, idHabito, token,refrescar]);
 
+        if (user) obtenerHabitos();
+    }, [user, idHabito, token, refrescar]);
+
+    useEffect(() => {
+        const actualizarProgreso = async () => {
+            let porcentaje = 0;
+            if (progreso > 0 && frecuencia > 0) {
+                porcentaje = (progreso / frecuencia) * 100;
+            }
+            setProgress(porcentaje);
+        };
+
+        actualizarProgreso();
+    }, [progreso, frecuencia]);
+
+    const refresca = () => {
+        setRefrescar(refrescar + 1);
+    };
+
+    let nomTipoHabito = "";
     if (tipoHabito === 1) nomTipoHabito = "Avance Gradual";
     if (tipoHabito === 2) nomTipoHabito = "Acciones";
     if (tipoHabito === 3) nomTipoHabito = "Cumplimiento";
 
-    const handleEditClick = () => {
-        setShowModal(true);
-    };
-
-    function refresca(){
-        setRefrescar(refrescar+1)
-      }
-
-    const handleCloseModal = () => {
-        setShowModal(false);
-    };
-
     return (
-        <>
-            <Container>
-                <br />
-                <Row>
-                    <Col>
-                        <Row className="justify-content-left">
-                                <FormEditar refresca={refresca} idHabito={idHabito} />
-                        </Row>
-                        <Row className="justify-content-center">
-                            <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
-                                <div className="circular-progress__circle">
-                                    <svg viewBox="0 0 36 36" className="circular-chart">
-                                        <path
-                                            className="circle-bg"
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                        <path
-                                            className="circle"
-                                            strokeDasharray={`${progreso}, 100`}
-                                            d="M18 2.0845
-                                                a 15.9155 15.9155 0 0 1 0 31.831
-                                                a 15.9155 15.9155 0 0 1 0 -31.831"
-                                        />
-                                    </svg>
-                                    <div className="circular-progress__text">
-                                        <div className="proFreq text-center">
-                                            {progreso}/{frecuencia}
+        <Container style={{ marginTop: "20px" }}>
+            <Row className="justify-content-center">
+                <FormEditar idHabito={idHabito} refresca={refresca} />
+            </Row>
+            <Row>
+                <Col md={6}>
+                    <div className="infoHabit">
+                        <Row className="justify-content-md-center">
+                            <Col xs lg="6">
+                                <div className="circular-progress" style={{ width: "250px", height: "250px" }}>
+                                    <div className="circular-progress__circle">
+                                        <svg viewBox="0 0 36 36" className="circular-chart">
+                                            <path
+                                                className="circle-bg"
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                            <path
+                                                className="circle"
+                                                strokeDasharray={`${progress}, 100`}
+                                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
+                                            />
+                                        </svg>
+                                        <div className="circular-progress__text">
+                                            <div className="proFreq text-center">
+                                                {progreso}/{frecuencia}
+                                            </div>
+                                            <FontAwesomeIcon icon={iconos[iconoHabito]} size="6x" style={{ color: "#0E28C0" }} />
                                         </div>
-                                        <FontAwesomeIcon icon={iconos.prueba} size='6x' style={{ color: '#0E28C0' }} />
                                     </div>
                                 </div>
-                            </div>
+                                <Row className="text-center">
+                                    <h2>{nombre}</h2>
+                                    <h4>{descripcion}</h4>
+                                    <h4>{nomTipoHabito}</h4>
+                                </Row>
+                            </Col>
+                            <Row className="justify-content-center">
+                                <Col xs lg="4"><BotonCompletar idHabito={idHabito} refresca={refresca} /></Col>
+                                <Col xs lg="4"><FormEliminar idHabito={idHabito} /></Col>
+                            </Row>
                         </Row>
-                        <Row className="text-center">
-                            <h2>{nombre}</h2>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{descripcion}</h4>
-                        </Row>
-                        <Row className="text-center">
-                            <h4>{nomTipoHabito}</h4>
-                        </Row>
-                        <Row className="justify-content-center">
-                            <button className="btn btn-completar" style={{ width: '160px', fontSize: '20px' }}>Completar</button>
-                        </Row>
-                    </Col>
-                    <Col className="bg-light"></Col>
-                </Row>
-            </Container>
-
-            {/* Modal para editar el hábito */}
-            {showModal && (
-                <FormEditar
-                    idHabito={idHabito}
-                    progress={progreso}
-                    onHide={handleCloseModal}
-                />
-            )}
-        </>
+                    </div>
+                </Col>
+                <Col md={6}>
+                    <CalendarioEspecifico idHabito={idHabito} />
+                    <HabitoEstadistica idHabito={idHabito} />
+                </Col>
+            </Row>
+        </Container>
     );
 }
 
