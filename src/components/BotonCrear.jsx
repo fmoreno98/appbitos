@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './BotonCrear.css';
 import LoginContext from './LoginContext';
 import { iconos } from './fontawesome.js';
-import ModalSeleccionIcono from './ModalSeleccionIcono'; 
+import ModalSeleccionIcono from './ModalSeleccionIcono';
 
 function BotonCrear(props) {
     const [show, setShow] = useState(false);
@@ -16,10 +16,10 @@ function BotonCrear(props) {
     const [frecuencia, setFrecuencia] = useState('')
     const [tipo_habito, setTipoHabito] = useState(1)
     const [selectedIcon, setSelectedIcon] = useState(iconos.plus);
-  const [showIconSelector, setShowIconSelector] = useState(false); 
+    const [showIconSelector, setShowIconSelector] = useState(false);
     const [error, setError] = useState(''); // Para mostrar mensajes de error
     const { user, token } = useContext(LoginContext);
-   
+
     const manejarCambio = (evento) => {
         const valorSeleccionado = evento.target.value;
         setOpcionSeleccionada(valorSeleccionado);
@@ -40,7 +40,7 @@ function BotonCrear(props) {
     const handleShow = () => setShow(true);
 
     const handleIconSelect = (icon) => {
-        console.log("ICONA",icon)
+        console.log("ICONA", icon)
         setIconoHabito(icon); // Actualizar el ícono seleccionado
         setShowIconSelector(false); // Cerrar el modal de selección de íconos
     };
@@ -115,7 +115,7 @@ function BotonCrear(props) {
             <div onClick={handleShow} className="circular-progress">
                 <div className="circular-progress__circle">
                     <svg viewBox="0 0 36 36" className="circular-chart">
-                        <path className="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"/>
+                        <path className="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                         <path className="circle" strokeDasharray={`${progress}, 100`} d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
                     </svg>
                     <div className="circular-progress__text">
@@ -127,9 +127,9 @@ function BotonCrear(props) {
             <Modal className='modal-lg' show={show} centered onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Creación de Hábitos</Modal.Title>
-                    <Button style={{ marginLeft:"30px" }} variant="primary" onClick={() => setShowIconSelector(true)}>Seleccionar Ícono</Button>
+                    <Button style={{ marginLeft: "30px" }} variant="primary" onClick={() => setShowIconSelector(true)}>Seleccionar Ícono</Button>
                     {iconoHabito && (<div className="selected-icon">
-                    <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{margin:"20px", color: 'Black' }} /> </div>)}
+                        <FontAwesomeIcon icon={iconos[iconoHabito]} size='2x' style={{ margin: "20px", color: 'Black' }} /> </div>)}
                 </Modal.Header>
                 <Modal.Body>
                     <Form onSubmit={handleSubmit}>

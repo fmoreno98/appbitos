@@ -14,6 +14,7 @@ import FormEditarHabito from './FormEditarHabito';
 
 const Home = () => {
     const navigate = useNavigate();
+
     const { token,setToken } = useContext(LoginContext);
     const [refresh, setRefresh] = useState(false);
 

@@ -11,16 +11,6 @@ const login = (email, password) => {
     .catch(error => []);
 }
 
-const checkToken = (token) => {
-  const requestOptions = {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json', authorization: token },
-  };
-  return fetch(API_URL + "/users/checktoken", requestOptions)
-    .then(response => response.json())
-    .catch(error => []);
-}
-
   const estadisticas = (id,token) => {
     const requestOptions = {
       method: 'GET',
@@ -79,7 +69,9 @@ const editarHabito = (nombre_habito, descripcion, tipo_habito, frecuencia, id, t
   return fetch(API_URL + "/habitos/" + id, requestOptions)
     .then(response => response.json())
     .catch(error => []);
-};
+
+}
+
 const historialHabito = (id, idHabito, token) => {
     const requestOptions = {
     method: 'GET',
@@ -95,18 +87,18 @@ const obtenerProgreso = (idHabito, token) =>{
     method: 'GET',
     headers: { 'Content-Type': 'application/json', authorization: token },
   };
-    return fetch(API_URL + "/seguimientoHabitos/" + fecha + "/" + idHabito, requestOptions)
-  .then(response => response.json())
-  .catch(error => []);
-};
+  return fetch(API_URL + "/seguimientoHabitos/" + fecha + "/" + idHabito, requestOptions)
+    .then(response => response.json())
+    .catch(error => []);
+}
 const obtenerFrecuencia = (idHabito, token) =>{
   const requestOptions = {
     method: 'GET',
     headers: { 'Content-Type': 'application/json', authorization: token },
   };
   return fetch(API_URL + "/habitos/" + idHabito, requestOptions)
-  .then(response => response.json())
-  .catch(error => console.log(error));
+    .then(response => response.json())
+    .catch(error => console.log(error));
 }
 
 export {

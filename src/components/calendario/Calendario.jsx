@@ -22,12 +22,12 @@ const Calendario = ({refresh}) => {
   const [currentMonth, setCurrentMonth] = useState(new Date().getMonth());
   const [currentYear, setCurrentYear] = useState(new Date().getFullYear());
   const [completionStatus, setCompletionStatus] = useState({});
-  const { user,token } = useContext(LoginContext);
+  const { user, token } = useContext(LoginContext);
   const [selectedDay, setSelectedDay] = useState(null);
 
   const fetchCompletionStatus = async (month, year) => {
     try {
-      const userId = user; 
+      const userId = user;
       const data = await historial(userId, token, month, year);
   
       const statusMap = data.reduce((acc, { fecha, estado_retos, retos_completados }) => {
@@ -70,7 +70,7 @@ const Calendario = ({refresh}) => {
   const handleNextMonth = () => {
     const today = new Date();
     if (
-      currentMonth < today.getMonth() || 
+      currentMonth < today.getMonth() ||
       currentYear < today.getFullYear()
     ) {
       if (currentMonth === 11) {
@@ -91,7 +91,7 @@ const Calendario = ({refresh}) => {
     const previousMonth = currentMonth === 0 ? 11 : currentMonth - 1;
     const previousYear = currentMonth === 0 ? currentYear - 1 : currentYear;
     const prevMonthDays = getDaysInMonth(previousMonth, previousYear);
-    
+
     const today = new Date();
     const isCurrentMonthAndYear = today.getMonth() === currentMonth && today.getFullYear() === currentYear;
 
