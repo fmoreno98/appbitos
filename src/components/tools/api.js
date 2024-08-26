@@ -103,7 +103,6 @@ const obtenerFrecuencia = (idHabito, token) =>{
 
 export {
   login,
-  checkToken,
   editarHabito,
   buscarHabito,
   eliminarHabito,
