@@ -42,8 +42,6 @@ const CalendarioEspecifico = (idHabito) => {
   };
   
 
-  
-
   useEffect(() => {
     fetchCompletionStatus(currentMonth, currentYear);
   }, [user,idHabito, currentMonth, currentYear]);
@@ -93,29 +91,39 @@ const CalendarioEspecifico = (idHabito) => {
             <BotonCalendarioEspecifico
                 key={`empty-start-${i}`}
                 day={prevMonthDays - (adjustedFirstDay - i - 1)}
-                isEmpty={true}
+                isVacio={false}
                 isPreviousMonth={true}
                 isCompleted={isCompleted}
             />
         );
     }
 
-    // Generar días del mes actual
-    for (let day = 1; day <= daysInMonth; day++) {
-        const date = `${currentYear}-${formatTwoDigits(currentMonth + 1)}-${formatTwoDigits(day)}`;
-        const isCompleted = completionStatus[date] || false;
-        const isFuture = isCurrentMonthAndYear && day > today.getDate();
+// Generar días del mes actual
+for (let day = 1; day <= daysInMonth; day++) {
+  const date = `${currentYear}-${formatTwoDigits(currentMonth + 1)}-${formatTwoDigits(day)}`;
 
-        days.push(
-            <BotonCalendarioEspecifico
-                key={`day-${day}`}
-                day={day}
-                isEmpty={false}
-                isCompleted={isCompleted}
-                isFuture={isFuture}
-            />
-        );
-    }
+  // Verifica si el día tiene datos de estado (completado o no completado)
+  const hasStatus = completionStatus.hasOwnProperty(date);
+  const isCompleted = hasStatus && completionStatus[date] === true;
+  const isNotCompleted = hasStatus && completionStatus[date] === false;
+  const isVacio = !hasStatus;  // Si no hay datos, se considera "empty"
+  const isFuture = isCurrentMonthAndYear && day > today.getDate();
+
+  days.push(
+    <BotonCalendarioEspecifico
+      key={`day-${day}`}
+      day={day}
+      isVacio={isVacio}
+      isCompleted={isCompleted}
+      isNotCompleted={isNotCompleted}
+      isFuture={isFuture}
+    />
+  );
+  console.log(`Rendering day ${day} - isVacio: ${isVacio}, isCompleted: ${isCompleted}, isNotCompleted: ${isNotCompleted}`);
+
+}
+
+
 
     // Generar días del próximo mes
     const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1;
@@ -130,7 +138,7 @@ const CalendarioEspecifico = (idHabito) => {
             <BotonCalendarioEspecifico
                 key={`empty-end-${i}`}
                 day={i + 1}
-                isEmpty={true}
+                isVacio={false}
                 isNextMonth={true}
                 isCompleted={isCompleted}
             />
