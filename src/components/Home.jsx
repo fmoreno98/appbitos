@@ -37,7 +37,7 @@ const Home = () => {
                     <Col id=''>
                         <div id='estadisticas'>
                             <Calendario refresh={refresh} />
-                            <Racha />
+                            <Racha refresh={refresh} />
                             <Estadisticas />
                         </div>
                     </Col>
