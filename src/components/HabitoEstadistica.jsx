@@ -33,28 +33,34 @@ const HabitoEstadistica = (idHabito) => {
     setFechas(obtenerFechasUltimosSieteDias());
   }, []);
 
-  useEffect(() => {
-    if (fechas.length === 7 && user) { 
-      habitoGraph(user, idHabito.idHabito, token).then(data => {
-        const formattedData = fechas.map(fecha => {
-          const fechaData = data.find(d => {
-            const date = new Date(d.fecha);
-            const dia = date.getDate().toString().padStart(2, '0');
-            const mes = (date.getMonth() + 1).toString().padStart(2, '0');
-            return `${dia}-${mes}` === fecha;
+    const updateGraph = () => {
+      if (fechas.length === 7 && user) { 
+        habitoGraph(user, idHabito.idHabito, token).then(data => {
+          const formattedData = fechas.map(fecha => {
+            const fechaData = data.find(d => {
+              const date = new Date(d.fecha);
+              const dia = date.getDate().toString().padStart(2, '0');
+              const mes = (date.getMonth() + 1).toString().padStart(2, '0');
+              return `${dia}-${mes}` === fecha;
+            });
+  
+            return { fecha, progreso: fechaData ? fechaData.progreso : 0 };
           });
-
-          return { fecha, progreso: fechaData ? fechaData.progreso : 0 };
+          setChartOptions({
+            data: formattedData,
+            series: [{ type: 'line', xKey: 'fecha', yKey: 'progreso', yName: 'Progreso' }],
+          });
+  
+        }).catch(error => {
+          console.error('Error fetching statistics:', error);
         });
-        setChartOptions({
-          data: formattedData,
-          series: [{ type: 'line', xKey: 'fecha', yKey: 'progreso', yName: 'Progreso' }],
-        });
-
-      }).catch(error => {
-        console.error('Error fetching statistics:', error);
-      });
-    }
+      }
+    }  
+  useEffect(() => {
+    let interval = setInterval(() => {
+      updateGraph();
+    }, 10);
+    return () => clearInterval(interval);
   }, [fechas, user]);
 
   return (
