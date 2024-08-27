@@ -166,7 +166,7 @@ function LandingPage() {
                                             </div>
                                             <div className="mt-12 flex items-center">
                                                 <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
-                                                    style={{ backgroundImage: `url('/img/Marc.png')` }}></div>
+                                                    style={{ backgroundImage: `url('/img/Marc.jpeg')` }}></div>
                                                 <div className="ml-4 flex flex-col items-start">
                                                     <div className="font-bold text-gray-800">
                                                         Marc
@@ -205,7 +205,7 @@ function LandingPage() {
                                             </div>
                                             <div className="mt-12 flex items-center">
                                                 <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
-                                                    style={{ backgroundImage: `url('/img/Benja.png')` }}></div>
+                                                    style={{ backgroundImage: `url('/img/Benja.jpeg')` }}></div>
                                                 <div className="ml-4 flex flex-col items-start">
                                                     <div className="font-bold text-gray-800">
                                                         Benja
@@ -244,10 +244,10 @@ function LandingPage() {
                                             </div>
                                             <div className="mt-12 flex items-center">
                                                 <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
-                                                    style={{ backgroundImage: `url('/img/Geri.png')` }}></div>
+                                                    style={{ backgroundImage: `url('/img/Geri.jpeg')` }}></div>
                                                 <div className="ml-4 flex flex-col items-start">
                                                     <div className="font-bold text-gray-800">
-                                                        Geri
+                                                        Gerard
                                                     </div>
                                                 </div>
                                             </div>
@@ -283,7 +283,7 @@ function LandingPage() {
                                             </div>
                                             <div className="mt-12 flex items-center">
                                                 <div className="w-16 h-16 bg-cover rounded-full border-2 border-gray-700" alt=""
-                                                    style={{ backgroundImage: `url('/img/Fran.png')` }}></div>
+                                                    style={{ backgroundImage: `url('/img/Fran.jpeg')` }}></div>
                                                 <div className="ml-4 flex flex-col items-start">
                                                     <div className="font-bold text-gray-800">
                                                         Fran
