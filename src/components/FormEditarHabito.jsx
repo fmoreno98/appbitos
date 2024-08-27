@@ -93,10 +93,10 @@ function FormEditar(props) {
 
     //borrar los campos una vez enviado el formulario
     function borrarCampos() {
-        setNombreHabito('');
-        setDescripcion('');
-        setFrecuencia(1);
-        setTipoHabito(1);
+        // setNombreHabito('');
+        // setDescripcion('');
+        // setFrecuencia(1);
+        // setTipoHabito(1);
     }
 
     function volverHome() {
@@ -326,7 +326,7 @@ function FormEditar(props) {
                     </a>
                 </div>
 
-                <div style={{marginLeft:'450px'}} onClick={handleShow}>
+                <div style={{marginLeft:'30%'}} onClick={handleShow}>
                     <button
                         style={editButtonStyles}
                         onMouseOver={handleEditButtonMouseOver}
