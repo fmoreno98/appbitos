@@ -9,7 +9,7 @@ function LandingPage() {
                 <section>
                     <div className="flex flex-col items-center justify-center px-4 py-8 sm:flex-row text-center h-72">
                         <div className="text-center mt-10 rounded-4">
-                            <h1 className="inline-block p-1 mb-4 text-3xl font-extrabold text-white md:text-5xl lg:text-7xl bg-[#E8E1D9] bg-opacity-80 rounded-3 "><span className=" text-transparent bg-clip-text bg-gradient-to-r to-[#081EAC] from-[#516BE7]">APPBITO</span></h1>
+                            <h1 className="inline-block p-1 mb-4 text-3xl font-extrabold text-white md:text-5xl lg:text-7xl bg-[#E8E1D9] bg-opacity-80 rounded-3 "><span className=" text-transparent bg-clip-text bg-gradient-to-r to-[#081EAC] from-[#516BE7]">APPBITOS</span></h1>
                             <div className='bg-[#E8E1D9] bg-opacity-80 rounded-3 shadow mt-10'><h4 className="text-[#2F49D4]  mr-2 ml-2">Cumplir Hábitos Saludables Mejora la Calidad de Vida de las Personas</h4></div>
                         </div>
                     </div>
@@ -28,22 +28,22 @@ function LandingPage() {
                         {/* <-- Content --> */}
                         <div className="box-border order-first w-full text-black border-solid md:w-1/2 md:pl-10 md:order-none">
                             <h3 className="m-0 text-xl font-semibold leading-tight border-0 border-[#938A7F] lg:text-3xl md:text-2xl">
-                                Bievenido a APPBITO!
+                                Bievenido a APPBITOS!
                             </h3>
                             <h4 className="text-[#2F49D4]">La mejor App de Hábitos Saludables!</h4>
                             <p className="pt-2 pb-2 m-0 leading-7 text-black border-0 border-[#938A7F]  lg:text-lg">
-                            Hemos creado AppBito, una aplicación innovadora diseñada para ayudarte a alcanzar tus objetivos de salud y bienestar diarios. AppBito ofrece un entorno inspirador y motivador, con herramientas personalizadas para que puedas seguir tus hábitos saludables, monitorear tu progreso y celebrar cada logro en tu camino hacia una vida más equilibrada. </p>                            <ul className="p-0 m-0 leading-6 border-0 border-[#938A7F]">
+                            Hemos creado AppBitos, una aplicación innovadora diseñada para ayudarte a alcanzar tus objetivos de salud y bienestar diarios. AppBitos ofrece un entorno inspirador y motivador, con herramientas personalizadas para que puedas seguir tus hábitos saludables, monitorear tu progreso y celebrar cada logro en tu camino hacia una vida más equilibrada. </p>                            <ul className="p-0 m-0 leading-6 border-0 border-[#938A7F]">
                                 <li className="box-border relative py-3 pl-0 text-left text-black border-solid">
                                     <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
                                     </span>Optimiza tu salud y calidad de vida con una app que te permite gestionar y mejorar tus hábitos diarios, facilitando el camino hacia una vida más plena y saludable.
                                 </li>
                                 <li className="box-border relative py-3 pl-0 text-left text-black border-solid">
                                     <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
-                                    </span>Monitorea y mejora tus hábitos diarios: desde prácticas saludables hasta la reducción de los menos beneficiosos, AppBito te ayuda a crear un estilo de vida equilibrado y satisfactorio..
+                                    </span>Monitorea y mejora tus hábitos diarios: desde prácticas saludables hasta la reducción de los menos beneficiosos, AppBitos te ayuda a crear un estilo de vida equilibrado y satisfactorio..
                                 </li>
                                 <li className="box-border relative py-3 pl-0 text-left ttext-black border-solid">
                                     <span className="inline-flex items-center justify-center w-6 h-6 mr-2 text-[#E8E1D9] bg-[#0E28C0] rounded-full"><span className="text-sm font-bold">✓</span>
-                                    </span>Sigue tus hábitos, celebra tus éxitos y ajusta lo necesario para mejorar tu bienestar. Con AppBito, cada día es una oportunidad para vivir mejor.
+                                    </span>Sigue tus hábitos, celebra tus éxitos y ajusta lo necesario para mejorar tu bienestar. Con AppBitos, cada día es una oportunidad para vivir mejor.
                                 </li>
                             </ul>
                         </div>
