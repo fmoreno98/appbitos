@@ -1,7 +1,8 @@
 import { useEffect, useContext, useState } from 'react';
 import LoginContext from './LoginContext';
+import ConsejoDiario from './ConsejoDiario';
 
-const Racha = ({refresh}) => {
+const Racha = ({ refresh }) => {
     const { user, token } = useContext(LoginContext);
     const [totalCompleted, setTotalCompleted] = useState(0);
     const [historial, setHistorial] = useState([]);
@@ -40,35 +41,45 @@ const Racha = ({refresh}) => {
                 },
             };
 
-            const resTotal = await fetch(`http://localhost:3000/api/estadisticas/totalCompleted/${user}`, options);
-            const dataTotal = await resTotal.json();
-            setTotalCompleted(dataTotal.total_completados);
-
             const res = await fetch(`http://localhost:3000/api/estadisticas/historial/${user}`, options);
             const data = await res.json();
             setHistorial(data);
+            console.log(data);
+
+            let day = new Date();
+            let year = day.getFullYear();
+            let month = String(day.getMonth() + 1).padStart(2, '0'); // Los meses comienzan desde 0, por eso se suma 1
+            let date = String(day.getDate()).padStart(2, '0');
+            
+            let formattedDate = `${year}-${month}-${date}`;
+            
+            // Variable para guardar el valor de retos_completados
+            let retosCompletados = null;
+            
+            // Busca la fecha en el historial
+            for (const item of data) {
+                if (item.fecha === formattedDate) {
+                    setTotalCompleted(item.retos_completados)
+                    break; // Sale del bucle si encuentra la coincidencia
+                }
+            }
+            console.log(totalCompleted);
+            
             // Calcular el número de días completados
             const completados = data.filter(dia => dia.estado_retos === 'Completado').length;
             setCompletados(completados);
 
-
-            const resPorsentage = await fetch(`http://localhost:3000/api/estadisticas/percentage/${user}`, options);
-            const dataPorsentage = await resPorsentage.json();
-            setPorcentajeCompletado(dataPorsentage.porcentaje_completado);
-            console.log("Porcentaje completado para:", user, dataPorsentage.porcentaje_completado);
-
         }
 
         if (user) obtenerTotalCompletados();
-    }, [user, token,refresh]);
+    }, [user, token, refresh]);
 
     return (
         <div style={styles.container}>
-        <h1 style={styles.heading}>Racha</h1>
-        <p style={styles.paragraph}>Hábitos completados: <b>{totalCompleted}</b></p>
-        <p style={styles.paragraph}>Días con todos los hábitos completados:<b>{completados}</b></p>
-        <p style={styles.paragraph}>Porcentaje completado:<b> {porcentajeCompletado}%</b></p>
-    </div>
+            <ConsejoDiario />
+            <p style={styles.paragraph}>Hábitos completados: <b>{totalCompleted}</b></p>
+            <p style={styles.paragraph}>Días con todos los hábitos completados:<b>{completados}</b></p>
+        </div>
     );
 };
 

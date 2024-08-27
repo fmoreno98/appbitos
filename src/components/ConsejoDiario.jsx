@@ -20,8 +20,8 @@ const ConsejoDiario = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Consejo Diario</h1>
+    <div style={{color: '#2F49D4'}}>
+      <h2>Consejo Diario</h2>
       <p>{consejo}</p>
     </div>
   );
